@@ -1,0 +1,160 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #000000;
+    margin: 0;
+}
+
+.heading {
+    text-align: center;
+    font-size: 36px;
+    margin-top: 47px;
+}
+.bt {
+    display: flex;
+    margin-top: 22px;
+    margin-left: 50px;
+    margin-bottom: 75px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.left {
+    width: 252px;
+    height: 170px;
+    background-color: #2F2E41;
+    background-image: url(logo.jpeg);
+    background-position: center center;
+    background-size: 100% 100%;
+    border-radius: 29px;
+    margin-top: -24px;
+    margin-left: -94px;
+}
+
+#inborder {
+    border: 6px solid #2F2E41;
+    text-align: center;
+    padding: 20px 21px 19px 21px;
+    justify-content: center;
+    align-items: center;
+}
+
+#b {
+    text-align: center;
+}
+.right{
+    margin-left: 4px;
+}
+.ph {
+    width: 252px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1.68px;
+    color: white;
+    border-radius: 28.5px;
+    background: #2F2E41;
+    box-shadow: 0px 10px 40px 0px rgba(122, 129, 190, 0.16);
+    padding: 4px 0px 4px 10px; 
+    position: relative;
+    padding-right: 3px;
+   
+}
+.img{
+    position: absolute;
+    left: 14px;
+}
+
+.navbar{
+    background-color:#2F2E41;
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
+}
+.navbar p{
+    border-radius: 28.5px;
+    background: #FFF;
+    box-shadow: 0px 10px 40px 0px rgba(122, 129, 190, 0.16);
+    text-align: center;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1.52px;
+    padding: 4px 39px;
+}
+.define{
+    width: auto;
+    height: auto;
+    display: inline-block;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    letter-spacing: 2.88px;
+    margin-top: 98px;
+    margin-left: 53px;
+}
+.button{
+    margin-left: 80px;
+    margin-top: 50px; /* Adjust the top margin to create space */
+    text-align: center;
+}
+button{
+    color: white;
+    border-radius: 28.5px;
+    background: #323146;
+    box-shadow: 0px 10px 40px 0px rgba(122, 129, 190, 0.16);
+    padding: 10px 47px; /* Increase top and bottom padding for more space */
+    position: relative;
+    margin-bottom: 20px; 
+}
+.polygon{
+    margin-left: 9px;
+    position: absolute;
+    top: 7px;
+}
+.lobutton{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+.btnl1,.btnl2{
+    max-width: 100%; 
+    padding: 10px 20px;
+    box-sizing: border-box; 
+    border: 4px solid #323246;
+    border-radius: 28.5px;
+    box-shadow: 0px 10px 40px 0px rgba(122, 129, 190, 0.16);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #000;
+    text-align: center;
+    font-size: 15px;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 1.68px;
+    
+}
+.btnl2 {
+    margin-left: 20px
+}
+
+@media (max-width: 768px) {
+    .bt {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .left {
+        margin: auto;
+    }
+    .define {
+        margin-left: 0px;
+    }
+    .button {
+        margin-left: 0px;
+    }
+}
