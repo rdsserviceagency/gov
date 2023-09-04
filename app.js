@@ -8,7 +8,7 @@ app.set('view engine', 'ejs');
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
-mongoose.connect("mongodb://0.0.0.0:27017/govdb",{
+mongoose.connect("mongodb+srv://admin-tushar:tushar123@cluster0.bry27q8.mongodb.net/govdb",{
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(()=>{
