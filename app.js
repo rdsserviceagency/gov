@@ -337,6 +337,11 @@ app.get("/home",(req,res)=>{
     res.render("home");
 })
 
+// New Application
+app.get("/new",(req,res)=>{
+    res.render("new")
+})
+
 app.listen(3002,(req,res)=>{
     console.log("Server started at port 3000")
 })
