@@ -8,7 +8,7 @@ app.set('view engine', 'ejs');
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
-mongoose.connect("mongodb+srv://admin-tushar:tushar123@cluster0.bry27q8.mongodb.net/govdb",{
+mongoose.connect("mongodb://0.0.0.0:27017/govdb",{
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(()=>{
@@ -110,7 +110,7 @@ app.post("/register",(req,res)=>{
                             OTP=OTP1;
                             const mailOptions={
                                 from:"emailtushar1910@gmail.com",
-                                to:Email,
+                                to:email,
                                 subject:"OTP Verification",
                                 text:`OTP: ${OTP1}`
                             }
@@ -171,7 +171,7 @@ app.post("/register_pro",(req,res)=>{
                             OTP=OTP1;
                             const mailOptions={
                                 from:"emailtushar1910@gmail.com",
-                                to:Email,
+                                to:email,
                                 subject:"OTP Verification",
                                 text:`OTP: ${OTP1}`
                             }
@@ -231,7 +231,23 @@ app.post("/converter",(req,res)=>{
     const output_unit=req.body.output_unit;
     let output;
     if(input_unit=="Hector"){
-        output=0.00
+        if(output_unit=="Hector"){
+            output=input*1.000
+        }
+        else if(output_unit=="Decimal"){
+            output=input*250.0
+        }
+        else if(output_unit=="VargFeet"){
+            output=input*108900.00
+
+        }
+        else if(output_unit=="Vargmeter"){
+            output=input*10120.82
+
+        }
+        else{
+            output=input*2.5000
+        }
     }
     else if(input_unit=="Decimal"){
         if(output_unit=="Hector"){
@@ -261,7 +277,7 @@ app.post("/converter",(req,res)=>{
         output=input*(2/1000)
     }
     else if(output_unit=="VargFeet"){
-        output=input*(1/1000)
+        output=input*(1000/1000)
 
     }
     else if(output_unit=="Vargmeter"){
@@ -274,10 +290,42 @@ app.post("/converter",(req,res)=>{
 
     }
     else if(input_unit=="Vargmeter"){
-        output=0.00
+        if(output_unit=="Hector"){
+            output=input*(0.099/1000)
+        }
+        else if(output_unit=="Decimal"){
+            output=input*(25/1000)
+        }
+        else if(output_unit=="VargFeet"){
+            output=input*(10760/1000)
+
+        }
+        else if(output_unit=="Vargmeter"){
+            output=input*(1000/1000)
+
+        }
+        else{
+            output=input*(0.25/1000)
+        }    
     }
     else{
-      output=0.00
+        if(output_unit=="Hector"){
+            output=input*0.400
+        }
+        else if(output_unit=="Decimal"){
+            output=input*100
+        }
+        else if(output_unit=="VargFeet"){
+            output=input*43560
+
+        }
+        else if(output_unit=="Vargmeter"){
+            output=input*4048.33
+
+        }
+        else{
+            output=input*1.00
+        }
     }
     res.render("conventor",{input:input,input_unit:input_unit,output_unit:output_unit,output:output,uarray:unit_array})
 
