@@ -18,6 +18,19 @@ body {
     align-items: center;
 }
 
+.io{
+    display: flex;
+    justify-content: space-between;
+}
+
+.it{
+    width: 330px;
+}
+
+.is{
+    width: 160px;
+}
+
 .input{
     border:2px solid #2F2E41;
 }
@@ -170,4 +183,22 @@ button{
     .button {
         margin-left: 0px;
     }
+    .it{
+        width: 290px;
+    }
+    
+    .is{
+        width: 130px;
+    }
+}
+
+@media(max-width: 500px){
+    .it{
+        width: 220px;
+    }
+    
+    .is{
+        width: 120px;
+    }
+    
 }

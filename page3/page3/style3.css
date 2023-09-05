@@ -116,7 +116,7 @@ body {
     display: inline-flex;
     padding: 35px 127px 35px 37px;
     flex-direction: column;
-    /* justify-content: top; */
+    justify-content: center;
     align-items: flex-start;
     gap: 20px;
     border-radius: 25px;
@@ -140,19 +140,7 @@ body {
     box-shadow: 1px 1px 58px 16px rgba(0, 0, 0, 0.40);
 }
 
-
-
 .form p {
-    text-align: left;
-    color: var(--Gray, #2A2A2A);
-    font-family: Poppins;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 900;
-    line-height: normal;
-}
-
-#hea{
     text-align: center;
     color: var(--Gray, #2A2A2A);
     font-family: Poppins;
@@ -162,19 +150,7 @@ body {
     line-height: normal;
 }
 
-#AAadiwasi{
-    display: none;
-}
-
-#SSampati{
-    display: none;
-}
-
-#parsk{
-    display: none;
-}
-
-.inputName {
+#inputName {
     background-color: #e6e6e6;
     border: 4px solid #313044;
 }

@@ -38,8 +38,24 @@ const userSchema= new mongoose.Schema({
     position: String,
     subscription:String
   });
+  
+  const User= mongoose.model("User",userSchema);
 
-const User= mongoose.model("User",userSchema);
+
+const docSchema= new mongoose.Schema({
+    name: String,
+    description: String,
+    par: String,
+    sub: [
+        {
+            name: String,
+            description: String,
+        }   
+    ],
+  });
+
+const Doc= mongoose.model("Doc",docSchema);
+
 
 // login route
 var login_valid=0;
@@ -220,9 +236,10 @@ app.get("/",(req,res)=>{
 })
 
 // conventor
-let unit_array=["Hector","Decimal","VargFeet","Vargmeter","Acre"]
+let unit_array=["हेक्टेयर","डिसमिल","वर्गफीट","वर्ग मीटर","एकड़"]
+
 app.get("/converter",(req,res)=>{
-    res.render("conventor",{input:1,input_unit:"Hector",output_unit:"Decimal",output:1,uarray:unit_array})
+    res.render("conventor",{input:1,input_unit:"Hector",output_unit:"डिसमिल",output:1,uarray:unit_array})
 })
 
 app.post("/converter",(req,res)=>{
@@ -230,18 +247,18 @@ app.post("/converter",(req,res)=>{
     const input_unit=req.body.input_unit;
     const output_unit=req.body.output_unit;
     let output;
-    if(input_unit=="Hector"){
-        if(output_unit=="Hector"){
+    if(input_unit=="हेक्टेयर"){
+        if(output_unit=="हेक्टेयर"){
             output=input*1.000
         }
-        else if(output_unit=="Decimal"){
+        else if(output_unit=="डिसमिल"){
             output=input*250.0
         }
-        else if(output_unit=="VargFeet"){
+        else if(output_unit=="वर्गफीट"){
             output=input*108900.00
 
         }
-        else if(output_unit=="Vargmeter"){
+        else if(output_unit=="वर्ग मीटर"){
             output=input*10120.82
 
         }
@@ -249,18 +266,18 @@ app.post("/converter",(req,res)=>{
             output=input*2.5000
         }
     }
-    else if(input_unit=="Decimal"){
-        if(output_unit=="Hector"){
+    else if(input_unit=="डिसमिल"){
+        if(output_unit=="हेक्टेयर"){
             output=input*0.004
         }
-        else if(output_unit=="Decimal"){
+        else if(output_unit=="डिसमिल"){
             output=input*1.0
         }
-        else if(output_unit=="VargFeet"){
+        else if(output_unit=="वर्गफीट"){
             output=input*435.6
 
         }
-        else if(output_unit=="Vargmeter"){
+        else if(output_unit=="वर्ग मीटर"){
             output=input*40.48
 
         }
@@ -269,18 +286,18 @@ app.post("/converter",(req,res)=>{
         }
 
     }
-   else if(input_unit=="VargFeet"){
-    if(output_unit=="Hector"){
+   else if(input_unit=="वर्गफीट"){
+    if(output_unit=="हेक्टेयर"){
         output=input*(0.009/1000)
     }
-    else if(output_unit=="Decimal"){
+    else if(output_unit=="डिसमिल"){
         output=input*(2/1000)
     }
-    else if(output_unit=="VargFeet"){
+    else if(output_unit=="वर्गफीट"){
         output=input*(1000/1000)
 
     }
-    else if(output_unit=="Vargmeter"){
+    else if(output_unit=="वर्ग मीटर"){
         output=input*(92.94/1000)
 
     }
@@ -289,18 +306,18 @@ app.post("/converter",(req,res)=>{
     }
 
     }
-    else if(input_unit=="Vargmeter"){
-        if(output_unit=="Hector"){
+    else if(input_unit=="वर्ग मीटर"){
+        if(output_unit=="हेक्टेयर"){
             output=input*(0.099/1000)
         }
-        else if(output_unit=="Decimal"){
+        else if(output_unit=="डिसमिल"){
             output=input*(25/1000)
         }
-        else if(output_unit=="VargFeet"){
+        else if(output_unit=="वर्गफीट"){
             output=input*(10760/1000)
 
         }
-        else if(output_unit=="Vargmeter"){
+        else if(output_unit=="वर्ग मीटर"){
             output=input*(1000/1000)
 
         }
@@ -309,17 +326,17 @@ app.post("/converter",(req,res)=>{
         }    
     }
     else{
-        if(output_unit=="Hector"){
+        if(output_unit=="हेक्टेयर"){
             output=input*0.400
         }
-        else if(output_unit=="Decimal"){
+        else if(output_unit=="डिसमिल"){
             output=input*100
         }
-        else if(output_unit=="VargFeet"){
+        else if(output_unit=="वर्गफीट"){
             output=input*43560
 
         }
-        else if(output_unit=="Vargmeter"){
+        else if(output_unit=="वर्ग मीटर"){
             output=input*4048.33
 
         }
@@ -332,6 +349,7 @@ app.post("/converter",(req,res)=>{
 })
 
 
+
 // home
 app.get("/home",(req,res)=>{
     res.render("home");
@@ -339,7 +357,14 @@ app.get("/home",(req,res)=>{
 
 // New Application
 app.get("/new",(req,res)=>{
-    res.render("new")
+    Doc.find().then((found)=>{
+        res.render("new",{unit1:found})
+    })
+})
+
+app.post("/new",(req,res)=>{
+    console.log(req.body);
+    res.redirect("/new")
 })
 
 app.listen(3002,(req,res)=>{
