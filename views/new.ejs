@@ -176,12 +176,12 @@
                         <div id="SSampati" class="row">
                             <div class="col-sm-6">
                                 <div class="mb-5">
-                                    <label for="formGroupExampleInput" class="form-label">के आदेश क्रमांक </label>
-                                    <input type="text"  class="form-control inputName" id="formGroupExampleInput"   placeholder="ENTER SUMMARY">
+                                    <label for="s1" class="form-label">के आदेश क्रमांक </label>
+                                    <input type="text" required class="form-control inputName" id="s1" placeholder="ENTER SUMMARY">
                                 </div>
                                 <div  class="mb-5">
-                                    <label for="formGroupExampleInput" class="form-label">कार्यालय </label>
-                                    <input type="text"  class="form-control inputName" id="formGroupExampleInput"   placeholder="ENTER SUMMARY">
+                                    <label for="s2" class="form-label">कार्यालय </label>
+                                    <input type="text" required class="form-control inputName" id="s2" placeholder="ENTER SUMMARY">
     
                                 </div>
     
@@ -189,13 +189,13 @@
                             <div class="col-sm-6">
                                
                                 <div class="mb-5">
-                                    <label for="formGroupExampleInput" class="form-label">दिनांक </label>
-                                    <input type="date" id="formGroupExampleInput" class="form-control inputName"   >
+                                    <label for="s3" class="form-label">दिनांक </label>
+                                    <input type="date"  id="s3" class="form-control inputName"   >
                                 </div>
     
                                 <div class="mb-5">
-                                    <label for="formGroupExampleInput" class="form-label">द्वारा अनुमति आदेश जारी </label>
-                                    <input type="file" id="formGroupExampleInput" class="form-control inputName"   >
+                                    <label for="s4" class="form-label">द्वारा अनुमति आदेश जारी </label>
+                                    <input type="file"  id="s4" class="form-control inputName"   >
                                 </div>
     
                             </div>
@@ -208,7 +208,7 @@
                             </div>
                             <div  class="mb-5">
                                 <label for="formGroupExampleInput" class="form-label">Aadiwasi ki bhumi ke sambandh me</label>
-                                <select class="form-select inputName" id="formGroupExampleInput" onchange="fun3(this.value)" aria-label="Default select example">
+                                <select class="form-select inputName" required id="formGroupExampleInput" onchange="fun3(this.value)" aria-label="Default select example">
                                     <option value=""  hidden selected>choose</option>
                                     <option value="Yes">Yes</option>
                                     <option value="No">No</option>
@@ -219,12 +219,12 @@
                             <div id="AAadiwasi" class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-5">
-                                        <label for="formGroupExampleInput" class="form-label">के आदेश क्रमांक </label>
-                                        <input type="text"required class="form-control inputName" id="formGroupExampleInput"   placeholder="ENTER SUMMARY">
+                                        <label for="a1" class="form-label">के आदेश क्रमांक </label>
+                                        <input type="text" required class="form-control inputName" id="a1" placeholder="ENTER SUMMARY">
                                     </div>
                                     <div  class="mb-5">
-                                        <label for="formGroupExampleInput" class="form-label">कार्यालय </label>
-                                        <input type="text" class="form-control inputName" id="formGroupExampleInput"   placeholder="ENTER SUMMARY">
+                                        <label for="a2" class="form-label">कार्यालय </label>
+                                        <input type="text" required class="form-control inputName" id="a2" placeholder="ENTER SUMMARY">
         
                                     </div>
         
@@ -232,13 +232,13 @@
                                 <div class="col-sm-6">
                                    
                                     <div class="mb-5">
-                                        <label for="formGroupExampleInput" class="form-label">दिनांक </label>
-                                        <input type="date" id="formGroupExampleInput" class="form-control inputName"   >
+                                        <label for="a3" class="form-label">दिनांक </label>
+                                        <input type="date" required  id="a3" class="form-control inputName"   >
                                     </div>
         
                                     <div class="mb-5">
-                                        <label for="formGroupExampleInput" class="form-label">द्वारा अनुमति आदेश जारी </label>
-                                        <input type="file" id="formGroupExampleInput" class="form-control inputName"   >
+                                        <label for="a4" class="form-label">द्वारा अनुमति आदेश जारी </label>
+                                        <input type="file" required id="a4" class="form-control inputName"   >
                                     </div>
         
                                 </div>
@@ -254,15 +254,15 @@
                                 <div class="col-sm-6">
                                     <div class="mb-5">
                                         <label for="formGroupExampleInput" class="form-label">PRATIFAL KA PRAKAR </label>
-                                        <select class="form-select inputName" id="formGroupExampleInput" aria-label="Default select example">
+                                        <select class="form-select inputName" required id="formGroupExampleInput" aria-label="Default select example">
                                             <option value="Cash">Cash</option>
                                             <option value="Cheque">Cheque</option>
                                             <option value="RTGS">RTGS</option>
                                         </select>
                                     </div>
                                     <div  class="mb-5">
-                                        <label for="formGroupExampleInput" class="form-label">JAARI DINANK </label>
-                                        <input type="date" class="form-control inputName" id="formGroupExampleInput">
+                                        <label for="formGroupExampleInput"  class="form-label">JAARI DINANK </label>
+                                        <input type="date" required class="form-control inputName" id="formGroupExampleInput">
         
                                     </div>
         
@@ -271,12 +271,12 @@
                                    
                                     <div class="mb-5">
                                         <label for="formGroupExampleInput" class="form-label">CHECK/RTGS NO </label>
-                                        <input type="number" id="formGroupExampleInput" class="form-control inputName"   >
+                                        <input type="number" required id="formGroupExampleInput" class="form-control inputName"   >
                                     </div>
         
                                     <div class="mb-5">
                                         <label for="formGroupExampleInput" class="form-label">RASHI</label>
-                                        <input type="number" id="formGroupExampleInput" class="form-control inputName"   >
+                                        <input type="number" required id="formGroupExampleInput" class="form-control inputName"   >
                                     </div>
         
                                 </div>
@@ -285,13 +285,13 @@
                                 <div class="col-sm-6">
                                     <div class="mb-5">
                                         <label for="formGroupExampleInput" class="form-label">BANK KA NAAM </label>
-                                        <input type="text" id="formGroupExampleInput" class="form-control inputName"   >
+                                        <input type="text" required id="formGroupExampleInput" class="form-control inputName"   >
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-5">
                                         <label for="formGroupExampleInput" class="form-label">SAMPATI VIVRAN KI AVASHAKTA </label>
-                                        <select class="form-select inputName" id="formGroupExampleInput" aria-label="Default select example">
+                                        <select class="form-select inputName" required id="formGroupExampleInput" aria-label="Default select example">
                                             <option value="One">One</option>
                                             <option value="Two">Two</option>
                                             <option value="Three">Three</option>
@@ -324,7 +324,7 @@
                             text=text+`<option  value="${arr[i].sub[k].name}">${arr[i].sub[k].name}</option> `
                         }
                     sub.innerHTML=text;
-                    subdes.value=""
+                    subdes.value=" "
                     if(arr[i].par=="true"){
                         parsk.style.display="block";
                     }
@@ -351,21 +351,39 @@
             }
         }
 
-        function fun2(value){
+        function fun2(val){
             let doc=document.getElementById("SSampati");
-            if(value=="Yes"){
+            let s1=document.getElementById("s1");
+            let s2=document.getElementById("s2");
+         
+            if(val=="Yes"){
+                s1.value=""
+                s2.value=""
                 doc.style.display="flex";
             }else{
+                s1.value=" "
+                s2.value=" "
                 doc.style.display="none";
 
             }
         }
 
-        function fun3(value){
+        function fun3(val){
             let doc=document.getElementById("AAadiwasi");
-            if(value=="Yes"){
+            let a1=document.getElementById("a1");
+            let a2=document.getElementById("a2");
+            let a3=document.getElementById("a3");
+            let a4=document.getElementById("a4");
+           
+            if(val=="Yes"){
+                a1.value=""
+                a2.value=""
                 doc.style.display="flex";
             }else{
+                a1.value=" "
+                a2.value=" "
+                // a3.value=" "
+                // a4.value=" "
                 doc.style.display="none";
 
             }
