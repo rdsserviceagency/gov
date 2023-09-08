@@ -145,8 +145,9 @@
                                 <div id="parsk" class="mb-5">
                                     <label for="formGroupExampleInput" class="form-label">पक्षकारो के मध्य सम्बन्ध</label>
                                     <select class="form-select inputName" name="parskh" id="formGroupExampleInput"  aria-label="Default select example">
-                                        <option value="पक्षकारो चुने1">पक्षकारो चुने 1</option>
-                                        <option value="पक्षकारो चुने2">पक्षकारो चुने 2</option>
+                                        <% for(let i=0;i<parskh.length;i++){ %>
+                                            <option  value="<%=parskh[i].name%>" ><%=parskh[i].name%></option>
+                                       <%} %>
                                     </select>
     
                                 </div>
@@ -159,20 +160,20 @@
                         </div>
     
                         <!-- Sampati hak -->
-    
+                    <div id="sampati">
                         <div>
                             <p>Sampati hak </p>
                         </div>
                         <div  class="mb-5">
                             <label for="formGroupExampleInput" class="form-label">Sampati hak</label>
-                            <select class="form-select inputName" id="formGroupExampleInput" onchange="fun2(this.value)" aria-label="Default select example">
+                            <select class="form-select inputName" id="formGroupExampleInput" onchange="fun2(<%= JSON.stringify(samp) %>,this.value)" aria-label="Default select example">
                                 <option value=""  hidden selected>choose</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
+                                <% for(let i=0;i<samp.length;i++){ %>
+                                    <option  value="<%=samp[i].name%>" ><%=samp[i].name%></option>
+                               <%} %>
                             </select>
     
                         </div>
-    
                         <div id="SSampati" class="row">
                             <div class="col-sm-6">
                                 <div class="mb-5">
@@ -200,53 +201,55 @@
     
                             </div>
                         </div>
+                    </div>
                       
                             <!-- Aadiwasi ki bhumi ke sambandh me  -->
-    
-                            <div>
-                                <p>Aadiwasi ki bhumi ke sambandh me </p>
-                            </div>
-                            <div  class="mb-5">
-                                <label for="formGroupExampleInput" class="form-label">Aadiwasi ki bhumi ke sambandh me</label>
-                                <select class="form-select inputName" required id="formGroupExampleInput" onchange="fun3(this.value)" aria-label="Default select example">
-                                    <option value=""  hidden selected>choose</option>
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                </select>
-        
-                            </div>
-        
-                            <div id="AAadiwasi" class="row">
-                                <div class="col-sm-6">
-                                    <div class="mb-5">
-                                        <label for="a1" class="form-label">के आदेश क्रमांक </label>
-                                        <input type="text" required class="form-control inputName" id="a1" placeholder="ENTER SUMMARY">
-                                    </div>
-                                    <div  class="mb-5">
-                                        <label for="a2" class="form-label">कार्यालय </label>
-                                        <input type="text" required class="form-control inputName" id="a2" placeholder="ENTER SUMMARY">
-        
-                                    </div>
-        
+                            <div id="Aadiwasi">
+                                <div >
+                                    <p>Aadiwasi ki bhumi ke sambandh me </p>
                                 </div>
-                                <div class="col-sm-6">
-                                   
-                                    <div class="mb-5">
-                                        <label for="a3" class="form-label">दिनांक </label>
-                                        <input type="date" required  id="a3" class="form-control inputName"   >
+                                <div  class="mb-5">
+                                    <label for="formGroupExampleInput" class="form-label">Aadiwasi ki bhumi ke sambandh me</label>
+                                    <select class="form-select inputName" required id="formGroupExampleInput" onchange="fun3(this.value)" aria-label="Default select example">
+                                        <option value=""  hidden selected>choose</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+            
+                                </div>
+            
+                                <div id="AAadiwasi" class="row">
+                                    <div class="col-sm-6">
+                                        <div class="mb-5">
+                                            <label for="a1" class="form-label">के आदेश क्रमांक </label>
+                                            <input type="text" required class="form-control inputName" id="a1" placeholder="ENTER SUMMARY">
+                                        </div>
+                                        <div  class="mb-5">
+                                            <label for="a2" class="form-label">कार्यालय </label>
+                                            <input type="text" required class="form-control inputName" id="a2" placeholder="ENTER SUMMARY">
+            
+                                        </div>
+            
                                     </div>
-        
-                                    <div class="mb-5">
-                                        <label for="a4" class="form-label">द्वारा अनुमति आदेश जारी </label>
-                                        <input type="file" required id="a4" class="form-control inputName"   >
+                                    <div class="col-sm-6">
+                                       
+                                        <div class="mb-5">
+                                            <label for="a3" class="form-label">दिनांक </label>
+                                            <input type="date"   id="a3" class="form-control inputName"   >
+                                        </div>
+            
+                                        <div class="mb-5">
+                                            <label for="a4" class="form-label">द्वारा अनुमति आदेश जारी </label>
+                                            <input type="file"  id="a4" class="form-control inputName"   >
+                                        </div>
+            
                                     </div>
-        
                                 </div>
                             </div>
     
     
                             <!-- PRATIFAL -->
-    
+                        <div id="PRATIFAL">
                             <div>
                                 <p>PRATIFAL</p>
                             </div>
@@ -254,10 +257,13 @@
                                 <div class="col-sm-6">
                                     <div class="mb-5">
                                         <label for="formGroupExampleInput" class="form-label">PRATIFAL KA PRAKAR </label>
-                                        <select class="form-select inputName" required id="formGroupExampleInput" aria-label="Default select example">
+                                        <select class="form-select inputName" onchange="fun4(this.value)" required id="formGroupExampleInput" aria-label="Default select example">
+                                            <option value="" hidden selected>Choose</option>
                                             <option value="Cash">Cash</option>
                                             <option value="Cheque">Cheque</option>
                                             <option value="RTGS">RTGS</option>
+                                            <option value="NFTS">NFTS</option>
+                                            <option value="UPI">UPI</option>
                                         </select>
                                     </div>
                                     <div  class="mb-5">
@@ -269,9 +275,9 @@
                                 </div>
                                 <div class="col-sm-6">
                                    
-                                    <div class="mb-5">
-                                        <label for="formGroupExampleInput" class="form-label">CHECK/RTGS NO </label>
-                                        <input type="number" required id="formGroupExampleInput" class="form-control inputName"   >
+                                    <div id="checkr" class="mb-5">
+                                        <label for="checkr1" class="form-label">CHECK/RTGS NO/NFTS No/UPI Id </label>
+                                        <input type="text" required id="checkr1" class="form-control inputName"   >
                                     </div>
         
                                     <div class="mb-5">
@@ -283,22 +289,23 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div class="mb-5">
-                                        <label for="formGroupExampleInput" class="form-label">BANK KA NAAM </label>
-                                        <input type="text" required id="formGroupExampleInput" class="form-control inputName"   >
+                                    <div id="bank" class="mb-5">
+                                        <label for="bank1" class="form-label">BANK KA NAAM </label>
+                                        <input type="text" required id="bank1" class="form-control inputName"   >
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="mb-5">
-                                        <label for="formGroupExampleInput" class="form-label">SAMPATI VIVRAN KI AVASHAKTA </label>
-                                        <select class="form-select inputName" required id="formGroupExampleInput" aria-label="Default select example">
-                                            <option value="One">One</option>
-                                            <option value="Two">Two</option>
-                                            <option value="Three">Three</option>
-                                        </select>
-                                    </div>
-                                </div>
+                             
                             </div>
+                        </div>
+                            <div class="mb-5">
+                                <label for="formGroupExampleInput" class="form-label">SAMPATI VIVRAN KI AVASHAKTA </label>
+                                <select class="form-select inputName" required id="formGroupExampleInput" aria-label="Default select example">
+                                    <option value="One">One</option>
+                                    <option value="Two">Two</option>
+                                    <option value="Three">Three</option>
+                                </select>
+                            </div>
+                            
                    
                         <div class="submit">
                                 <button type="submit" class="m-5 submitbtn">Save and next</button>
@@ -313,9 +320,18 @@
         function fun(arr,val){
             d=val;
             let doc=document.getElementById("docdes");
+            let Aadiwasi=document.getElementById("Aadiwasi");
+            let PRATIFAL=document.getElementById("PRATIFAL");
+            let sampati=document.getElementById("sampati");
             let sub=document.getElementById("sub");
             let subdes=document.getElementById("subdes");
             let parsk=document.getElementById("parsk");
+            let a1=document.getElementById("a1");
+            let a2=document.getElementById("a2");
+            let s1=document.getElementById("s1");
+            let s2=document.getElementById("s2");
+            let checkr1=document.getElementById("checkr1");
+            let bank1=document.getElementById("bank1");
             let text=`<option  value="दस्तावेज का प्रकार"  hidden selected>दस्तावेज का प्रकार</option> `
             for(let i=0;i<arr.length;i++){
                 if(arr[i].name==val){
@@ -325,11 +341,41 @@
                         }
                     sub.innerHTML=text;
                     subdes.value=" "
-                    if(arr[i].par=="true"){
+                    if(arr[i].par=="Yes"){
                         parsk.style.display="block";
                     }
                     else{
                         parsk.style.display="none";
+                    }
+                    if(arr[i].adi=="Yes"){
+                        a1.value=""
+                        a2.value=""
+                        Aadiwasi.style.display="block";
+                    }
+                    else{
+                            a1.value=" "
+                            a2.value=" "
+                        Aadiwasi.style.display="none";
+                    }
+                    if(arr[i].PRATIFAL=="Yes"){
+                        checkr1.value=""
+                        bank1.value=""
+                        PRATIFAL.style.display="block";
+                    }
+                    else{
+                        checkr1.value=" "
+                        bank1.value=" "
+                        PRATIFAL.style.display="none";
+                    }
+                    if(arr[i].Sampati=="Yes"){
+                        s1.value=""
+                        s2.value=""
+                        sampati.style.display="block";
+                    }
+                    else{
+                        s1.value=" "
+                        s2.value=" "
+                        sampati.style.display="none";
                     }
                 }
             }
@@ -351,20 +397,24 @@
             }
         }
 
-        function fun2(val){
+        function fun2(arr,val){
             let doc=document.getElementById("SSampati");
             let s1=document.getElementById("s1");
             let s2=document.getElementById("s2");
-         
-            if(val=="Yes"){
-                s1.value=""
-                s2.value=""
-                doc.style.display="flex";
-            }else{
-                s1.value=" "
-                s2.value=" "
-                doc.style.display="none";
+            for(let i=0;i<arr.length;i++){
+                if(arr[i].name==val){
+                    if(arr[i].other=="Yes"){
+                        s1.value=""
+                        s2.value=""
+                        doc.style.display="flex";
+                    }
+                    else{
+                        s1.value=" "
+                        s2.value=" "
+                        doc.style.display="none";
 
+                    }
+                }
             }
         }
 
@@ -372,8 +422,6 @@
             let doc=document.getElementById("AAadiwasi");
             let a1=document.getElementById("a1");
             let a2=document.getElementById("a2");
-            let a3=document.getElementById("a3");
-            let a4=document.getElementById("a4");
            
             if(val=="Yes"){
                 a1.value=""
@@ -384,6 +432,25 @@
                 a2.value=" "
                 doc.style.display="none";
 
+            }
+        }
+
+        function fun4(val){
+            let doc=document.getElementById("SSampati");
+            let checkr=document.getElementById("checkr");
+            let bank=document.getElementById("bank");
+            let checkr1=document.getElementById("checkr1");
+            let bank1=document.getElementById("bank1");
+            if(val=="Cash"){
+                checkr.style.display="none"
+                bank.style.display="none"
+                checkr1.value=" "
+                bank1.value=" "
+            }else{
+                checkr.style.display="block"
+                bank.style.display="block"
+                checkr1.value=""
+                bank1.value=""
             }
         }
     </script>

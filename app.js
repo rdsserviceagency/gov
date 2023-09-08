@@ -3,7 +3,8 @@ const app = express();
 const bodyParser=require("body-parser");
 const mongoose=require("mongoose");
 const bcrypt=require("bcrypt");
-const nodemailer=require("nodemailer")
+const nodemailer=require("nodemailer");
+const { name } = require("ejs");
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -46,6 +47,9 @@ const docSchema= new mongoose.Schema({
     name: String,
     description: String,
     par: String,
+    adi: String,
+    PRATIFAL:String,
+    Sampati:String,
     sub: [
         {
             name: String,
@@ -55,6 +59,19 @@ const docSchema= new mongoose.Schema({
   });
 
 const Doc= mongoose.model("Doc",docSchema);
+
+const parSchema= new mongoose.Schema({
+    name: String,   
+  });
+
+const Parskh= mongoose.model("Parskh",parSchema);
+
+const SampatiSchema= new mongoose.Schema({
+    name: String,
+    other: String,
+  });
+
+const Sampati= mongoose.model("Sampati",SampatiSchema);
 
 
 // login route
@@ -357,8 +374,13 @@ app.get("/home",(req,res)=>{
 
 // New Application
 app.get("/new",(req,res)=>{
-    Doc.find().then((found)=>{
-        res.render("new",{unit1:found})
+    Doc.find().then( (found)=>{
+         Parskh.find().then((parskh)=>{
+            Sampati.find().then((samp)=>{
+                res.render("new",{unit1:found,parskh:parskh,samp:samp})
+
+            })
+         })
     })
 })
 
@@ -367,6 +389,239 @@ app.post("/new",(req,res)=>{
     res.redirect("/new")
 })
 
+// admin
+
+    // Document
+
+    var doc_valid=0;
+
+
+
+    app.get("/admin/document",(req,res)=>{
+        res.render("admin_document",{doc_valid:doc_valid})
+    })
+
+    app.get("/admin/document/list",(req,res)=>{
+        Doc.find().then((found)=>{
+            res.render("admin_document_list",{parray:found})
+        })
+    })
+    app.get("/admin/:name/document/delete",(req,res)=>{
+        Doc.deleteOne({name:req.params.name}).then((found)=>{
+            res.redirect("/admin/document/list")
+        })
+    })
+
+    app.post("/admin/document",(req,res)=>{
+        const name=req.body.name
+        const description=req.body.description
+        const par=req.body.par
+        const adi=req.body.adi
+        const PRATIFAL=req.body.PRATIFAL
+        const Sampati=req.body.Sampati
+        Doc.findOne({name:name}).then(async(found)=>{
+            if(found){
+                doc_valid=1;
+            }else{
+                const doc=new Doc({
+                    name: name,
+                    description: description,
+                    par: par,
+                    adi: adi,
+                    PRATIFAL:PRATIFAL,
+                    Sampati:Sampati,
+                    sub: [],
+                })
+                await doc.save();
+            }
+            res.redirect("/admin/document")
+        }).catch((e)=>{
+            console.log(e)
+        })
+    })
+
+    app.get("/admin/:name/document/update",(req,res)=>{
+        Doc.findOne({name:req.params.name}).then((found)=>{
+            res.render("admin_document_update",{found:found})
+        })
+    })
+
+    app.post("/admin/document/update",async(req,res)=>{
+       const name=req.body.name
+       const description=req.body.description
+       const par=req.body.par
+       const adi=req.body.adi
+       const PRATIFAL=req.body.PRATIFAL
+       const Sampati=req.body.Sampati
+       const found=await Doc.findOne({name:name})
+       found.description=description
+       found.par=par
+       found.adi=adi
+       found.PRATIFAL=PRATIFAL
+       found.Sampati=Sampati
+       await found.save().then(()=>{
+        res.redirect("/admin/document/list")
+       })
+    })
+
+    // Sub document
+    var sub_valid=0;
+
+    app.get("/admin/sub",(req,res)=>{
+        Doc.find().then((found)=>{
+            res.render("admin_sub",{sub_valid:sub_valid,parray:found})
+            sub_valid=0;
+        })
+    })
+
+    app.get("/admin/:name/:dname/sub/delete",(req,res)=>{
+        Doc.updateOne({name:req.params.dname},{$pull:{sub: {name:req.params.name}}}).then((found)=>{
+            res.redirect("/admin/sub/list")
+        })
+    })
+    app.get("/admin/:name/:dname/sub/update",async(req,res)=>{ 
+        const parray=await  Doc.find()
+        Doc.findOne({name:req.params.dname}).then((found)=>{
+            for(let i=0;i<found.sub.length;i++){
+                if(req.params.name==found.sub[i].name){
+                    res.render("admin_sub_update",{name:req.params.name,description:found.sub[i].description,parray:parray,dname:req.params.dname})
+                    break;
+                }
+            }
+        })
+    })
+
+    app.get("/admin/sub/list",(req,res)=>{
+        Doc.find().then((found)=>{
+            res.render("admin_sub_list",{parray:found,k:1})
+        })
+    })
+
+    app.post("/admin/sub",async (req,res)=>{
+        const name=req.body.name
+        const description=req.body.description
+        const विलेख=req.body.विलेख
+        const found= await Doc.findOne({name:विलेख})
+        for(let i=0;i<found.sub.length;i++){
+            if(name==found.sub[i].name){
+                sub_valid=1;
+                    break;
+                }
+            }
+        if(sub_valid==0){
+            const obj={
+                name:name,
+                description:description
+            }
+            found.sub.push(obj)
+            await found.save();
+        }
+        res.redirect("/admin/sub")
+        
+    })
+
+
+    app.post("/admin/sub/:dname/update",async(req,res)=>{
+        const विलेख=req.params.dname
+        const name=req.body.name
+        const description=req.body.description
+        console.log(विलेख)
+        Doc.updateOne({name:विलेख},{$set:{"sub.$[elem].description":description}},{arrayFilters:[{"elem.name":name}]}).then(()=>{
+            res.redirect("/admin/sub/list")
+        }).catch((e)=>{
+            console.log(e)
+        })
+    })
+
+    // Parsakh
+    var parskh_valid=0;
+
+    app.get("/admin/par",(req,res)=>{
+        res.render("admin_par",{parskh_valid:parskh_valid})
+        parskh_valid=0;
+    })
+
+    app.get("/admin/par/list",(req,res)=>{
+        Parskh.find().then((found)=>{
+            res.render("admin_par_list",{parray:found})
+        })
+    })
+
+    app.get("/admin/:name/par/delete",(req,res)=>{
+        Parskh.deleteOne({name:req.params.name}).then((found)=>{
+            res.redirect("/admin/par/list")
+        })
+    })
+
+    app.post("/admin/par",(req,res)=>{
+        const name=req.body.name
+        Parskh.findOne({name:name}).then(async(found)=>{
+            if(found){
+                parskh_valid=1;
+            }else{
+                const parskh=new Parskh({
+                    name:name,
+                })
+                await parskh.save();
+            }
+            res.redirect("/admin/par")
+        }).catch((e)=>{
+            console.log(e)
+        })
+    })
+
+    // sampati
+    var sampati_valid=0;
+    app.get("/admin/sampati",(req,res)=>{
+        res.render("admin_samp",{sampati_valid:sampati_valid})
+        sampati_valid=0;
+    })
+
+    app.get("/admin/sampati/list",(req,res)=>{
+        Sampati.find().then((found)=>{
+            res.render("admin_samp_list",{parray:found})
+        })
+    })
+
+    app.get("/admin/:name/sampati/delete",(req,res)=>{
+        Sampati.deleteOne({name:req.params.name}).then((found)=>{
+            res.redirect("/admin/sampati/list")
+        })
+    })
+    app.get("/admin/:name/sampati/update",(req,res)=>{
+        Sampati.findOne({name:req.params.name}).then((found)=>{
+            res.render("admin_samp_update",{found:found})
+        })
+    })
+
+    app.post("/admin/sampati",(req,res)=>{
+        const name=req.body.name
+        const type=req.body.type
+        Sampati.findOne({name:name}).then(async(found)=>{
+            if(found){
+                sampati_valid=1;
+            }else{
+                const samp=new Sampati({
+                    name:name,
+                    other:type,
+                })
+                await samp.save();
+            }
+            res.redirect("/admin/sampati")
+        }).catch((e)=>{
+            console.log(e)
+        })
+    })
+
+    app.post("/admin/sampati/update",async(req,res)=>{
+        const name=req.body.name
+        const type=req.body.type
+       const found=await Sampati.findOne({name:name})
+       found.other=type
+       await found.save().then(()=>{
+        res.redirect("/admin/sampati/list")
+       })
+    })
 app.listen(3002,(req,res)=>{
     console.log("Server started at port 3000")
 })
