@@ -65,6 +65,17 @@ const parSchema= new mongoose.Schema({
   });
 
 const Parskh= mongoose.model("Parskh",parSchema);
+const peopleSchema= new mongoose.Schema({
+    name: String,   
+  });
+
+const People= mongoose.model("People",peopleSchema);
+
+const verifySchema= new mongoose.Schema({
+    name: String,   
+  });
+
+const Verify= mongoose.model("Verify",verifySchema);
 
 const SampatiSchema= new mongoose.Schema({
     name: String,
@@ -389,6 +400,27 @@ app.post("/new",(req,res)=>{
     res.redirect("/new")
 })
 
+
+// pakashkar
+
+app.get("/pakashkar",(req,res)=>{
+    Verify.find().then((found)=>{
+        People.find().then((found1)=>{
+            res.render("pakashkar",{parray:found,parray1:found1})
+        })
+    })
+})
+
+app.post("/pakashkar",(req,res)=>{
+    console.log(req.body);
+  
+    res.redirect("/pakashkar")
+})
+
+
+
+
+
 // admin
 
     // Document
@@ -622,6 +654,81 @@ app.post("/new",(req,res)=>{
         res.redirect("/admin/sampati/list")
        })
     })
+
+    // people
+    var people_valid=0;
+
+    app.get("/admin/people",(req,res)=>{
+        res.render("admin_people",{people_valid:people_valid})
+        people_valid=0;
+    })
+
+    app.get("/admin/people/list",(req,res)=>{
+        People.find().then((found)=>{
+            res.render("admin_people_list",{parray:found})
+        })
+    })
+
+    app.get("/admin/:name/people/delete",(req,res)=>{
+        People.deleteOne({name:req.params.name}).then((found)=>{
+            res.redirect("/admin/people/list")
+        })
+    })
+
+    app.post("/admin/people",(req,res)=>{
+        const name=req.body.name
+        People.findOne({name:name}).then(async(found)=>{
+            if(found){
+                people_valid=1;
+            }else{
+                const people=new People({
+                    name:name,
+                })
+                await people.save();
+            }
+            res.redirect("/admin/people")
+        }).catch((e)=>{
+            console.log(e)
+        })
+    })
+
+    // verify
+    var verify_valid=0;
+
+    app.get("/admin/verify",(req,res)=>{
+        res.render("admin_verification",{verify_valid:verify_valid})
+        verify_valid=0;
+    })
+
+    app.get("/admin/verify/list",(req,res)=>{
+        Verify.find().then((found)=>{
+            res.render("admin_verify_list",{parray:found})
+        })
+    })
+
+    app.get("/admin/:name/verify/delete",(req,res)=>{
+        Verify.deleteOne({name:req.params.name}).then((found)=>{
+            res.redirect("/admin/verify/list")
+        })
+    })
+
+    app.post("/admin/verify",(req,res)=>{
+        const name=req.body.name
+        Verify.findOne({name:name}).then(async(found)=>{
+            if(found){
+                verify_valid=1;
+            }else{
+                const verify=new Verify({
+                    name:name,
+                })
+                await verify.save();
+            }
+            res.redirect("/admin/verify")
+        }).catch((e)=>{
+            console.log(e)
+        })
+    })
+
 app.listen(3002,(req,res)=>{
     console.log("Server started at port 3000")
 })

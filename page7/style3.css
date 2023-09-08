@@ -1,0 +1,54 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #000000;
+    margin: 0;
+}
+
+
+/* HEADER */
+
+
+.form {
+    margin: 30px;
+    padding: 75px 150px 64px 150px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 33px;
+    background: #FFF;
+    box-shadow: 1px 1px 58px 16px rgba(0, 0, 0, 0.40);
+}
+
+.form p {
+    text-align: center;
+    color: var(--Gray, #2A2A2A);
+    font-family: Poppins;
+    font-size: 1.5rem;
+    font-style: normal;
+    line-height: normal;
+    font-weight: bolder;
+}
+
+#inputName {
+    background-color: #e6e6e6;
+    border: 4px solid #313044;
+}
+.submit{
+  display: flex;
+  justify-content: center;
+}
+.submitbtn{
+    background-color: #313044;
+    color: white;
+    padding: 10px 100px;
+    border-radius: 23px;
+}
+
+@media (max-width: 768px) {
+    .form{
+        padding: 75px 10px 64px 10px;
+        box-sizing: border-box;
+    }
+    .submitbtn{
+        padding: 10px 20px;
+    }
+}
