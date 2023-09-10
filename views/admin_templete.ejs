@@ -9,35 +9,32 @@
                             <!-- Card Header - Dropdown -->
                             <div
                                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="background-color: #2F2E41;">
-                                <h6 class="m-0" style="color: #fff; font-weight: 700;">पक्षकार</h6>
+                                <h6 class="m-0" style="color: #fff; font-weight: 700;">Template</h6>
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
-                                <form action="/admin/people" method="post">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1" style="color: #2F2E41;"> विलेख चुने<sup style="color: red;">*</sup></label>
-                                        <select name="विलेख" id="exampleInputPassword1" required class="form-control" aria-placeholder="Select Status">
-                                            <% for(let i=0;i<parray.length;i++){ %>
-                                                   <option value="<%=parray[i].name%>"><%=parray[i].name%></option>
-                                            <%}%>
-                                        </select>
-                                    </div>
-                                    <% if(people_valid == 1){ %>
+                                <form action="/admin/temp" method="post">
+                                    <% if(tem_valid == 1){ %>
                                         <div class="mb-3">
-                                            <label for="exampleInputPassword2" class="form-label">पक्षकार<sup style="color: red;">*</sup></label>
+                                            <label for="exampleInputPassword2" class="form-label">Template <sup style="color: red;">*</sup></label>
                                             <input type="text" class="form-control input is-invalid" name="name" id="exampleInputPassword2" aria-describedby="validationServer04Feedback" required>
                                             <div id="validationServer04Feedback" class="invalid-feedback">
-                                                पक्षकार name is already exist
+                                                Template  is already exist
                                             </div>
-                                          </div>
-                                    <% } %>          
-                                    <% if(people_valid == 0){ %>
+                                        </div>
+                                    <% } %>    
+                                    <% if(tem_valid == 0){ %>
                                     <div class="form-group">
-                                      <label for="exampleInputEmail1" style="color: #2F2E41;"> पक्षकार <sup style="color: red;">*</sup></label>
-                                      <input type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  name="name">
+                                        <label for="exampleInputEmail1" style="color: #2F2E41;">Template   <sup style="color: red;">*</sup></label>
+                                        <input type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name">
                                     </div>
-                                    <% } %>          
+                                    <% } %>    
 
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" style="color: #2F2E41;">Template description  <sup style="color: red;">*</sup></label>
+                                        <input type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="description">
+                                    </div>
+                                
                                     <!--Image upload-->
                                     <button type="submit" class="btn btn-primary" style="background:#2F2E41; color: #fff; font-weight: 700;">Submit</button>
                                 </form>

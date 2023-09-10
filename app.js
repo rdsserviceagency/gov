@@ -56,6 +56,10 @@ const docSchema= new mongoose.Schema({
             description: String,
         }   
     ],
+    people:[{
+        name:String
+        }
+    ]
   });
 
 const Doc= mongoose.model("Doc",docSchema);
@@ -65,11 +69,12 @@ const parSchema= new mongoose.Schema({
   });
 
 const Parskh= mongoose.model("Parskh",parSchema);
-const peopleSchema= new mongoose.Schema({
+const tempSchema= new mongoose.Schema({
     name: String,   
+    description: String,   
   });
 
-const People= mongoose.model("People",peopleSchema);
+const Templete= mongoose.model("Templete",tempSchema);
 
 const verifySchema= new mongoose.Schema({
     name: String,   
@@ -403,10 +408,11 @@ app.post("/new",(req,res)=>{
 
 // pakashkar
 
-app.get("/pakashkar",(req,res)=>{
+app.get("/:dname/pakashkar",(req,res)=>{
+
     Verify.find().then((found)=>{
-        People.find().then((found1)=>{
-            res.render("pakashkar",{parray:found,parray1:found1})
+        Doc.findOne({name:req.params.dname}).then((found1)=>{
+            res.render("pakashkar",{parray:found,parray1:found1.people})
         })
     })
 })
@@ -417,6 +423,19 @@ app.post("/pakashkar",(req,res)=>{
     res.redirect("/pakashkar")
 })
 
+// Template
+app.get("/templete",(req,res)=>{
+    Templete.find().then( (found)=>{
+        res.render("templete",{unit1:found})
+
+    })
+})
+
+app.post("/templete",(req,res)=>{
+    console.log(req.body);
+  
+    res.redirect("/templete")
+})
 
 
 
@@ -463,6 +482,7 @@ app.post("/pakashkar",(req,res)=>{
                     PRATIFAL:PRATIFAL,
                     Sampati:Sampati,
                     sub: [],
+                    people:[]
                 })
                 await doc.save();
             }
@@ -659,37 +679,43 @@ app.post("/pakashkar",(req,res)=>{
     var people_valid=0;
 
     app.get("/admin/people",(req,res)=>{
-        res.render("admin_people",{people_valid:people_valid})
-        people_valid=0;
-    })
-
-    app.get("/admin/people/list",(req,res)=>{
-        People.find().then((found)=>{
-            res.render("admin_people_list",{parray:found})
+        Doc.find().then((found)=>{
+            res.render("admin_people",{people_valid:people_valid,parray:found})
+            people_valid=0;
         })
     })
 
-    app.get("/admin/:name/people/delete",(req,res)=>{
-        People.deleteOne({name:req.params.name}).then((found)=>{
+    app.get("/admin/people/list",(req,res)=>{
+        Doc.find().then((found)=>{
+            res.render("admin_people_list",{parray:found,k:1})
+        })
+    })
+
+    app.get("/admin/:name/:dname/people/delete",(req,res)=>{
+        Doc.updateOne({name:req.params.dname},{$pull:{people: {name:req.params.name}}}).then((found)=>{
             res.redirect("/admin/people/list")
         })
     })
 
-    app.post("/admin/people",(req,res)=>{
+    app.post("/admin/people",async(req,res)=>{
         const name=req.body.name
-        People.findOne({name:name}).then(async(found)=>{
-            if(found){
+        const विलेख=req.body.विलेख
+        const found= await Doc.findOne({name:विलेख})
+        for(let i=0;i<found.people.length;i++){
+            if(name==found.people[i].name){
                 people_valid=1;
-            }else{
-                const people=new People({
-                    name:name,
-                })
-                await people.save();
+                    break;
+                }
             }
-            res.redirect("/admin/people")
-        }).catch((e)=>{
-            console.log(e)
-        })
+        if(people_valid==0){
+            const obj={
+                name:name,
+            }
+            found.people.push(obj)
+            await found.save();
+        }
+        res.redirect("/admin/people")
+
     })
 
     // verify
@@ -727,6 +753,61 @@ app.post("/pakashkar",(req,res)=>{
         }).catch((e)=>{
             console.log(e)
         })
+    })
+
+
+    // Templete
+
+    var tem_valid=0;
+    app.get("/admin/temp",(req,res)=>{
+        res.render("admin_templete",{tem_valid:tem_valid})
+        tem_valid=0;
+    })
+
+    app.get("/admin/temp/list",(req,res)=>{
+        Templete.find().then((found)=>{
+            res.render("admin_templete_list",{parray:found})
+        })
+    })
+
+    app.get("/admin/:name/temp/delete",(req,res)=>{
+        Templete.deleteOne({name:req.params.name}).then((found)=>{
+            res.redirect("/admin/sampati/list")
+        })
+    })
+    app.get("/admin/:name/temp/update",(req,res)=>{
+        Templete.findOne({name:req.params.name}).then((found)=>{
+            res.render("admin_templete_update",{found:found})
+        })
+    })
+
+    app.post("/admin/temp",(req,res)=>{
+        const name=req.body.name
+        const description=req.body.description
+        Templete.findOne({name:name}).then(async(found)=>{
+            if(found){
+                tem_valid=1;
+            }else{
+                const tempa=new Templete({
+                    name:name,
+                    description:description,
+                })
+                await tempa.save();
+            }
+            res.redirect("/admin/temp")
+        }).catch((e)=>{
+            console.log(e)
+        })
+    })
+
+    app.post("/admin/temp/update",async(req,res)=>{
+        const name=req.body.name
+        const description=req.body.description
+       const found=await Templete.findOne({name:name})
+       found.description=description
+       await found.save().then(()=>{
+        res.redirect("/admin/temp/list")
+       })
     })
 
 app.listen(3002,(req,res)=>{

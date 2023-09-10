@@ -6,13 +6,13 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">पक्षकार</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Template</h1>
                    
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text" style="color: #501bd7eb;">पक्षकार</h6>
+                            <h6 class="m-0 font-weight-bold text" style="color: #501bd7eb;">Template</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -20,8 +20,8 @@
                                     <thead>
                                         <tr>
                                             <th>SL No.</th>
-                                            <th>पक्षकार</th>
-                                            <th>विलेख</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
                                             <th>Action</th>
 
                                         </tr>
@@ -29,25 +29,25 @@
                                     <tfoot>
                                         <tr>
                                             <th>SL No.</th>
-                                            <th>पक्षकार</th>
-                                            <th>विलेख</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
                                             <th>Action</th>
+
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <% for(var i=0; i < parray.length; i++){ %>
-                                            <% for(var j=0; j < parray[i].people.length; j++){ %> 
-                                        <tr>
-                                            <td><%=k%></td>
-                                            <td><%= parray[i].people[j].name %></td>
+                                            <tr>
+                                            <td><%=i+1%></td>
                                             <td><%= parray[i].name %></td>
+                                            <td><%= parray[i].description %></td>
                                             <td>
-                                                <a href="/admin/<%= parray[i].people[j].name %>/<%= parray[i].name %>/people/delete" class="btn btn-danger btn-sm" data-toggle="tooltip" style="color: white;background-color:red;" data-placement="left" title="Update"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                <a href="/admin/<%= parray[i].name %>/temp/update" class="btn btn-info btn-sm" data-toggle="tooltip" style="color: white;background-color: #501bd7eb;" data-placement="left" title="Update"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                <a href="/admin/<%= parray[i].name %>/temp/delete" class="btn btn-danger btn-sm" data-toggle="tooltip" style="color: white;background-color:red;" data-placement="left" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                             </td>
                                          
                                         </tr>
-                                        <% k++ %>
-                                       <% } %>       
+                                        
                                       <% } %>       
                                     </tbody>
                                 </table>

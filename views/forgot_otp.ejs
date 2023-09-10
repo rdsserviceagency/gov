@@ -46,47 +46,23 @@
         <br>
         <br>
         <div id="form" >
-            <form action="/login" method="post">
-                <% if(login_valid == 0 || login_valid == 2){ %>
+            <form action="forgot/otp" method="post">
+                <% if(forgot_otp_valid == 0 ){ %>
                 <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Email *</label>
-                  <input   type="email" class="form-control input " id="exampleInputEmail1" aria-describedby="emailHelp" name="email" required>
+                  <label for="exampleInputEmail1" class="form-label">OTP *</label>
+                  <input   type="number" class="form-control input " id="exampleInputEmail1" aria-describedby="emailHelp" name="otp" required>
                 </div>
                 <% } %> 
-                <% if(login_valid == 1){ %>
-                <div class="mb-3">
-                  <label for="validationCustomUsername" class="form-label">Email *</label>
-                  <input type="email" class="form-control input is-invalid" name="email" id="validationCustomUsername" aria-describedby="validationServer03Feedback" required>
-                  <div id="validationServer03Feedback" class="invalid-feedback">
-                    User is not found.
-                  </div>
-                </div>
-                <% } %> 
-                <% if(login_valid == 0 || login_valid == 1){ %>
+                <% if(forgot_otp_valid == 1 ){ %>
                     <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password *</label>
-                    <input type="password" class="form-control input" id="exampleInputPassword1" name="password" required>
-                    </div>
-                <% } %> 
-                <% if(login_valid == 2){ %>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword2" class="form-label">Password *</label>
-                        <input type="password" class="form-control input is-invalid" name="password" id="exampleInputPassword2" aria-describedby="validationServer04Feedback" required>
+                        <label for="exampleInputPassword2" class="form-label">OTP *</label>
+                        <input type="number" class="form-control input is-invalid" name="otp" id="exampleInputPassword2" aria-describedby="validationServer04Feedback" required>
                         <div id="validationServer04Feedback" class="invalid-feedback">
-                          Incorrect Password.
+                          Incorrect OTP.
                         </div>
                       </div>
                 <% } %> 
-                <div style="display: flex;justify-content: space-between;">
-                    <div>
-                        <button type="submit" class="btn btn-lg" style="background-color: #2F2E41;color: white; border-radius: 20px;">Login</button>
-                        <button class="btn btn-light btn-lg"><a href="/register" style="text-decoration: none;color: #2F2E41;">Register</a></button>
-                    </div>
-                    <div style="padding-top: 10px;">
-                        <a href="/forgot" style="text-decoration: none; color: #2F2E41;font-weight: 700;">Forgot Password?</a>
-                    </div>
-
-                </div>
+                <button type="submit" class="btn btn-lg" style="background-color: #2F2E41;color: white; border-radius: 20px;">Verify OTP</button>
             </form>
         </div>
     </section>
