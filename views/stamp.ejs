@@ -115,7 +115,7 @@
                 </ul>
             </div>
             <div class="col-sm-9">
-                <form action="" method="post">
+                <form action="/Mumbai/Tushar/stamp" method="post">
                     <div class="form">
                         <div>
                             <p>दस्तावेज का विवरण </p>
@@ -123,94 +123,155 @@
                         
                         <div class="mb-5">
                             <label for="formGroupExampleInput" class="form-label">संपत्ति का बाजार मूल्य </label>
-                            <input type="text" class="form-control" id="inputName" placeholder="ENTER SUMMARY">
+                            <input type="text" name="actual" readonly value="500000" class="form-control inputName" id="" placeholder="ENTER SUMMARY">
                         </div>
                         <div class="mb-5">
                             <label for="formGroupExampleInput" class="form-label">प्रतिफल की राशी </label>
-                            <input type="text" class="form-control" id="inputName" placeholder="ENTER SUMMARY">
+                            <input type="text" name="sell" readonly value="100000" class="form-control inputName" id="" placeholder="ENTER SUMMARY">
                         </div>
-                        <div class="row">
+
+                        <div class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">क्या स्टाम्प ड्यूटी में छूव चाहते है</label>
+                            <select class="form-select inputName" name="sdi" onchange="fun(this.value)" aria-label="Default select example">
+                                <option hidden selected>Choose</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div id="st" class="row">
+                           
                             <div class="col-sm-6">
-                                <div class="mb-5">
-                                    <label for="formGroupExampleInput" class="form-label">क्या स्टाम्प ड्यूटी में छूव चाहते है</label>
-                                    <select class="form-select" id="inputName" aria-label="Default select example">
-                                        <option selected>ENTER SUMMARY</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                <div id="sdrd" class="mb-5">
+                                    <label for="formGroupExampleInput" class="form-label">हां तो छुट का कारण छूने </label>
+                                    <select type="text" class="form-control inputName" id="sdr" onchange="stamp(<%= JSON.stringify(docum) %>,this.value)" placeholder="ENTER SUMMARY">
+                                        <option hidden selected>Choose</option>
+                                        <% for(let i=0;i<docum.Reason.length;i++) { %>
+                                            <%if(docum.Reason[i].Applicable=="Stamp"){%>
+                                                <option value="<%=docum.Reason[i].name%>"><%=docum.Reason[i].name%></option>
+                                            <%}%>  
+                                        <%}%>
                                     </select>
-                                </div>
-                                <div class="mb-5">
-                                    <label for="formGroupExampleInput" class="form-label">छुट का प्रतिशत  </label>
-                                    <input type="text" class="form-control" id="inputName" placeholder="ENTER SUMMARY">
-                                </div>
-                                <div class="mb-5">
-                                    <label for="formGroupExampleInput" class="form-label">हां/नहीं/लागु नहीं </label>
-                                    <input type="text" class="form-control" id="inputName" placeholder="ENTER SUMMARY">
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="mb-5">
-                                    <label for="formGroupExampleInput" class="form-label">हां तो छुट का कारण छूने  </label>
-                                    <input type="text" class="form-control" id="inputName" placeholder="ENTER SUMMARY">
+                                <div id="sidd" class="mb-5">
+                                    <label for="formGroupExampleInput" class="form-label">छुट का प्रतिशत  </label>
+                                    <input type="number" name="sd" readonly class="form-control inputName" id="sdis" placeholder="ENTER SUMMARY">
                                 </div>
-                                <div class="mb-5">
-                                    <label for="formGroupExampleInput" class="form-label">क्या पंजियन शुल्क में छू चाहते है  </label>
-                                    <select class="form-select" id="inputName" aria-label="Default select example">
-                                        <option selected>ENTER SUMMARY</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                            </div>
+                        </div>
+
+                        
+                        <div class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">क्या पंजियन शुल्क में छू चाहते है</label>
+                            <select class="form-select inputName" name="pid" onchange="fun2(this.value)" aria-label="Default select example">
+                                <option hidden selected>Choose</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div id="pa" class="row">
+                           
+                            <div class="col-sm-6">
+                                <div id="pdrd" class="mb-5">
+                                    <label for="formGroupExampleInput" class="form-label">हां तो छुट का कारण छूने </label>
+                                    <select type="text" class="form-control inputName" id="sdr" onchange="pan(<%= JSON.stringify(docum) %>,this.value)" placeholder="ENTER SUMMARY">
+                                        <option hidden selected>Choose</option>
+                                        <% for(let i=0;i<docum.Reason.length;i++) { %>
+                                            <%if(docum.Reason[i].Applicable=="Panjyan"){%>
+                                                <option value="<%=docum.Reason[i].name%>"><%=docum.Reason[i].name%></option>
+                                            <%}%>  
+                                        <%}%>
                                     </select>
                                 </div>
-                                <div class="mb-5">
-                                    <label for="formGroupExampleInput" class="form-label">छुट का प्रतिशत </label>
-                                    <input type="text" class="form-control" id="inputName" placeholder="ENTER SUMMARY">
+                            </div>
+                            <div class="col-sm-6">
+                                <div id="pidd" class="mb-5">
+                                    <label for="formGroupExampleInput" class="form-label">छुट का प्रतिशत  </label>
+                                    <input type="number" readonly name="pd" class="form-control inputName" id="pdis" placeholder="ENTER SUMMARY">
                                 </div>
                             </div>
                         </div>
                         <div class="mb-5">
                             <label for="formGroupExampleInput" class="form-label">क्या पूर्व में स्टाम्प और पंजियान शुल्क जमा किया गया है </label>
-                            <select class="form-select" id="inputName" aria-label="Default select example">
-                                <option selected>ENTER SUMMARY</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="form-select inputName" onchange="fun3(this.value)" aria-label="Default select example">
+                                <option hidden selected>Choose</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
                             </select>
                         </div>
-                        <div class="row">
+                        <div id="stp" class="row">
                             <div class="col-sm-6">
                                 <div class="mb-5">
                                     <label for="formGroupExampleInput" class="form-label">पूर्वे के भुगतान स्टाम्प राशी दर्ज करे</label>
-                                    <input type="text" class="form-control" id="inputName" placeholder="ENTER SUMMARY">
+                                    <input type="number" name="pst" class="form-control inputName" id="" placeholder="ENTER SUMMARY">
                                 </div>
                                 <div class="mb-5">
                                     <label for="formGroupExampleInput" class="form-label">पूर्वे के भुगतान पंजीयन  राशी दर्ज करे </label>
-                                    <input type="text" class="form-control" id="inputName" placeholder="ENTER SUMMARY">
+                                    <input type="number" name="ppt" class="form-control inputName" id="" placeholder="ENTER SUMMARY">
                                 </div>
                                 <div class="mb-5">
                                     <label for="formGroupExampleInput" class="form-label">दस्तावेज क्रमांक </label>
-                                    <input type="text" class="form-control" id="inputName" placeholder="ENTER SUMMARY">
+                                    <input type="text" class="form-control inputName" id="" placeholder="ENTER SUMMARY">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="mb-5">
                                     <label for="formGroupExampleInput" class="form-label">हां होने पर पूर्व के पंजीयन का व्योरा चुने  </label>
-                                    <input type="text" class="form-control" id="inputName" placeholder="ENTER SUMMARY">
+                                    <input type="text" class="form-control inputName" id="" placeholder="ENTER SUMMARY">
                                 </div>
                                 <div class="mb-5">
                                     <label for="formGroupExampleInput" class="form-label">पंजीयन कार्यालय का नाम  </label>
-                                    <input type="text" class="form-control" id="inputName" placeholder="ENTER SUMMARY">
+                                    <input type="text" class="form-control inputName" id="" placeholder="ENTER SUMMARY">
                                 </div>
                                 <div class="mb-5">
                                     <label for="formGroupExampleInput" class="form-label">दिनांक
                                     </label>
-                                    <input type="text" class="form-control" id="inputName" placeholder="ENTER SUMMARY">
+                                    <input type="date" class="form-control inputName" id="" placeholder="ENTER SUMMARY">
                                 </div>
                             </div>
                         </div>
-                
-                     
+                        <div id="res">
+                            <div>
+                                <p id="hea">Result </p>
+                            </div>
+                            <div class="mb-5">
+                                <label for="formGroupExampleInput" class="form-label">विलेख</label>
+                                <input type="text" class="form-control inputName" id="vna" readonly placeholder="ENTER SUMMARY">
+                            </div>
+                            <div  class="row">
+                                <div class="col-sm-6">
+                                    <div class="mb-5">
+                                        <label for="formGroupExampleInput" class="form-label">दस्तावेज का प्रकार </label>
+                                        <input type="text" class="form-control inputName" id="dna" readonly placeholder="">
+                                    </div>
+                                    <div class="mb-5">
+                                        <label for="formGroupExampleInput" class="form-label">मुद्रांक शुल्क </label>
+                                        <input type="text" class="form-control inputName" id="sta" readonly placeholder="">
+                                    </div>
+                                    <div class="mb-5">
+                                        <label for="formGroupExampleInput" class="form-label">उपकर  </label>
+                                        <input type="text" class="form-control inputName" id="up" readonly placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    
+                                    <div class="mb-5">
+                                        <label for="formGroupExampleInput" class="form-label">जनपद   </label>
+                                        <input type="text" class="form-control inputName" id="ja" readonly placeholder="">
+                                    </div>
+                                    <div class="mb-5">
+                                        <label for="formGroupExampleInput" class="form-label">कुल देय मुद्रांक शुल्क  योग (100 के राउंड फिगर में)
+                                        </label>
+                                        <input type="text" class="form-control inputName" id="sto" readonly placeholder="">
+                                    </div>
+                                    <div class="mb-5">
+                                        <label for="formGroupExampleInput" class="form-label">कुल पंजीयन शुल्क</label>
+                                        <input type="text" class="form-control inputName" id="p" readonly placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
                 
                 
                 
@@ -223,7 +284,52 @@
         </div>
     </section>
     <script>
-     
+      function fun3(val){
+        let stp=document.getElementById("stp");
+
+            if(val=="Yes"){
+                stp.style.display="flex"
+            }
+            else{
+                stp.style.display="none"
+            }
+      }
+      function fun(val){
+        let st=document.getElementById("st");
+
+            if(val=="Yes"){
+                st.style.display="flex"
+            }
+            else{
+                st.style.display="none"
+            }
+      }
+      function fun2(val){
+        let pa=document.getElementById("pa");
+
+            if(val=="Yes"){
+                pa.style.display="flex"
+            }
+            else{
+                pa.style.display="none"
+            }
+      }
+      function stamp(arr,val){
+        let sdis=document.getElementById("sdis");
+            for(let i=0;i<arr.Reason.length;i++){
+                if(arr.Reason[i].Applicable=="Stamp" && arr.Reason[i].name==val){
+                    sdis.value=arr.Reason[i].discount
+                }
+            }
+      }
+      function pan(arr,val){
+        let pdis=document.getElementById("pdis");
+            for(let i=0;i<arr.Reason.length;i++){
+                if(arr.Reason[i].Applicable=="Panjyan" && arr.Reason[i].name==val){
+                    pdis.value=arr.Reason[i].discount
+                }
+            }
+      }
      
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

@@ -37,6 +37,48 @@
                                         <input type="text" required value="<%=description%>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="description">
                                     </div>
                                 
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" style="color: #2F2E41;">शुल्क का प्रकार <sup style="color: red;">*</sup></label>
+                                        <select name="Type" id="exampleInputEmail1" required class="form-control" aria-placeholder="Select Status">
+                                            <%if(Type=="Fixed"){%>}
+                                                <option value="Fixed" selected>Fixed</option>
+                                                <option value="Percentage">Percentage</option>
+                                                <option value="Per Feet">Per Feet</option>
+                                            <%}%>
+                                            <%if(Type=="Percentage"){%>}
+                                                <option value="Fixed">Fixed</option>
+                                                <option value="Percentage" selected>Percentage</option>
+                                                <option value="Per Feet">Per Feet</option>
+                                            <%}%>
+                                            <%if(Type=="Per Feet"){%>}
+                                                <option value="Fixed">Fixed</option>
+                                                <option value="Percentage">Percentage</option>
+                                                <option value="Per Feet" selected>Per Feet</option>
+                                            <%}%>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" style="color: #2F2E41;">स्टाम्प शुल्क<sup style="color: red;">*</sup></label>
+                                        <input type="number" value="<%=Stamp%>" step="0.01" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Stamp">
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" style="color: #2F2E41;">उपकर शुल्क<sup style="color: red;">*</sup></label>
+                                        <input type="number" value="<%=Upkar%>" step="0.01" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Upkar">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" style="color: #2F2E41;">जनपद शुल्क<sup style="color: red;">*</sup></label>
+                                        <input type="number" value="<%=Janpad%>" step="0.01" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Janpad">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" style="color: #2F2E41;">पंजीयन शुल्क  <sup style="color: red;">*</sup></label>
+                                        <input type="number" value="<%=panjikar%>" step="0.01" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="panjikar">
+                                    </div>
+
                                     <!--Image upload-->
                                     <button type="submit" class="btn btn-primary" style="background:#2F2E41; color: #fff; font-weight: 700;">Submit</button>
                                 </form>

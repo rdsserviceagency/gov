@@ -54,6 +54,25 @@ const docSchema= new mongoose.Schema({
         {
             name: String,
             description: String,
+            Stamp:Number,
+            Upkar:Number,
+            Janpad:Number,
+            panjikar: Number,
+            Type:String,
+            Reason:[
+                {
+                    name:String,
+                    discount:Number,
+                    Type:String,
+                    Applicable:String
+                }
+            ],
+            templete:[
+                {
+                    name:String,
+                    description:String
+                }
+            ]
         }   
     ],
     people:[{
@@ -268,6 +287,12 @@ app.get("/",(req,res)=>{
     res.render("index");
 })
 
+
+// Important
+app.get("/important",(req,res)=>{
+    res.render("important");
+})
+
 // conventor
 let unit_array=["हेक्टेयर","डिसमिल","वर्गफीट","वर्ग मीटर","एकड़"]
 
@@ -406,6 +431,79 @@ app.post("/new",(req,res)=>{
 })
 
 
+
+// Stamp
+
+app.get("/:vname/:dname/stamp",(req,res)=>{
+    Doc.findOne({name:req.params.vname}).then((found)=>{
+        for(let i=0;i<found.sub.length;i++){
+            res.render("stamp",{docum:found.sub[i]})
+        }
+    })
+})
+
+app.post("/:vname/:dname/stamp",(req,res)=>{
+    let upk
+    let jan
+    let sta
+    let panji
+    let total_st=0;
+    const actual=req.body.actual
+    const sell=req.body.sell
+    const sdi=req.body.sdi;
+    const pid=req.body.pid;
+    const sd=req.body.sd;
+    const pd=req.body.pd;
+    const ppt=req.body.ppt;
+    const pst=req.body.pst;
+
+    Doc.findOne({name:req.params.vname}).then((found)=>{
+        for(let i=0;i<found.sub.length;i++){
+            if(found.sub[i].name==req.params.dname){
+                if(found.sub[i].Type=="Percentage"){
+                    upk=(found.sub[i].Upkar*actual)/100;
+                    jan=(found.sub[i].Janpad*actual)/100;
+                    sta=(found.sub[i].Stamp*actual)/100;
+                    panji=(found.sub[i].panjikar*actual)/100;
+                    total_st=upk+jan+sta;
+                }
+                if(found.sub[i].Type=="Fixed"){
+                    upk=found.sub[i].Upkar;
+                    jan=found.sub[i].Janpad;
+                    sta=found.sub[i].Stamp;
+                    panji=found.sub[i].panjikar;
+                    total_st=upk+jan+sta;
+                }
+            }
+        }
+        if(sdi=="Yes"){
+            
+            sta=sta-((sta*sd)/100)
+            total_st=upk+jan+sta;
+
+        }
+        if(pid=="Yes"){
+            panji=panji-((panji*pd)/100)
+        }
+        if(pid=="Yes"){
+            sta=sta-pst
+            total_st=upk+jan+sta;
+
+            panji=panji-ppt
+        }
+        let obj={
+           sta:sta,
+           upk:upk,
+           jan:jan,
+           total:total_st,
+           panji:panji
+        }
+        console.log(obj);
+    })
+ 
+
+})
+
 // pakashkar
 
 app.get("/:dname/pakashkar",(req,res)=>{
@@ -424,9 +522,14 @@ app.post("/pakashkar",(req,res)=>{
 })
 
 // Template
-app.get("/templete",(req,res)=>{
-    Templete.find().then( (found)=>{
-        res.render("templete",{unit1:found})
+app.get("/:vname/:dname/templete",(req,res)=>{
+
+    Doc.findOne({name:req.params.vname}).then( (found)=>{
+        for(let i=0;i<found.sub.length;i++){
+            if(found.sub[i].name==req.params.dname){
+                res.render("templete",{unit1:found.sub[i].templete})
+            }
+        }
 
     })
 })
@@ -536,7 +639,7 @@ app.post("/templete",(req,res)=>{
         Doc.findOne({name:req.params.dname}).then((found)=>{
             for(let i=0;i<found.sub.length;i++){
                 if(req.params.name==found.sub[i].name){
-                    res.render("admin_sub_update",{name:req.params.name,description:found.sub[i].description,parray:parray,dname:req.params.dname})
+                    res.render("admin_sub_update",{name:req.params.name,description:found.sub[i].description,parray:parray,Type:found.sub[i].Type,Stamp:found.sub[i].Stamp,Upkar:found.sub[i].Upkar,Janpad:found.sub[i].Janpad,panjikar:found.sub[i].panjikar,dname:req.params.dname})
                     break;
                 }
             }
@@ -553,6 +656,11 @@ app.post("/templete",(req,res)=>{
         const name=req.body.name
         const description=req.body.description
         const विलेख=req.body.विलेख
+        const Type=req.body.Type
+        const Stamp=req.body.Stamp
+        const Upkar=req.body.Upkar
+        const Janpad=req.body.Janpad
+        const panjikar=req.body.panjikar
         const found= await Doc.findOne({name:विलेख})
         for(let i=0;i<found.sub.length;i++){
             if(name==found.sub[i].name){
@@ -563,7 +671,14 @@ app.post("/templete",(req,res)=>{
         if(sub_valid==0){
             const obj={
                 name:name,
-                description:description
+                description:description,
+                Stamp:Stamp,
+                Upkar:Upkar,
+                Janpad:Janpad,
+                panjikar: panjikar,
+                Type:Type,
+                Reason:[],
+                templete:[],
             }
             found.sub.push(obj)
             await found.save();
@@ -577,8 +692,13 @@ app.post("/templete",(req,res)=>{
         const विलेख=req.params.dname
         const name=req.body.name
         const description=req.body.description
+        const Type=req.body.Type
+        const Stamp=req.body.Stamp
+        const Upkar=req.body.Upkar
+        const Janpad=req.body.Janpad
+        const panjikar=req.body.panjikar
         console.log(विलेख)
-        Doc.updateOne({name:विलेख},{$set:{"sub.$[elem].description":description}},{arrayFilters:[{"elem.name":name}]}).then(()=>{
+        Doc.updateOne({name:विलेख},{$set:{"sub.$[elem].description":description, "sub.$[elem].Type":Type, "sub.$[elem].Stamp":Stamp,"sub.$[elem].Upkar":Upkar,"sub.$[elem].Janpad":Janpad,"sub.$[elem].panjikar":panjikar}},{arrayFilters:[{"elem.name":name}]}).then(()=>{
             res.redirect("/admin/sub/list")
         }).catch((e)=>{
             console.log(e)
@@ -760,55 +880,147 @@ app.post("/templete",(req,res)=>{
 
     var tem_valid=0;
     app.get("/admin/temp",(req,res)=>{
-        res.render("admin_templete",{tem_valid:tem_valid})
-        tem_valid=0;
+        Doc.find().then((found)=>{
+            res.render("admin_templete",{tem_valid:tem_valid,parray:found})
+            tem_valid=0;
+        })
     })
 
     app.get("/admin/temp/list",(req,res)=>{
-        Templete.find().then((found)=>{
-            res.render("admin_templete_list",{parray:found})
+        Doc.find().then((found)=>{
+            res.render("admin_templete_list",{parray:found,k:1})
         })
     })
 
-    app.get("/admin/:name/temp/delete",(req,res)=>{
-        Templete.deleteOne({name:req.params.name}).then((found)=>{
-            res.redirect("/admin/sampati/list")
+    app.get("/admin/:name/:dname/:vname/temp/delete",(req,res)=>{
+
+        Doc.updateOne({name:req.params.vname},{$pull:{"sub.$[elem].templete": {name:req.params.name} }},  {arrayFilters:[{"elem.name":req.params.dname}]}).then((found)=>{
+            res.redirect("/admin/temp/list")
         })
+
     })
-    app.get("/admin/:name/temp/update",(req,res)=>{
-        Templete.findOne({name:req.params.name}).then((found)=>{
-            res.render("admin_templete_update",{found:found})
-        })
+    app.get("/admin/:name/:dname/:vname/temp/update",async(req,res)=>{
+        const found=await Doc.findOne({name:req.params.vname});
+        for(let i=0;i<found.sub.length;i++){
+            if(found.sub[i].name==req.params.dname){
+                for(let j=0;j<found.sub[i].templete.length;j++){
+                    if(found.sub[i].templete[j].name==req.params.name){
+                        res.render("admin_templete_update",{vname:req.params.vname,dname:req.params.dname,name:req.params.name,description:found.sub[i].templete[j].description})
+                    }
+                }
+            }
+        }
+       
     })
 
-    app.post("/admin/temp",(req,res)=>{
+    app.post("/admin/temp",async (req,res)=>{
         const name=req.body.name
         const description=req.body.description
-        Templete.findOne({name:name}).then(async(found)=>{
-            if(found){
-                tem_valid=1;
-            }else{
-                const tempa=new Templete({
-                    name:name,
-                    description:description,
-                })
-                await tempa.save();
-            }
+        const विलेख=req.body.विलेख
+        const दस्तावेज=req.body.दस्तावेज
+        const found= await Doc.findOne({name:विलेख});
+        console.log(found);
+            for(let i=0;i<found.sub.length;i++){
+                if(दस्तावेज==found.sub[i].name){
+                        for(let j=0;j<found.sub[i].templete.length;j++){
+                            if(name==found.sub[i].templete[j].name){
+                                tem_valid=1;
+                                break;
+                            }
+                        }
+                        if(tem_valid==0){
+                            const obj={
+                                name:name,
+                                description:description
+                            }
+                            found.sub[i].templete.push(obj)
+                        }
+                        break;
+                    }
+                }
+                await found.save();
+            
             res.redirect("/admin/temp")
-        }).catch((e)=>{
-            console.log(e)
-        })
+       
     })
 
     app.post("/admin/temp/update",async(req,res)=>{
         const name=req.body.name
+        const दस्तावेज=req.body.दस्तावेज
+        const विलेख=req.body.विलेख
         const description=req.body.description
-       const found=await Templete.findOne({name:name})
-       found.description=description
-       await found.save().then(()=>{
-        res.redirect("/admin/temp/list")
-       })
+        Doc.updateOne({name:विलेख},{$set:{"sub.$[elem].templete.$[ele1].description": description }},  {arrayFilters:[{"elem.name":दस्तावेज},{"elem.name":name}]}).then((found)=>{
+            res.redirect("/admin/temp/list")
+        })
     })
+
+    // Reason
+
+    var rea_valid=0;
+    app.get("/admin/rea",(req,res)=>{
+        Doc.find().then((found)=>{
+            res.render("admin_Reason",{rea_valid:rea_valid,parray:found})
+            rea_valid=0;
+        })
+    })
+
+    app.get("/admin/:vname/:dname/rea/list",(req,res)=>{
+        Doc.findOne({name:req.params.vname}).then((found)=>{
+            console.log(found)
+            for(let i=0;i<found.sub.length;i++){
+                if(req.params.dname==found.sub[i].name){
+                    res.render("admin_Reason_list",{parray:found.sub[i].Reason,Sub:req.params.dname,Doc:req.params.vname})
+                }
+            }
+        })
+    })
+
+    app.get("/admin/:name/:dname/:vname/reas/delete",(req,res)=>{
+
+        Doc.updateOne({name:req.params.vname},{$pull:{"sub.$[elem].Reason": {name:req.params.name} }},  {arrayFilters:[{"elem.name":req.params.dname}]}).then((found)=>{
+            res.redirect(`/admin/${req.params.vname}/${req.params.dname}/rea/list`)
+        })
+
+    })
+  
+
+    app.post("/admin/rea",async (req,res)=>{
+        const name=req.body.name
+        const discount=req.body.rdiscount
+        const Type=req.body.Type
+        const विलेख=req.body.विलेख
+        const दस्तावेज=req.body.दस्तावेज
+        const Applicable=req.body.Applicable
+        const found= await Doc.findOne({name:विलेख});
+        console.log(found);
+            for(let i=0;i<found.sub.length;i++){
+                if(दस्तावेज==found.sub[i].name){
+                        for(let j=0;j<found.sub[i].Reason.length;j++){
+                            if(name==found.sub[i].Reason[j].name){
+                                rea_valid=1;
+                                break;
+                            }
+                        }
+                        if(rea_valid==0){
+                            const obj={
+                                name:name,
+                                discount:discount,
+                                Type:Type,
+                                Applicable:Applicable
+                            }
+                            found.sub[i].Reason.push(obj)
+                        }
+                        break;
+                    }
+                }
+                await found.save();
+            
+            res.redirect("/admin/rea")
+       
+    })
+
+   
+
 
 app.listen(3002,(req,res)=>{
     console.log("Server started at port 3000")

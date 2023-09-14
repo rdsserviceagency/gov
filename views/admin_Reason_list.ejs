@@ -6,13 +6,13 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Template</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Reason</h1>
                    
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text" style="color: #501bd7eb;">Template</h6>
+                            <h6 class="m-0 font-weight-bold text" style="color: #501bd7eb;"><%=Sub%></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -20,10 +20,9 @@
                                     <thead>
                                         <tr>
                                             <th>SL No.</th>
-                                            <th>Name</th>
-                                            <th>विलेख</th>
-                                            <th>दस्तावेज</th>
+                                            <th>Reason</th>
                                             <th>Description</th>
+                                            <th>Applicable</th>
                                             <th>Action</th>
 
                                         </tr>
@@ -31,35 +30,40 @@
                                     <tfoot>
                                         <tr>
                                             <th>SL No.</th>
-                                            <th>Name</th>
-                                            <th>विलेख</th>
-                                            <th>दस्तावेज</th>
+                                            <th>Reason</th>
                                             <th>Description</th>
+                                            <th>Applicable</th>
                                             <th>Action</th>
 
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <% for(var i=0; i < parray.length; i++){ %>
-                                        <% for(var j=0; j < parray[i].sub.length; j++){ %>
-                                        <% for(var m=0; m < parray[i].sub[j].templete.length; m++){ %>
+                                        <% for(var i=0; i < parray.length; i++){ %>                                      
                                             <tr>
-                                            <td><%=k%></td>
-                                            <td><%= parray[i].sub[j].templete[m].name %></td>
+                                            <td><%=i+1%></td>
                                             <td><%= parray[i].name %></td>
-                                            <td><%= parray[i].sub[j].name %></td>
-                                            <td><%= parray[i].sub[j].templete[m].description %></td>
+                                            <% if(parray[i].Type=="Fixed") {%>
+                                                <td><%= parray[i].discount %> Rs</td>
+
+                                            <%}%>
+                                            <% if(parray[i].Type=="Percentage") {%>
+                                                <td><%= parray[i].discount %> %</td>
+
+                                            <%}%>
+                                            <% if(parray[i].Type=="Per Feet") {%>
+                                                <td><%= parray[i].discount %> प्रति बटवारा हिस्सा</td>
+                                            <%}%>
+                                            <td><%= parray[i].Applicable %></td>
+
                                             <td>
-                                                <!-- <a href="/admin/<%= parray[i].sub[j].templete[m].name %>/<%= parray[i].sub[j].name %>/<%= parray[i].name %>/temp/update" class="btn btn-info btn-sm" data-toggle="tooltip" style="color: white;background-color: #501bd7eb;" data-placement="left" title="Update"><i class="fa fa-pencil" aria-hidden="true"></i></a> -->
-                                                <a href="/admin/<%= parray[i].sub[j].templete[m].name %>/<%= parray[i].sub[j].name %>/<%= parray[i].name %>/temp/delete" class="btn btn-danger btn-sm" data-toggle="tooltip" style="color: white;background-color:red;" data-placement="left" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                              
+                                                <a href="/admin/<%= parray[i].name %>/<%=Sub%>/<%=Doc%>/reas/delete" class="btn btn-danger btn-sm" data-toggle="tooltip" style="color: white;background-color:red;" data-placement="left" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                             </td>
                                          
                                         </tr>
-                                        <% k++ %>       
 
                                       <% } %>       
-                                      <% } %>       
-                                      <% } %>       
+                                          
                                     </tbody>
                                 </table>
                             </div>

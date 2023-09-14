@@ -22,7 +22,11 @@
                                             <th>SL No.</th>
                                             <th>दस्तावेज</th>
                                             <th>विलेख</th>
-                                            <th>दस्तावेज का विवरण </th>
+                                            <th>दस्तावेज का विवरण</th>
+                                            <th>स्टाम्प शुल्क</th>
+                                            <th>उपकर शुल्क</th>
+                                            <th>जनपद शुल्क</th>
+                                            <th>पंजीयन शुल्क</th>
                                             <th>Action</th>
 
                                         </tr>
@@ -32,7 +36,11 @@
                                             <th>SL No.</th>
                                             <th>दस्तावेज</th>
                                             <th>विलेख</th>
-                                            <th>दस्तावेज का विवरण </th>
+                                            <th>दस्तावेज का विवरण</th>
+                                            <th>स्टाम्प शुल्क</th>
+                                            <th>उपकर शुल्क</th>
+                                            <th>जनपद शुल्क</th>
+                                            <th>पंजीयन शुल्क</th>
                                             <th>Action</th>
 
                                         </tr>
@@ -40,11 +48,33 @@
                                     <tbody>
                                         <% for(var i=0; i < parray.length; i++){ %>
                                         <% for(var j=0; j < parray[i].sub.length; j++){ %>
-                                            <tr>
+                                        <tr>
                                             <td><%=k%></td>
-                                            <td><%= parray[i].sub[j].name %></td>
+                                            <td>
+                                                <a href="/admin/<%=parray[i].name%>/<%=parray[i].sub[j].name%>/rea/list" style="text-decoration: none;color: #858796;">
+                                                    <%= parray[i].sub[j].name %>
+                                                </a>
+                                            </td>
                                             <td><%= parray[i].name %></td>
                                             <td><%= parray[i].sub[j].description %></td>
+                                            <% if(parray[i].sub[j].Type=="Fixed") {%>
+                                                <td><%= parray[i].sub[j].Stamp %> Rs</td>
+                                                <td><%= parray[i].sub[j].Upkar %> Rs</td>
+                                                <td><%= parray[i].sub[j].Janpad %> Rs</td>
+                                                <td><%= parray[i].sub[j].panjikar %> Rs</td>
+                                            <%}%>
+                                            <% if(parray[i].sub[j].Type=="Percentage") {%>
+                                                <td><%= parray[i].sub[j].Stamp %> %</td>
+                                                <td><%= parray[i].sub[j].Upkar %> %</td>
+                                                <td><%= parray[i].sub[j].Janpad %> %</td>
+                                                <td><%= parray[i].sub[j].panjikar %> %</td>
+                                            <%}%>
+                                            <% if(parray[i].sub[j].Type=="Per Feet") {%>
+                                                <td><%= parray[i].sub[j].Stamp %> प्रति बटवारा हिस्सा </td>
+                                                <td><%= parray[i].sub[j].Upkar %> प्रति बटवारा हिस्सा </td>
+                                                <td><%= parray[i].sub[j].Janpad %> प्रति बटवारा हिस्सा </td>
+                                                <td><%= parray[i].sub[j].panjikar %> प्रति बटवारा हिस्सा </td>
+                                            <%}%>
                                             <td>
                                                 <a href="/admin/<%= parray[i].sub[j].name %>/<%= parray[i].name %>/sub/update" class="btn btn-info btn-sm" data-toggle="tooltip" style="color: white;background-color: #501bd7eb;" data-placement="left" title="Update"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                                 <a href="/admin/<%= parray[i].sub[j].name %>/<%= parray[i].name %>/sub/delete" class="btn btn-danger btn-sm" data-toggle="tooltip" style="color: white;background-color:red;" data-placement="left" title="Update"><i class="fa fa-trash-o" aria-hidden="true"></i></a>

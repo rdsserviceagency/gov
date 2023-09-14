@@ -28,7 +28,20 @@ body {
     font-weight: bolder;
 }
 
-#inputName {
+#stp{
+    display: none;
+}
+#st{
+    display: none;
+}
+#pa{
+    display: none;
+}
+#res{
+    display: none;
+}
+
+.inputName {
     background-color: #e6e6e6;
     border: 4px solid #313044;
 }

@@ -129,6 +129,8 @@
                                         <label for="formGroupExampleInput" class="form-label">पक्षकार का प्रकार</label>
                                         <select class="form-select inputName" onchange="fun(this.value)"  aria-label="Default select example">
                                             <option selected hidden>Choose</option>
+                                            <option value="मुख्त्यार">मुख्त्यार आम </option>
+                                            <option value="संरक्षक">संरक्षक</option>
                                             <% for(let i=0;i<parray1.length;i++){ %>
                                                 <option  value="<%=parray1[i].name%>" ><%=parray1[i].name%></option>
                                            <%} %>
@@ -284,7 +286,7 @@
         let न्यायलय=document.getElementById("न्यायलय")
         let आदेश=document.getElementById("आदेश")
         let दिनांक=document.getElementById("दिनांक")
-        if(val=="A"){
+        if(val=="मुख्त्यार"){
             तरफ.style.display="block";
             मुख्त्यार.style.display="block";
             दस्तावेज.style.display="block";
@@ -297,7 +299,7 @@
             संरक्षक.style.display="none";
             न्यायलय.style.display="none";
             
-        }else if(val=="B"){
+        }else if(val=="संरक्षक"){
             तरफ.style.display="block";
             मुख्त्यार.style.display="none";
             दस्तावेज.style.display="none";
