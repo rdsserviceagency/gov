@@ -4,7 +4,11 @@ const bodyParser=require("body-parser");
 const mongoose=require("mongoose");
 const bcrypt=require("bcrypt");
 const nodemailer=require("nodemailer");
+const multer=require("multer");
+const path = require("path")
 const { name } = require("ejs");
+const e = require("express");
+app.set("views",path.join(__dirname,"views"))
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -108,6 +112,12 @@ const SampatiSchema= new mongoose.Schema({
 
 const Sampati= mongoose.model("Sampati",SampatiSchema);
 
+const impSchema= new mongoose.Schema({
+    name: String,   
+    path: String,   
+  });
+
+const Imp= mongoose.model("Imp",impSchema);
 
 // login route
 var login_valid=0;
@@ -875,6 +885,186 @@ app.post("/templete",(req,res)=>{
         })
     })
 
+    let obj=[
+        {
+          name: "A",
+          Mohalla:[
+            {
+                name:"B",
+                Society:[
+                    {
+                        name:"C",
+                        Bhumi:[{
+                            name:"20 andar",     
+                            price:14000    
+                          },
+                          {
+                            name:"20 bhar",
+                            price:20000,
+                          }
+                        ]
+                    },
+                    {
+                        name:"C1",
+                        Bhumi:[{
+                            name:"20 andar",     
+                            price:12560  
+                          },
+                          {
+                            name:"20 bhar",
+                            price:8400,
+                          }
+                        ]
+                    }
+                ]
+            }
+          ]  
+        }
+    ]
+
+    let obj1=[
+        {
+            name:"H",
+            price:1500000
+        }
+    ]
+
+    let fas=[
+        {
+            name:"D",
+            per:25
+        },
+        {
+            name:"C",
+            per:25
+        },
+        {
+            name:"DC",
+            per:50
+        },
+        
+    ]
+
+    let Roa=[
+        {
+            name:"R1",
+            per:10
+        },
+        {
+            name:"R2",
+            per:30
+        },
+        {
+            name:"H3",
+            per:20
+        },
+        
+    ]
+
+    // Sampti
+    app.post("/sampti",(req,res)=>{
+        // const sak=req.body.sak;
+        const rakba=req.body.rakba;
+        const ward=req.body.ward;
+        const Mohala=req.body.Mohala;
+        const Society=req.body.Society;
+        const Bhumi=req.body.Bhumi;
+        const HBhumi=req.body.HBhumi;
+        const Fasal=req.body.Fasal;
+        const Road=req.body.Road;
+        let warr=[];
+        let Harr=[];
+        for(let i=0;i<ward.length;i++){
+            if(ward[i]=="Nan"){
+                warr.push(0);
+            }
+            else{
+                for(let j=0;j<obj.length;j++){
+                    if(ward[i]==obj[j].name){
+                        for(let k=0;k<obj[j].Mohalla.length;k++){
+                            if(Mohala[i]==obj[j].Mohalla[k].name){
+                                for(let m=0;m<obj[j].Mohalla[k].Society.length;m++){
+                                    if(Society[i]==obj[j].Mohalla[k].Society[m].name){
+                                        for(let k1=0;k1<obj[j].Mohalla[k].Society[m].Bhumi.length;k1++){
+                                            if(Bhumi[i]==obj[j].Mohalla[k].Society[m].Bhumi[k1].name){
+                                                 warr.push(obj[j].Mohalla[k].Society[m].Bhumi[k1].price);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for(let i=0;i<HBhumi.length;i++){
+            if(HBhumi[i]=="Nan"){
+                Harr.push(0);
+            }
+            else{
+                let to=0;
+                let t=0;
+                for(let j=0;j<obj1.length;j++){
+                    if(HBhumi[i]==obj1[j].name){
+                        t=obj1[j].price*(rakba[i]/10120);
+                        to=obj1[j].price*(rakba[i]/10120);
+                    }
+                }
+                for(let j=0;j<fas.length;j++){
+                    if(Fasal[i]==fas[j].name){
+                        to=to+(t*fas[j].per)/100;
+                    }
+                }
+                for(let j=0;j<Roa.length;j++){
+                    if(Road[i]==Roa[j].name){
+                        to=to+(t*Roa[j].per)/100;
+                    }
+                }
+                Harr.push(to);
+            }
+        }
+
+        let div=[];
+        for(let i=0;i<warr.length;i++){
+            if(warr[i]!=0){
+                let fl=0;
+                for(let j=0;j<div.length;j++){
+                    if(div[j].val==warr[i]){
+                        fl=1;
+                        div[j].mul=Number(div[j].mul)+Number(rakba[i]);
+                        break;
+                    }
+                }
+                if(fl==0){
+                    div.push({
+                        val:warr[i],
+                        mul:Number(rakba[i])
+                    })
+                }
+            }
+        }
+        let Total_amount=0;
+        for(let i=0;i<Harr.length;i++){
+            Total_amount=Total_amount+Harr[i];
+        }
+        for(let i=0;i<div.length;i++){
+            if(div[i].mul<=506){
+                Total_amount=Total_amount+(div[i].val*div[i].mul);
+            }
+            else if(div[i].mul<=1012){
+                Total_amount=Total_amount+(div[i].val*(div[i].mul-506)*0.8)+(div[i].val*506);
+            }
+            else{
+                Total_amount=Total_amount+(div[i].val*506*1.8)+(div[i].val*(div[i].mul-1012)*0.5);
+            }
+        }
+        console.log(warr)
+        console.log(Harr)
+        console.log(div)
+        console.log(Total_amount)
+
+    })
 
     // Templete
 
@@ -1020,7 +1210,86 @@ app.post("/templete",(req,res)=>{
     })
 
    
+    // Important
+    var Important_valid=0;
+    app.get("/admin/important",(req,res)=>{
+        res.render("admin_important",{Important_valid:Important_valid})
+        Important_valid=0
+    })
 
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+      
+            // Uploads is the Upload_folder_name
+            cb(null, "uploads")
+        },
+        filename: function (req, file, cb) {
+          cb(null, file.fieldname + "-" + Date.now()+".pdf")
+        }
+      })
+      const maxSize = 1 * 10000 * 10000;
+
+      var upload = multer({ 
+        storage: storage,
+        limits: { fileSize: maxSize },
+        fileFilter: function (req, file, cb){
+        
+            // Set the filetypes, it is optional
+            var filetypes = /pdf/;
+            var mimetype = filetypes.test(file.mimetype);
+      
+            var extname = filetypes.test(path.extname(
+                        file.originalname).toLowerCase());
+            
+            if (mimetype && extname) {
+                return cb(null, true);
+            }
+          
+            cb("Error: File upload only supports the "
+                    + "following filetypes - " + filetypes);
+          } 
+      
+    // mypic is the name of file attribute
+    }).single("file");    
+    
+
+    app.post("/admin/important",(req,res)=>{
+        const name=req.body.name;
+        Imp.findOne({name:name}).then(async(found)=>{
+            if(found){
+                Important_valid=1
+                res.redirect("/admin/important")
+            }
+            else{
+                upload(req,res, async(err)=>{
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        const imp=new Imp({
+                            name:name,
+                            path:req.body.file
+                        })
+                        await imp.save().then(()=>{
+                            res.redirect("/admin/important")
+                        })
+                    }
+                })
+            }
+        })
+    })
+
+    app.get("/admin/important/list",(req,res)=>{
+        Imp.find().then((found)=>{
+            res.render("admin_important_list",{parray:found})
+        })
+    })
+
+    app.get("/admin/:name/imp/delete",(req,res)=>{
+        Imp.deleteOne({name:req.params.name}).then(()=>{
+            res.redirect("/admin/important/list")
+        })
+    })
 
 app.listen(3002,(req,res)=>{
     console.log("Server started at port 3000")
