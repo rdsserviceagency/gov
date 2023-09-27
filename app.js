@@ -119,6 +119,29 @@ const impSchema= new mongoose.Schema({
 
 const Imp= mongoose.model("Imp",impSchema);
 
+const TreeSchema= new mongoose.Schema({
+    name: String,   
+    quality: String,   
+    size:String,
+    price:Number
+  });
+
+const Tree= mongoose.model("Tree",TreeSchema);
+
+const FruitSchema= new mongoose.Schema({
+    name: String,   
+    price: Number,   
+  });
+
+const Fruit= mongoose.model("Fruit",FruitSchema);
+
+const FamousSchema= new mongoose.Schema({
+    name: String,   
+    price: Number,   
+  });
+
+const Famous= mongoose.model("Famous",FamousSchema);
+
 // login route
 var login_valid=0;
 app.get("/login",(req,res)=>{
@@ -888,13 +911,13 @@ app.post("/templete",(req,res)=>{
     let obj=[
         {
           name: "A",
-          Mohalla:[
+          mohalla:[
             {
                 name:"B",
-                Society:[
+                society:[
                     {
                         name:"C",
-                        Bhumi:[{
+                        bhumi:[{
                             name:"20 andar",     
                             price:14000    
                           },
@@ -906,7 +929,7 @@ app.post("/templete",(req,res)=>{
                     },
                     {
                         name:"C1",
-                        Bhumi:[{
+                        bhumi:[{
                             name:"20 andar",     
                             price:12560  
                           },
@@ -922,14 +945,36 @@ app.post("/templete",(req,res)=>{
         }
     ]
 
-    let obj1=[
+    let obj1=[   
+        {
+            name:"20 andar",     
+            price:14000    
+        },
+        {
+            name:"20 bhar",
+            price:20000,
+        }    
+    ]
+
+
+    let objH=[
         {
             name:"H",
             price:1500000
         }
     ]
+    let objH1=[
+        {
+            name:"H",
+            price:1500000
+        },
+        {
+            name:"H1",
+            price:150000
+        }
+    ]
 
-    let fas=[
+    let fobj=[
         {
             name:"D",
             per:25
@@ -945,7 +990,7 @@ app.post("/templete",(req,res)=>{
         
     ]
 
-    let Roa=[
+    let robj=[
         {
             name:"R1",
             per:10
@@ -961,33 +1006,2786 @@ app.post("/templete",(req,res)=>{
         
     ]
 
+
+
     // Sampti
-    app.post("/sampti",(req,res)=>{
-        // const sak=req.body.sak;
-        const rakba=req.body.rakba;
+
+    app.post("sampti",(req,res)=>{
+        const sak=req.body.sak
+        const k=req.body.k
+        const rakba=req.body.rakba
+        const hbumi=req.body.Hbumi;
         const ward=req.body.ward;
-        const Mohala=req.body.Mohala;
-        const Society=req.body.Society;
-        const Bhumi=req.body.Bhumi;
-        const HBhumi=req.body.HBhumi;
-        const Fasal=req.body.Fasal;
-        const Road=req.body.Road;
-        let warr=[];
-        let Harr=[];
-        for(let i=0;i<ward.length;i++){
-            if(ward[i]=="Nan"){
-                warr.push(0);
+        const mohalla=req.body.mohalla;
+        const society=req.body.society;
+        const bhumi=req.body.bhumi;
+        const fasl=req.body.fasl;
+        const road=req.body.road;
+        const ty=req.body.ty;
+        let warr=[]
+        let Hector=[]
+        let mward=[]
+        let total=0;
+        const tree=req.body.tree;
+        const treeType=req.body.treeType;
+        const treeQuantity=req.body.treeQuantity;
+        const treeName=req.body.treeName;
+        const treeQuality=req.body.treeQuality;
+        const treeSize=req.body.treeSize;
+
+        let tree_total=0;    
+        const vishesh=req.body.vishesh;
+        const vishName=req.body.vishName;
+        const vishType=req.body.vishType;
+        const vishPrice=req.body.vishPrice;
+        const vishQuantity=req.body.vishQuantity;
+        let vish_total=0;
+
+
+        if(sak=="kakarNagarPalika"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
             }
-            else{
-                for(let j=0;j<obj.length;j++){
-                    if(ward[i]==obj[j].name){
-                        for(let k=0;k<obj[j].Mohalla.length;k++){
-                            if(Mohala[i]==obj[j].Mohalla[k].name){
-                                for(let m=0;m<obj[j].Mohalla[k].Society.length;m++){
-                                    if(Society[i]==obj[j].Mohalla[k].Society[m].name){
-                                        for(let k1=0;k1<obj[j].Mohalla[k].Society[m].Bhumi.length;k1++){
-                                            if(Bhumi[i]==obj[j].Mohalla[k].Society[m].Bhumi[k1].name){
-                                                 warr.push(obj[j].Mohalla[k].Society[m].Bhumi[k1].price);
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else if(mward[i].val<=1012){
+                        total=total+(mward[i].name*(mward[i].val-506)*0.8)+(506*mward[i].name);
+              
+                    }else{
+                        total=total+(mward[i].name*(mward[i].val-1012)*0.5)+(506*mward[i].name*0.8)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+        }
+
+        else if(sak=="kakarNagarPanchayat"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-506)*0.25)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+
+
+        }
+
+        else if(sak=="baNagarPan"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-506)*0.25)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+        }
+
+        else if(sak=="MarPan"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                    }
+                    
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-506)*0.25)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else if(mward[i].val<=1012){
+                        total=total+(mward[i].name*(mward[i].val-506)*0.5)+(506*mward[i].name);
+              
+                    }else{
+                        total=total+(mward[i].name*(mward[i].val-1012)*0.25)+(506*mward[i].name*0.5)+(506*mward[i].name);
+              
+                    }
+                }
+            }
+        }
+
+        else if(sak=="pandPan"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    total=total+(mward[i].name*mward[i].val);                 
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+        }
+
+        else if(sak=="JangPan"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-506)*0.25)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+        }
+
+        else if(sak=="dantPal"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else if(mward[i].val<=1012){
+                        total=total+(mward[i].name*(mward[i].val-506)*0.8)+(506*mward[i].name);
+              
+                    }else{
+                        total=total+(mward[i].name*(mward[i].val-1012)*0.5)+(506*mward[i].name*0.8)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+        }
+
+        else if(sak=="dantPan"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-1012)*0.25)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+        }
+        
+        else if(sak=="Balod"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                        total=total+(mward[i].name*mward[i].val);                   
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+        }
+        else if(sak=="Gudar"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-506)*0.25)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    if(mward[i].val<=4048){
+                        total=total+(mward[i].name*mward[i].val*0.9);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-506)*0.7)+(506*mward[i].name*0.9);
+              
+                    }                }
+            }
+        }
+        else if(sak=="Balesh"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-506)*0.20)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-506)*0.40)+(506*mward[i].name);
+              
+                    }                }
+            }
+        }
+        else if(sak=="Beja"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else if(mward[i].val<=1012){
+                        total=total+(mward[i].name*(mward[i].val-506)*0.8)+(506*mward[i].name);
+              
+                    }else{
+                        total=total+(mward[i].name*(mward[i].val-1012)*0.5)+(506*mward[i].name*0.8)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+        }
+        else if(sak=="Bemeter1"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-506)*0.5)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+        }
+        else if(sak=="Bemeter2"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-506)*0.25)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+        }
+        else if(sak=="Mandrapal"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else if(mward[i].val<=1012){
+                        total=total+(mward[i].name*(mward[i].val-506)*0.8)+(506*mward[i].name);
+              
+                    }else{
+                        total=total+(mward[i].name*(mward[i].val-1012)*0.5)+(506*mward[i].name*0.8)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+        }
+        else if(sak=="Mandrapan"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-506)*0.25)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+        }
+        else if(sak=="mohal"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if(mward[j].type==ty[i]){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k" || mward[i].type=="p"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-506)*0.25)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+        }
+        else if(sak=="ranjar"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-506)*0.4)+(506*mward[i].name);
+              
+                    }
+            }
+        }
+        else if(sak=="ambika1"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else if(mward[i].val<=1012){
+                        total=total+(mward[i].name*(mward[i].val-506)*0.8)+(506*mward[i].name);
+              
+                    }else{
+                        total=total+(mward[i].name*(mward[i].val-1012)*0.5)+(506*mward[i].name*0.8)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+        }
+        else if(sak=="ambika2"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else if(mward[i].val<=1012){
+                        total=total+(mward[i].name*(mward[i].val-506)*0.8)+(506*mward[i].name);
+              
+                    }else{
+                        total=total+(mward[i].name*(mward[i].val-1012)*0.5)+(506*mward[i].name*0.8)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    total=total+(mward[i].name*mward[i].val);                 
+                }
+            }
+        }
+        else if(sak=="raygarh1"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]!="k"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-506)*0.25)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    if(mward[i].val<=1014){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-1014)*0.60)+(1014*mward[i].name);
+              
+                    }                }
+            }
+        }
+        else if(sak=="raygarh2"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]!="k"){
+    
+                        for(let j=0;j<objH1.length;j++){
+                            if(hbumi[i]==objH1[j].name){
+                                to=objH1[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH1.length;j++){
+                            if(hbumi[i]==objH1[j].name){
+                                to=objH1[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-506)*0.25)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    if(mward[i].val<=1014){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-1014)*0.60)+(1014*mward[i].name);
+              
+                    }                }
+            }
+        }
+        else if(sak=="raygarh3"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH1.length;j++){
+                            if(hbumi[i]==objH1[j].name){
+                                to=objH1[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH1.length;j++){
+                            if(hbumi[i]==objH1[j].name){
+                                to=objH1[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                if(mward[i].type=="k"){
+                    if(mward[i].val<=506){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else if(mward[i].val<=1012){
+                        total=total+(mward[i].name*(mward[i].val-506)*0.8)+(506*mward[i].name);
+              
+                    }else{
+                        total=total+(mward[i].name*(mward[i].val-1012)*0.5)+(506*mward[i].name*0.8)+(506*mward[i].name);
+              
+                    }
+                }else{
+                    if(mward[i].val<=1014){
+                        total=total+(mward[i].name*mward[i].val);
+                    }
+                    else{
+                        total=total+(mward[i].name*(mward[i].val-1014)*0.60)+(1014*mward[i].name);
+              
+                    }   
+                }
+            }
+        }
+        else if(sak=="mahasam"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                total=total+(mward[i].name*mward[i].val);                 
+            }
+        }
+        else if(sak=="sitapur"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                total=total+(mward[i].name*mward[i].val);                 
+            }
+        }
+        else if(sak=="surajpur"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                total=total+(mward[i].name*mward[i].val);                 
+            }
+        }
+        else if(sak=="patna"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                total=total+(mward[i].name*mward[i].val);                 
+            }
+        }
+        else if(sak=="baloda"){
+            for(let i=0;i<ward.length;i++){
+                if(bhumi[i]=="N"){
+                    warr.push(0);
+                }
+                else{
+                    for(let j=0;j<obj1.length;j++){
+                        if(bhumi[i]==obj1[j].name){
+                           warr.push(obj1[j].price);
+                        }
+                    }
+                }
+            }
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                    if(ty[i]=="pa"){
+    
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120)*2.5;
+                                tt=tt+to;
+                            }
+                        }
+    
+                    }
+                    else{
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                    }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
+                }
+            }
+
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                mward[j].val=mward[j].val+Number(rakba[i]);
+                                flag=1;
+                                break;
+                            }
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+
+            for(let i=0;i<mward.length;i++){
+                total=total+(mward[i].name*mward[i].val);                 
+            }
+        }
+    
+        else{
+            if(sak=="J"){
+                for(let i=0;i<ward.length;i++){
+                    if(bhumi[i]=="N"){
+                        warr.push(0);
+                    }
+                    else{
+                        for(let j=0;j<obj1.length;j++){
+                            if(bhumi[i]==obj1[j].name){
+                               warr.push(obj1[j].price);
+                            }
+                        }
+                    }
+                }
+    
+                for(let i=0;i<hbumi.length;i++){
+                    if(hbumi[i]=="N"){
+                        Hector.push(0);
+                    }
+                    else{
+                        let to;
+                        let tt=0;
+                        if(ty[i]=="pa"){
+        
+                            for(let j=0;j<objH.length;j++){
+                                if(hbumi[i]==objH[j].name){
+                                    to=objH[j].price*(rakba[i]/10120)*2.5;
+                                    tt=tt+to;
+                                }
+                            }
+        
+                        }
+                        else{
+                            for(let j=0;j<objH.length;j++){
+                                if(hbumi[i]==objH[j].name){
+                                    to=objH[j].price*(rakba[i]/10120);
+                                    tt=tt+to;
+                                }
+                            }
+                        }
+                            for(let j=0;j<fobj.length;j++){
+                                if(fasl[i]==fobj[j].name){
+                                    tt=tt+(fobj[j].per*to)/100;
+                                }
+                            }
+                
+                            for(let j=0;j<robj.length;j++){
+                                if(road[i]==robj[j].name){
+                                    tt=tt+(robj[j].per*to)/100;
+                                }
+                            }
+                        
+            
+                        Hector.push(tt);
+                    }
+                }
+            }
+    
+    
+    
+            for(let i=0;i<ward.length;i++){
+                    if(ward[i]=="N"){
+                        warr.push(0);
+                    }
+                    else{
+                        for(let j=0;j<obj.length;j++){
+                            if(ward[i]==obj[j].name){
+                                for(let k=0;k<obj[j].mohalla.length;k++){
+                                    if(mohalla[i]==obj[j].mohalla[k].name){
+                                        for(let m=0;m<obj[j].mohalla[k].society.length;m++){
+                                            if(society[i]==obj[j].mohalla[k].society[m].name){
+                                                for(let km=0;km<obj[j].mohalla[k].society[m].bhumi.length;km++){
+                                                    if(bhumi[i]==obj[j].mohalla[k].society[m].bhumi[km].name)
+                                                    {
+                                                        warr.push(obj[j].mohalla[k].society[m].bhumi[km].price);
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -995,76 +3793,237 @@ app.post("/templete",(req,res)=>{
                             }
                         }
                     }
+            }
+            
+            for(let i=0;i<hbumi.length;i++){
+                if(hbumi[i]=="N"){
+                    Hector.push(0);
+                }
+                else{
+                    let to;
+                    let tt=0;
+                        for(let j=0;j<objH.length;j++){
+                            if(hbumi[i]==objH[j].name){
+                                to=objH[j].price*(rakba[i]/10120);
+                                tt=tt+to;
+                            }
+                        }
+                        for(let j=0;j<fobj.length;j++){
+                            if(fasl[i]==fobj[j].name){
+                                tt=tt+(fobj[j].per*to)/100;
+                            }
+                        }
+            
+                        for(let j=0;j<robj.length;j++){
+                            if(road[i]==robj[j].name){
+                                tt=tt+(robj[j].per*to)/100;
+                            }
+                        }
+                    
+        
+                    Hector.push(tt);
                 }
             }
+            for(let i=0;i<warr.length;i++){
+                if(warr[i]!=0){
+                    let flag=0;
+                    for(let j=0;j<mward.length;j++){
+                        if(mward[j].name==warr[i]){
+                            mward[j].val=mward[j].val+Number(rakba[i]);
+                            if(mward[j].type!='k' && ty[i]=='k'){
+                                mward[j].type=ty[i];
+                            }
+                            flag=1;
+                            break;
+                        }
+                    }
+                        if(flag==0){
+                            let ob={
+                                name:warr[i],
+                                val:Number(rakba[i]),
+                                type:ty[i]
+                            }
+                            mward.push(ob);
+                        }
+                } 
+            }
+    
+            if(sak=="kn"){
+                for(let i=0;i<hbumi.length;i++){
+                    if(hbumi[i]=="N"){
+                        Hector.push(0);
+                    }
+                    else{
+                        let to;
+                        let tt=0;
+                            for(let j=0;j<objH1.length;j++){
+                                if(hbumi[i]==objH1[j].name){
+                                    to=objH1[j].price*(rakba[i]/10120);
+                                    tt=tt+to;
+                                }
+                            }
+                            // for(let j=0;j<fobj.length;j++){
+                            //     if(fasl[i]==fobj[j].name){
+                            //         tt=tt+(fobj[j].per*to)/100;
+                            //     }
+                            // }
+                
+                            // for(let j=0;j<robj.length;j++){
+                            //     if(road[i]==robj[j].name){
+                            //         tt=tt+(robj[j].per*to)/100;
+                            //     }
+                            // }
+                        
+            
+                        Hector.push(tt);
+                    }
+                }
+                for(let i=0;i<warr.length;i++){
+                    if(warr[i]!=0){
+                        let flag=0;
+                        for(let j=0;j<mward.length;j++){
+                            if(mward[j].name==warr[i]){
+                                if((mward[j].type=="k" && ty[i]=="k") || (mward[j].type!="k" && ty[i]!="k")){
+                                    mward[j].val=mward[j].val+Number(rakba[i]);
+                                    flag=1;
+                                    break;
+                                }
+                            }
+                        }
+                            if(flag==0){
+                                let ob={
+                                    name:warr[i],
+                                    val:Number(rakba[i]),
+                                    type:ty[i]
+                                }
+                                mward.push(ob);
+                            }
+                    } 
+                }
+            }
+        
+            for(let i=0;i<Hector.length;i++){
+                total=total+Hector[i];
+            }
+        
+        
+          if(sak=="P" || sak=="kn"){
+            console.log(sak);
+                for(let i=0;i<mward.length;i++){
+                    if(mward[i].type=="k"){
+                        if(mward[i].val<=506){
+                            total=total+(mward[i].name*mward[i].val);
+                        }
+                        else if(mward[i].val<=1012){
+                            total=total+(mward[i].name*(mward[i].val-506)*0.8)+(506*mward[i].name);
+                  
+                        }else{
+                            total=total+(mward[i].name*(mward[i].val-1012)*0.5)+(506*mward[i].name*0.8)+(506*mward[i].name);
+                  
+                        }
+                    }else{
+                        if(mward[i].val<4099){
+                            total=total+(mward[i].name*mward[i].val);
+                        }
+                       else{
+                            total=total+(mward[i].name*(mward[i].val-4099)*0.75)+(4099*mward[i].name);
+                        }
+                    }
+                }
+          }  
+        
+          else if(sak=="N"){
+                    for(let i=0;i<mward.length;i++){
+                    if(mward[i].type=="k"){
+                        if(mward[i].val<=506){
+                            total=total+(mward[i].name*mward[i].val);
+                        }
+                        else if(mward[i].val<=1012){
+                            total=total+(mward[i].name*(mward[i].val-506)*0.8)+(506*mward[i].name);
+                
+                        }else{
+                            total=total+(mward[i].name*(mward[i].val-1012)*0.5)+(506*mward[i].name*0.8)+(506*mward[i].name);
+                
+                        }
+                    }else{
+                        if(mward[i].val<=4099){
+                            total=total+(mward[i].name*mward[i].val);
+                        }
+                       else{
+                            total=total+(mward[i].name*(mward[i].val-4099)*0.8)+(4099*mward[i].name);
+                        }
+                    }
+                }
+            
+          }
+          else if(sak=="J"){
+                    for(let i=0;i<mward.length;i++){
+                            total=total+(mward[i].name*mward[i].val);                    
+                     }
+            }
+          else{
+                for(let i=0;i<mward.length;i++){
+                    if(mward[i].type=="k"){
+                        if(mward[i].val<=506){
+                            total=total+(mward[i].name*mward[i].val);
+                        }
+                       else{
+                            total=total+(mward[i].name*(mward[i].val-506)*0.25)+(506*mward[i].name);
+                        }
+                    }
+                    else{
+                        if(mward[i].val<=4099){
+                            total=total+(mward[i].name*mward[i].val);
+                        }
+                       else{
+                            total=total+(mward[i].name*(mward[i].val-4099)*0.6)+(4099*mward[i].name);
+                        }
+                    }
+                }
+         
+          }
+
+
         }
-        for(let i=0;i<HBhumi.length;i++){
-            if(HBhumi[i]=="Nan"){
-                Harr.push(0);
-            }
-            else{
-                let to=0;
-                let t=0;
-                for(let j=0;j<obj1.length;j++){
-                    if(HBhumi[i]==obj1[j].name){
-                        t=obj1[j].price*(rakba[i]/10120);
-                        to=obj1[j].price*(rakba[i]/10120);
-                    }
+
+        console.log(mward);
+        console.log(Hector);
+        console.log(total);
+        res.send("Succ");
+    
+        for(let i=0;i<vishesh.length;i++){
+            if(vishesh[i]=="Yes"){
+                if(vishName[i]=="Machine"){
+                    Famous.findOne({name:vishType[i]}).then((found)=>{
+                        vish_total=vish_total+(found.price*vishQuantity[i])
+                    })
                 }
-                for(let j=0;j<fas.length;j++){
-                    if(Fasal[i]==fas[j].name){
-                        to=to+(t*fas[j].per)/100;
-                    }
+                else{
+                    vish_total=vish_total+(vishPrice[i]*vishQuantity[i])
                 }
-                for(let j=0;j<Roa.length;j++){
-                    if(Road[i]==Roa[j].name){
-                        to=to+(t*Roa[j].per)/100;
-                    }
-                }
-                Harr.push(to);
             }
         }
 
-        let div=[];
-        for(let i=0;i<warr.length;i++){
-            if(warr[i]!=0){
-                let fl=0;
-                for(let j=0;j<div.length;j++){
-                    if(div[j].val==warr[i]){
-                        fl=1;
-                        div[j].mul=Number(div[j].mul)+Number(rakba[i]);
-                        break;
-                    }
+        for(let i=0;i<tree.length;i++){
+            if(tree[i]=="Yes"){
+                if(treeType=="Timber"){
+                    Tree.findOne({name:treeName[i],quality:treeQuality[i],size:treeSize[i]}).then((found)=>{
+                        tree_total=tree_total+(found.price*treeQuantity[i]);
+                    })
                 }
-                if(fl==0){
-                    div.push({
-                        val:warr[i],
-                        mul:Number(rakba[i])
+                else{
+                    Fruit.findOne({name: treeName[i]}).then((found)=>{
+                        tree_total=tree_total+(found.price*treeQuantity[i]);
                     })
                 }
             }
         }
-        let Total_amount=0;
-        for(let i=0;i<Harr.length;i++){
-            Total_amount=Total_amount+Harr[i];
-        }
-        for(let i=0;i<div.length;i++){
-            if(div[i].mul<=506){
-                Total_amount=Total_amount+(div[i].val*div[i].mul);
-            }
-            else if(div[i].mul<=1012){
-                Total_amount=Total_amount+(div[i].val*(div[i].mul-506)*0.8)+(div[i].val*506);
-            }
-            else{
-                Total_amount=Total_amount+(div[i].val*506*1.8)+(div[i].val*(div[i].mul-1012)*0.5);
-            }
-        }
-        console.log(warr)
-        console.log(Harr)
-        console.log(div)
-        console.log(Total_amount)
 
+     
+    
     })
+
+
 
     // Templete
 
