@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        .button1{
+            margin-top: 20p;
+     /* Adjust the top margin to create space */
+        text-align: center;
+}
+        .btn-custom {
+            background-color: #2F2E41; /* Change the background color */
+            color: white; /* Text color */
+            border: none; /* Remove the button border */
+            border-radius: 28.5px;
+            box-shadow: 0px 10px 40px 0px rgba(122, 129, 190, 0.16);
+            padding: 10px 47px;
+            font-size: 18px; /* Adjust the font size */
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Add a smooth transition effect */
+        }
+        
+        .btn-custom:hover {
+            background-color: #323146; /* Change the background color on hover */
+        }   
+    </style>
+</head>
+
+
+<style>
+    .custom-form {
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        padding: 5rem;
+    }
+
+    @keyframes moveText {
+        0% {
+            transform: translateX(-100%);
+        }
+
+        100% {
+            transform: translateX(100%);
+        }
+    }
+
+    #b {
+        animation: moveText 10s linear infinite;
+    }
+</style>
+
+<body>
+    <section class="upper">
+        <p class="heading">CG-EREGISTRY</p>
+        <div class="bt">
+            <div class="left">
+            </div>
+            <div class="middle">
+                <p id="inborder">सी की वेबसाईट के माध्यम से उप पंजीयन कार्यालय में पंचीकृत होने वाले सभी प्रकार के
+                    दस्तावेज<br>
+                    किफायती दर पर ऑनलाइन प्रिंट/पा प्राप्त करे</p>
+            </div>
+            <div class="right">
+                <a href="/dast/logout" style="text-decoration: none;">
+                    <p class="ph"><span class="img"><img src="/img/logout.png"
+                                alt="admin"></span>लॉग out </p>
+                </a>
+                <p class="ph"><span class="img"><img src="/img/whatsapp 3.png" alt=""></span>9039791530 </p>
+                <p class="ph"><span class="img"><img src="/img/phone-call 2.png" alt=""></span>9039791530</p>
+            </div>
+        </div>
+    </section>
+    <div>
+        <p id="b" style="animation: moveText 10s linear infinite;">यहाँ पर मेनू पर सुचना डिस्प्ले करना है जो ब्लिंग होता
+            रहेगा</p>
+    </div>
+    <section class="navbar">
+        <!-- <p>मुख्य </p> -->
+        <button type="button" class="btn bg-white" style="width: 150px; position: relative; top: 10px;">
+            <a style="text-decoration: none; color: black" href="/">मुख्य</a>
+        </button>
+        <!-- <p> हमारे</p> -->
+        <button type="button" class="btn bg-white" style="width: 150px; position: relative; top: 10px;">
+            <a style="text-decoration: none; color: black" href="./about.ejs">हमारे</a>
+        </button>
+        <!-- <p>ऑनलाइन</p> -->
+        <div class="dropdown">
+            <a class="btn bg-white dropdown-toggle" style="width: 150px;" href="#" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                ऑनलाइन
+            </a>
+
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/condition">पजं ीयन डकये जानेवाले दस्तावेज पता करें</a></li>
+                <li><a class="dropdown-item" href="/login">जमीन की सरकारी कीमत बाजार म ल्ू य क ी ग र् न ा</a></li>
+                <li><a class="dropdown-item" href="/login">रडजस्री खचा (स्टाम्प, फीस , सेवा श ल्ु क ) क ी ग र् न ा</a></li>
+                <li><a class="dropdown-item" href="/login">दस्तावेज तैयार करे</a></li>
+                <li><a class="dropdown-item" href="/login">प वू ा क े द स् त ा व े ज स च ा क र े</a></li>
+            </ul>
+        </div>
+        <!-- <p> नागरिक</p> -->
+        <div class="dropdown">
+            <a class="btn bg-white dropdown-toggle" style="width: 150px;" href="#" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                नागरिक
+            </a>
+
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">ज म ी न / म क ा न / व क्षृ ों आ ड द क े ड न ध ा ा र र त द र क ी ज
+                        ा न क ा र ी</a></li>
+                <li><a class="dropdown-item" href="#">स्टाम्प, पडजयन और सेवा शल्ु क की शासन द्वारा डनधााररत दर की
+                        जानकारी</a></li>
+                <li><a class="dropdown-item" href="/vigyaapn/upload">जमीन की खरीदी/डबक्री डवज्ञापन</a></li>
+                <li><a class="dropdown-item" href="/nagrikSevaye">दस्तावेज लेखक/स्टाम्प वेंिर/अडधवक्ता/जमीन िीलसा सपं का</a></li>
+            </ul>
+        </div>
+        <!-- <p> महत्वपूर्ण</p> -->
+        <button type="button" class="btn bg-white" style="width: 150px; position: relative; top: 10px;">
+            <a style="text-decoration: none; color: black" href="/important">महत्वपूर्ण</a>
+        </button>
+        <!-- वक्रय क्रय हतेुप्रॉपटी खोज -->
+        <button type="button" class="btn bg-white" style="width: 150px; position: relative; top: 10px;">
+            <a style="text-decoration: none; color: black" href="/vigyaapn">वक्रय क्रय हतेु प्रॉपटी खोज</a>
+        </button>
+        <!-- <p>संपर्क</p> -->
+        <button type="button" class="btn bg-white" style="width: 150px; position: relative; top: 10px;">
+            <a style="text-decoration: none; color: black" href="">संपर्क</a>
+        </button>
+        <!-- <p>पालिसी</p> -->
+        <button type="button" class="btn bg-white" style="width: 150px; position: relative; top: 10px;">
+            <a style="text-decoration: none; color: black" href="">पालिसी</a>
+        </button>
+    </section>
+<section class="bottom">
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form id="user-edit-form">
+                    <!-- Hidden input for user id -->
+                    <div class="form-group">
+                        <input type="hidden" id="id" class="form-control input" name="id" value="<%= user.id %>">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" class="form-control input" value="<%= user.name %>" readonly>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control input" value="<%= user.email %>" readonly>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="profession">Profession:</label>
+                        <input type="text" id="profession" name="profession" class="form-control input" value="<%= user.profession %>" readonly>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="profession">Jila:</label>
+                        <input type="text" id="Jila" name="Jila" class="form-control input" value="<%= user.Jila %>" readonly>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="profession">Office:</label>
+                        <input type="text" id="Office" name="Office" class="form-control input" value="<%= user.Office %>" readonly>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input type="text" id="phone" name="phone" class="form-control input" value="<%= user.phone %>" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="upi">UPI ID:</label>
+                        <input type="text" id="upi" name="upi" class="form-control input" value="<%= user.upi %>" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="mapLink">Google Map Link:</label>
+                        <input type="text" id="mapLink" name="mapLink" class="form-control input" value="<%= user.mapLink %>" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <textarea id="address" name="address" class="form-control input" required><%= user.address %></textarea>
+                    </div>
+                    <br>
+                    <div class="text-center button1">
+                        <button type="submit" class="btn-custom">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+    
+
+
+
+        <script>
+            // Select the form element
+            const form = document.getElementById('user-edit-form');
+        
+            // Add a submit event listener to the form
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+        
+                // Capture the values of form fields inside the event listener
+                const id = document.getElementById("id").value;
+                const phone = document.getElementById("phone").value;
+                const upi = document.getElementById("upi").value;
+                const mapLink = document.getElementById("mapLink").value;
+                const address = document.getElementById("address").value;
+        
+                console.log(id, phone, upi, mapLink, address);
+        
+                fetch('/dastavej/update', {
+                    method: 'POST', // You may need to adjust the HTTP method (e.g., POST or PUT)
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ id, phone, upi, mapLink, address }), // Include the form data
+                })
+                .then(response => response.json())
+                .then(data => {
+                    location.reload();
+                })
+                .catch(error => {
+                    // Handle any errors here (e.g., show an error message)
+                    console.error('Error:', error);
+                });
+            });
+        </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+crossorigin="anonymous">
+</script>
+</body>
+
+</html>

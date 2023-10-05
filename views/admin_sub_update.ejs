@@ -40,17 +40,17 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" style="color: #2F2E41;">शुल्क का प्रकार <sup style="color: red;">*</sup></label>
                                         <select name="Type" id="exampleInputEmail1" required class="form-control" aria-placeholder="Select Status">
-                                            <%if(Type=="Fixed"){%>}
+                                            <%if(Type=="Fixed"){%>
                                                 <option value="Fixed" selected>Fixed</option>
                                                 <option value="Percentage">Percentage</option>
                                                 <option value="Per Feet">Per Feet</option>
                                             <%}%>
-                                            <%if(Type=="Percentage"){%>}
+                                            <%if(Type=="Percentage"){%>
                                                 <option value="Fixed">Fixed</option>
                                                 <option value="Percentage" selected>Percentage</option>
                                                 <option value="Per Feet">Per Feet</option>
                                             <%}%>
-                                            <%if(Type=="Per Feet"){%>}
+                                            <%if(Type=="Per Feet"){%>
                                                 <option value="Fixed">Fixed</option>
                                                 <option value="Percentage">Percentage</option>
                                                 <option value="Per Feet" selected>Per Feet</option>
@@ -75,10 +75,69 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="exampleInputEmail1" style="color: #2F2E41;">पंजीयन शुल्क का प्रकार <sup style="color: red;">*</sup></label>
+                                        <select name="PanType" id="exampleInputEmail1" required class="form-control" aria-placeholder="Select Status">
+                                            <%if(PanType=="Fixed"){%>
+                                            <option value="Fixed" selected>Fixed</option>
+                                            <option value="Percentage">Percentage</option>
+                                            <option value="Per Feet">Per Partiton</option>
+                                        <%}%>
+                                        <%if(PanType=="Percentage"){%>
+                                            <option value="Fixed">Fixed</option>
+                                            <option value="Percentage" selected>Percentage</option>
+                                            <option value="Per Feet">Per Partiton</option>
+                                        <%}%>
+                                        <%if(PanType=="Per Feet"){%>
+                                            <option value="Fixed">Fixed</option>
+                                            <option value="Percentage">Percentage</option>
+                                            <option value="Per Feet" selected>Per Partiton</option>
+                                        <%}%>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label for="exampleInputEmail1" style="color: #2F2E41;">पंजीयन शुल्क  <sup style="color: red;">*</sup></label>
                                         <input type="number" value="<%=panjikar%>" step="0.01" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="panjikar">
                                     </div>
 
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" style="color: #2F2E41;">Partiton  <sup style="color: red;">*</sup></label>
+                                        <input type="number" value="<%=Partiton%>" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Partiton">
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" style="color: #2F2E41;">पक्षकार  <sup style="color: red;">*</sup></label>
+                                        <input type="text" value="<%=Paksh%>" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Paksh">
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" style="color: #2F2E41;"> Sampati Required  <sup style="color: red;">*</sup></label>
+                                        <select name="SamptiRequi" id="exampleInputEmail1" required class="form-control" aria-placeholder="Select Status">
+                                        <%if(SamptiRequi=="Yes"){%>
+                                            <option value="Yes" selected>Yes</option>
+                                            <option value="No">No</option>
+                                        <%}%>
+                                        <%if(SamptiRequi=="No"){%>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No" selected>No</option>
+                                        <%}%>
+                                      </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" style="color: #2F2E41;">  Stamp Mulkiya   <sup style="color: red;">*</sup></label>
+                                        <select name="SamptiMauk" id="exampleInputEmail1" required class="form-control" aria-placeholder="Select Status">
+                                        <%if(SamptiMauk=="Yes"){%>
+                                            <option value="Yes" selected>Yes</option>
+                                            <option value="No">No</option>
+                                        <%}%>
+                                        <%if(SamptiMauk=="No"){%>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No" selected>No</option>
+                                        <%}%>
+                                      </select>
+                                    </div>
                                     <!--Image upload-->
                                     <button type="submit" class="btn btn-primary" style="background:#2F2E41; color: #fff; font-weight: 700;">Submit</button>
                                 </form>

@@ -21,6 +21,7 @@
                                         <tr>
                                             <th>SL No.</th>
                                             <th>File Name</th>
+                                            <th>File Link</th>
                                             <th>Action</th>
 
                                         </tr>
@@ -29,6 +30,7 @@
                                         <tr>
                                             <th>SL No.</th>
                                             <th>File Name</th>
+                                            <th>File Link</th>
                                             <th>Action</th>
 
                                         </tr>
@@ -38,6 +40,7 @@
                                             <tr>
                                             <td><%=i+1%></td>
                                             <td><%= parray[i].name %></td>
+                                           <td> <a href="<%= parray[i].path %>">Link</a></td>
                                             <td>
                                                 <a href="/admin/<%= parray[i].name %>/imp/delete" class="btn btn-danger btn-sm" data-toggle="tooltip" style="color: white;background-color:red;" data-placement="left" title="Update"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                             </td>

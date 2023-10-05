@@ -27,6 +27,10 @@
                                             <th>उपकर शुल्क</th>
                                             <th>जनपद शुल्क</th>
                                             <th>पंजीयन शुल्क</th>
+                                            <th>पक्षकार</th>
+                                            <th>Sampati Required</th>
+                                            <th> Stamp Mulkiya </th>
+                                            <th>Partiton</th>
                                             <th>Action</th>
 
                                         </tr>
@@ -41,6 +45,10 @@
                                             <th>उपकर शुल्क</th>
                                             <th>जनपद शुल्क</th>
                                             <th>पंजीयन शुल्क</th>
+                                            <th>पक्षकार</th>
+                                            <th>Sampati Required</th>
+                                            <th> Stamp Mulkiya </th>
+                                            <th>Partiton</th>
                                             <th>Action</th>
 
                                         </tr>
@@ -61,20 +69,43 @@
                                                 <td><%= parray[i].sub[j].Stamp %> Rs</td>
                                                 <td><%= parray[i].sub[j].Upkar %> Rs</td>
                                                 <td><%= parray[i].sub[j].Janpad %> Rs</td>
-                                                <td><%= parray[i].sub[j].panjikar %> Rs</td>
                                             <%}%>
+
+
+
                                             <% if(parray[i].sub[j].Type=="Percentage") {%>
                                                 <td><%= parray[i].sub[j].Stamp %> %</td>
                                                 <td><%= parray[i].sub[j].Upkar %> %</td>
                                                 <td><%= parray[i].sub[j].Janpad %> %</td>
-                                                <td><%= parray[i].sub[j].panjikar %> %</td>
                                             <%}%>
+
+                                         
+
                                             <% if(parray[i].sub[j].Type=="Per Feet") {%>
                                                 <td><%= parray[i].sub[j].Stamp %> प्रति बटवारा हिस्सा </td>
                                                 <td><%= parray[i].sub[j].Upkar %> प्रति बटवारा हिस्सा </td>
                                                 <td><%= parray[i].sub[j].Janpad %> प्रति बटवारा हिस्सा </td>
+                                            <%}%>
+                                          
+                                            <% if(parray[i].sub[j].PanType=="Percentage") {%>
+                                                <td><%= parray[i].sub[j].panjikar %> %</td>
+                                            <%}%>
+
+                                            
+                                            <% if(parray[i].sub[j].PanType=="Fixed") {%>
+                                                <td><%= parray[i].sub[j].panjikar %> Rs</td>
+                                            <%}%>
+
+                                            <% if(parray[i].sub[j].PanType=="Per Feet") {%>
                                                 <td><%= parray[i].sub[j].panjikar %> प्रति बटवारा हिस्सा </td>
                                             <%}%>
+
+                                            <td><%= parray[i].sub[j].Paksh %></td>
+                                            <td><%= parray[i].sub[j].SamptiRequi %></td>
+                                            <td><%= parray[i].sub[j].SamptiMauk %></td>
+                                            <td><%= parray[i].sub[j].Partiton %></td>
+
+
                                             <td>
                                                 <a href="/admin/<%= parray[i].sub[j].name %>/<%= parray[i].name %>/sub/update" class="btn btn-info btn-sm" data-toggle="tooltip" style="color: white;background-color: #501bd7eb;" data-placement="left" title="Update"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                                 <a href="/admin/<%= parray[i].sub[j].name %>/<%= parray[i].name %>/sub/delete" class="btn btn-danger btn-sm" data-toggle="tooltip" style="color: white;background-color:red;" data-placement="left" title="Update"><i class="fa fa-trash-o" aria-hidden="true"></i></a>

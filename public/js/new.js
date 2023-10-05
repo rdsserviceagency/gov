@@ -17,7 +17,7 @@ function addPratifal() {
                 <div class="col-sm-6">
                     <div class="mb-5">
                         <label for="pratifalPrakar${pratifalCounter}" class="form-label">PRATIFAL KA PRAKAR</label>
-                        <select class="form-select inputName" onchange="toggleFields(this)" required id="pratifalPrakar${pratifalCounter}" name="pratifalPrakar${pratifalCounter}" aria-label="Default select example">
+                        <select class="form-select inputName" onchange="toggleFields(this)" required id="pratifalPrakar${pratifalCounter}" name="pratifal" aria-label="Default select example">
                             <option value="" hidden selected>Choose</option>
                             <option value="Cash">Cash</option>
                             <option value="Cheque">Cheque</option>
@@ -28,17 +28,17 @@ function addPratifal() {
                     </div>
                     <div class="mb-5">
                         <label for="jaariDinank${pratifalCounter}" class="form-label">JAARI DINANK</label>
-                        <input type="date" required class="form-control inputName" id="jaariDinank${pratifalCounter}" name="jaariDinank${pratifalCounter}">
+                        <input type="date" required class="form-control inputName" id="jaariDinank${pratifalCounter}" name="pratifaldate">
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div id="checkr" class="mb-5">
                         <label for="checkr${pratifalCounter}" class="form-label">CHECK/RTGS NO/NFTS No/UPI Id</label>
-                        <input type="text" required id="checkr${pratifalCounter}" name="checkr${pratifalCounter}" class="form-control inputName">
+                        <input type="text" required id="checkr${pratifalCounter}" name="check" class="form-control inputName">
                     </div>
                     <div class="mb-5">
                         <label for="rashi${pratifalCounter}" class="form-label">RASHI</label>
-                        <input type="number" required id="rashi${pratifalCounter}" name="rashi${pratifalCounter}" class="form-control inputName">
+                        <input type="number" required id="rashi${pratifalCounter}" name="pratifalamount" class="form-control inputName">
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@ function addPratifal() {
                 <div class="col-sm-6">
                     <div id="bank" class="mb-5">
                         <label for="bankNaam${pratifalCounter}" class="form-label">BANK KA NAAM</label>
-                        <input type="text" required id="bankNaam${pratifalCounter}" name="bankNaam${pratifalCounter}" class="form-control inputName">
+                        <input type="text" required id="bankNaam${pratifalCounter}" name="pratifalbank" class="form-control inputName">
                     </div>
                 </div>
             </div>
@@ -79,9 +79,8 @@ function updatePratifalNumbersAndAttributes() {
 
         const inputs = section.querySelectorAll(".inputName");
         inputs.forEach((input) => {
-            const originalName = input.getAttribute("name");
+            const originalName = input.getAttribute("id");
             const newName = originalName.replace(/\d+$/, pratifalNumber);
-            input.setAttribute("name", newName);
             input.setAttribute("id", newName);
         });
 

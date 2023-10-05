@@ -50,7 +50,7 @@ body {
 
 .log,
 .ph {
-    width: 252px;
+    width: 300px;
     text-align: center;
     font-size: 25px;
     font-weight: 400;
@@ -172,6 +172,12 @@ body {
     display: none;
 }
 #PRATIFAL{
+    display: none;
+}
+#Loan{
+    display: none;
+}
+#Ledge{
     display: none;
 }
 
