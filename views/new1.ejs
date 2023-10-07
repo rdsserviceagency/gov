@@ -158,14 +158,20 @@
                             </div>
                             <div class="col-sm-6">
                                 <div id="parsk" class="mb-5">
-                                    <label for="formGroupExampleInput" class="form-label">पक्षकारो के मध्य
-                                        सम्बन्ध</label>
+                                    <label for="formGroupExampleInput" class="form-label">पक्षकारो के मध्य सम्बन्ध</label>
                                     <select class="form-select inputName" name="parskh" id="formGroupExampleInput"
                                         aria-label="Default select example">
                                         <% for(let i=0;i<parskh.length;i++){ %>
-                                            <option value="<%=parskh[i].name%>">
-                                                <%=parskh[i].name%>
-                                            </option>
+                                                <% if(parskh[i].name==obj.pakshkar){ %>
+                                                <option value="<%=parskh[i].name%>" selected>
+                                                    <%=parskh[i].name%>
+                                                </option>
+                                                <%} %>
+                                                <% if(parskh[i].name!=obj.pakshkar){ %>
+                                                    <option value="<%=parskh[i].name%>">
+                                                        <%=parskh[i].name%>
+                                                    </option>
+                                                <%} %>
                                             <%} %>
                                     </select>
 
@@ -180,102 +186,123 @@
                         </div>
 
                         <!-- Sampati hak -->
-                        <div id="sampati">
-                            <div>
-                                <p>Sampati hak </p>
-                            </div>
-                            <div class="mb-5">
-                                <label for="formGroupExampleInput" class="form-label">Sampati hak</label>
-                                <select class="form-select inputName" name="sampati" id="formGroupExampleInput"
-                                    onchange="fun2(<%= JSON.stringify(samp) %>,this.value)"
-                                    aria-label="Default select example">
-                                    <option value="" hidden selected>choose</option>
-                                    <% for(let i=0;i<samp.length;i++){ %>
-                                        <option value="<%=samp[i].name%>">
-                                            <%=samp[i].name%>
-                                        </option>
+                        <% if(obj.Sampati.length==1){ %>
+                            <div id="sampati">
+                                <div>
+                                    <p>Sampati hak </p>
+                                </div>
+                                <div class="mb-5">
+                                    <label for="formGroupExampleInput" class="form-label">Sampati hak</label>
+                                    <select class="form-select inputName" name="sampati" id="formGroupExampleInput"
+                                        onchange="fun2(<%= JSON.stringify(samp) %>,this.value)"
+                                        aria-label="Default select example">
+                                        <% for(let i=0;i<samp.length;i++){ %>
+                                            <% if(samp[i].name==obj.Sampati[0].valid){ %>
+                                                <option value="<%=samp[i].name%>" selected>
+                                                    <%=samp[i].name%>
+                                                </option>
+                                            <%} %>
+                                            <% if(samp[i].name!=obj.Sampati[0].valid){ %>
+                                                <option value="<%=samp[i].name%>">
+                                                    <%=samp[i].name%>
+                                                </option>
+                                            <%} %>
                                         <%} %>
-                                </select>
-
-                            </div>
-                            <div id="SSampati" class="row">
-                                <div class="col-sm-6">
-                                    <div class="mb-5">
-                                        <label for="s1" class="form-label">के आदेश क्रमांक </label>
-                                        <input type="text"  name="sampatiNo" required class="form-control inputName" id="s1"
-                                            placeholder="ENTER SUMMARY">
-                                    </div>
-                                    <div class="mb-5">
-                                        <label for="s2" class="form-label">कार्यालय </label>
-                                        <input type="text" name="sampatioffice"  required class="form-control inputName" id="s2"
-                                            placeholder="ENTER SUMMARY">
-
-                                    </div>
-
+                                    </select>
                                 </div>
-                                <div class="col-sm-6">
+                                <% if(obj.Sampati[0].number!=" "){ %>
+                                    <div id="SSampati" class="row">
+                                        <div class="col-sm-6">
+                                            <div class="mb-5">
+                                                <label for="s1" class="form-label">के आदेश क्रमांक </label>
+                                                <input type="text" value="<%=obj.Sampati[0].number%>" name="sampatiNo" required class="form-control inputName" id="s1"
+                                                    placeholder="ENTER SUMMARY">
+                                            </div>
+                                            <div class="mb-5">
+                                                <label for="s2" class="form-label">कार्यालय </label>
+                                                <input type="text" value="<%=obj.Sampati[0].office%>" name="sampatioffice"  required class="form-control inputName" id="s2"
+                                                    placeholder="ENTER SUMMARY">
 
-                                    <div class="mb-5">
-                                        <label for="s3" class="form-label">दिनांक </label>
-                                        <input type="date" name="sampatiDate"  id="s3" class="form-control inputName">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+
+                                            <div class="mb-5">
+                                                <label for="s3" class="form-label">दिनांक </label>
+                                                <input type="date" value="<%=obj.Sampati[0].date%>" name="sampatiDate"  id="s3" class="form-control inputName">
+                                            </div>
+
+                                            <div class="mb-5">
+                                                <label for="s4"  class="form-label">द्वारा अनुमति आदेश जारी </label>
+                                                <input type="file" value="<%=obj.Sampati[0].file%>" name="sampatifile" id="s4" class="form-control inputName">
+                                            </div>
+
+                                        </div>
                                     </div>
-
-                                    <div class="mb-5">
-                                        <label for="s4"  class="form-label">द्वारा अनुमति आदेश जारी </label>
-                                        <input type="file" name="sampatifile" id="s4" class="form-control inputName">
-                                    </div>
-
-                                </div>
+                                <%} %>
                             </div>
-                        </div>
+                        <%} %>
+
 
                         <!-- Aadiwasi ki bhumi ke sambandh me  -->
-                        <div id="Aadiwasi">
-                            <div>
-                                <p>Aadiwasi ki bhumi ke sambandh me </p>
+                        <% if(obj.Aadiwasi.length==1){ %>
+                            <div id="Aadiwasi">
+                                    <div>
+                                        <p>Aadiwasi ki bhumi ke sambandh me </p>
+                                    </div>
+                                    <div class="mb-5">
+                                        <label for="formGroupExampleInput"  class="form-label">Aadiwasi ki bhumi ke sambandh
+                                            me</label>
+                                        <select class="form-select inputName" name="aadwasi" required id="formGroupExampleInput"
+                                            onchange="fun3(this.value)" aria-label="Default select example">
+                                            <% if(obj.Aadiwasi[0].valid=="Yes"){ %>
+                                                <option value="Yes" selected>Yes</option>
+                                                <option value="No">No</option>
+                                            <%} %>
+                                            <% if(obj.Aadiwasi[0].valid=="No"){ %>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No" selected>No</option>
+                                            <%} %>
+
+                                        </select>
+
+                                    </div>
+                                <% if(obj.Aadiwasi[0].number!=" "){ %>
+                                    <div id="AAadiwasi" class="row">
+                                        <div class="col-sm-6">
+                                            <div class="mb-5">
+                                                <label for="a1"  class="form-label">के आदेश क्रमांक </label>
+                                                <input type="text" value="<%=obj.Aadiwasi[0].number%>" name="aadwasino" required class="form-control inputName" id="a1"
+                                                    placeholder="ENTER SUMMARY">
+                                            </div>
+                                            <div class="mb-5">
+                                                <label for="a2"  class="form-label">कार्यालय </label>
+                                                <input type="text" value="<%=obj.Aadiwasi[0].office%>" name="aadwasioffice" required class="form-control inputName" id="a2"
+                                                placeholder="ENTER SUMMARY">
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+
+                                            <div class="mb-5">
+                                                <label for="a3"  class="form-label">दिनांक </label>
+                                                <input type="date" value="<%=obj.Aadiwasi[0].date%>" name="aadwasidate" id="a3" class="form-control inputName">
+                                            </div>
+
+                                            <div class="mb-5">
+                                                <label for="a4"  class="form-label">द्वारा अनुमति आदेश जारी </label>
+                                                <input type="file" value="<%=obj.Aadiwasi[0].file%>" name="aadwasifile" id="a4" class="form-control inputName">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                <%} %>
+
                             </div>
-                            <div class="mb-5">
-                                <label for="formGroupExampleInput"  class="form-label">Aadiwasi ki bhumi ke sambandh
-                                    me</label>
-                                <select class="form-select inputName" name="aadwasi" required id="formGroupExampleInput"
-                                    onchange="fun3(this.value)" aria-label="Default select example">
-                                    <option value="" hidden selected>choose</option>
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                </select>
+                        <%} %>
 
-                            </div>
-
-                            <div id="AAadiwasi" class="row">
-                                <div class="col-sm-6">
-                                    <div class="mb-5">
-                                        <label for="a1"  class="form-label">के आदेश क्रमांक </label>
-                                        <input type="text" name="aadwasino" required class="form-control inputName" id="a1"
-                                            placeholder="ENTER SUMMARY">
-                                    </div>
-                                    <div class="mb-5">
-                                        <label for="a2"  class="form-label">कार्यालय </label>
-                                        <input type="text" name="aadwasioffice" required class="form-control inputName" id="a2"
-                                            placeholder="ENTER SUMMARY">
-
-                                    </div>
-
-                                </div>
-                                <div class="col-sm-6">
-
-                                    <div class="mb-5">
-                                        <label for="a3"  class="form-label">दिनांक </label>
-                                        <input type="date" name="aadwasidate" id="a3" class="form-control inputName">
-                                    </div>
-
-                                    <div class="mb-5">
-                                        <label for="a4"  class="form-label">द्वारा अनुमति आदेश जारी </label>
-                                        <input type="file" name="aadwasifile" id="a4" class="form-control inputName">
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
 
 
                         <!-- PRATIFAL -->
@@ -331,6 +358,8 @@
                             <a class="btn btn-success btn-sm" onclick="addPratifal()">Add Pratifal</a>
                         </div>
 
+                    <% if(obj.Loan.length==1){ %>
+
                         <!-- Loan -->
                         <div id="Loan">
                             <div>
@@ -342,6 +371,9 @@
                                         class="form-control inputName">
                                 </div>
                         </div>
+                    <%} %>
+
+                    <% if(obj.Ledge.length==1){ %>
 
                         <!-- Ledge -->
                         <div id="Ledge">
@@ -373,6 +405,8 @@
                                 </div>
                                
                         </div>
+                    <%} %>
+
 
                         <!-- SAMPATI VIVRAN KI AVASHAKTA  -->
                         <div class="mb-5">

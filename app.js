@@ -219,7 +219,53 @@ const vigyapnSchema = new mongoose.Schema({
 
 
 const applicationSchema = new mongoose.Schema({
-  number:Number
+  number:Number,
+  Dastavej:{
+    document:String,
+    docdescription:String,
+    pakshkar:String,
+    subdocument:String,
+    subdocdescription:String,
+    Sampati:[
+        {
+            valid:String,
+            number:String,
+            office:String,
+            date:String,
+            file:String
+        }
+    ],
+    Aadiwasi:[
+        {
+            valid:String,
+            number:String,
+            office:String,
+            date:String,
+            file:String
+        }
+    ],
+    Loan:[
+        {
+            amount:Number
+        }
+    ],
+    Ledge:[
+        {
+            amount:Number,
+            rate:Number,
+            year:Number
+        }
+    ],
+    Partifal:[
+        {
+            type:String,
+            amount:Number,
+            date:String,
+            bank:String,
+            check:toString
+        }
+    ]
+  }
 });
 
 const userSchema= new mongoose.Schema({
@@ -323,6 +369,39 @@ const FasalSchema= new mongoose.Schema({
   });
 
 const Fasal= mongoose.model("Fasal",FasalSchema);
+
+const ExtraSchema= new mongoose.Schema({
+    name: String,
+    Percentage: String,
+  });
+
+const Extra= mongoose.model("Extra",ExtraSchema);
+
+const IncompleteSchema= new mongoose.Schema({
+    name: String,
+    Percentage: String,
+  });
+
+const Incomplete= mongoose.model("Incomplete",IncompleteSchema);
+
+const TalSchema= new mongoose.Schema({
+    name: String,
+    Percentage: String,
+  });
+
+const Tal= mongoose.model("Tal",TalSchema);
+
+const makanSchema= new mongoose.Schema({
+    city: String,
+    sampati: String,
+    sagrachna: String,
+    upbad: String,
+    second:String,
+    tal:String,
+    avskarn:String,
+  });
+
+const Makan= mongoose.model("Makan",makanSchema);
 
 const impSchema= new mongoose.Schema({
     name: String,   
@@ -868,25 +947,139 @@ app.get("/new",async (req,res)=>{
 })
 
 app.get("/:number/new",async (req,res)=>{
-    // const fou=await User.findOne({email:req.cookies.useremail})
-    // let obj={
-    //     number:appli
-    // }
-    // fou.application.push(obj);
-    // await fou.save()
+    const fou=await User.findOne({email:req.cookies.useremail})
+    let obj;
+    for(let i=0;i<fou.application.length;i++){
+        if(fou.application[i].number==req.params.number){
+            obj=fou.application[i].Dastavej;
+            break;
+        }
+    }
     Doc.find().then((found)=>{
          Parskh.find().then((parskh)=>{
             Sampati.find().then((samp)=>{
-                res.render("new",{unit1:found,parskh:parskh,samp:samp,appli:req.params.number})
-
+                res.render("new1",{unit1:found,parskh:parskh,samp:samp,appli:req.params.number,obj:obj})
             })
          })
     })
 })
 
-app.post("/new",(req,res)=>{
-    console.log(req.body);
-    res.redirect("/new")
+app.post("/:number/new",async (req,res)=>{
+    const found= await Doc.findOne({name:req.body.doc})
+    let Sampati=[]
+    let Aadiwasi=[]
+    let Loan=[]
+    let Ledge=[]
+    let Partifal=[]
+    if(found.Loan=="Yes"){
+        let ob={
+            amount:req.body.loan
+        }
+        Loan.push(ob);
+    }
+
+    if(found.Ledge=="Yes"){
+        let ob={
+            amount:req.body.ledgeamount,
+            rate:req.body.ledgeinterest,
+            year:req.body.ledgeyear
+        }
+        Ledge.push(ob);
+    }
+
+    if(found.Sampati=="Yes"){
+        const sam= await Sampati.findOne({name:req.body.sampati})
+        if(sam.other=="Yes"){
+            let ob={
+                valid:req.body.sampati,
+                number:req.body.sampatiNo,
+                office:req.body.sampatioffice,
+                date:req.body.sampatiDate,
+                file:req.body.sampatifile
+            }
+            Sampati.push(ob);
+        }
+        else{
+            let ob={
+                valid:req.body.sampati,
+                number:"",
+                office:"",
+                date:"",
+                file:""
+            }
+            Sampati.push(ob);
+        }
+    }
+    if(found.adi=="Yes"){
+        if(req.body.aadwasi=="Yes"){
+            let ob={
+                valid:req.body.aadwasi,
+                number:req.body.aadwasino,
+                office:req.body.aadwasioffice,
+                date:req.body.aadwasidate,
+                file:req.body.aadwasifile
+            }
+            Aadiwasi.push(obj);
+        }
+        else{
+            let ob={
+                valid:req.body.aadwasi,
+                number:"",
+                office:"",
+                date:"",
+                file:""
+            }
+            Aadiwasi.push(ob);
+        }
+    }
+
+    if(found.PRATIFAL=="Yes"){
+        if(typeof(req.body.pratifal)==string){
+            let ob={
+                type:req.body.pratifal,
+                date:req.body.pratifaldate,
+                check:req.body.check,
+                amount:req.body.pratifalamount,
+                bank:req.body.pratifalbank
+            }
+            Partifal.push(ob);
+        }
+        else{
+            for(let i=0;i<req.body.pratifal.length;i++){
+                let ob={
+                    type:req.body.pratifal,
+                    date:req.body.pratifaldate,
+                    check:req.body.check,
+                    amount:req.body.pratifalamount,
+                    bank:req.body.pratifalbank
+                }
+                Partifal.push(ob);
+            }
+        }
+       
+    }
+
+    let obj={
+        document:req.body.doc,
+        docdescription:req.body.docdes,
+        pakshkar:req.body.parskh,
+        subdocument:req.body.sub,
+        subdocdescription:req.body.subdes,
+        Sampati:Sampati,
+        Aadiwasi:Aadiwasi,
+        Loan:Loan,
+        Ledge:Ledge,
+        Partifal:Partifal
+    }
+
+    const user1= await User.findOne({email:req.cookies.useremail});
+    for(let i=0;i<user1.application.length;i++){
+        if(user1.application[i].number==req.params.number){
+            user1.application[i].Dastavej=obj;
+            break;
+        }
+    }
+    res.redirect(`${req.params.number}/new`)
 })
 
 
@@ -4118,7 +4311,14 @@ app.post("/templete",(req,res)=>{
 
 // admin
 
+// User
 
+
+app.get("/admin/user",(req,res)=>{
+    User.find().then((found)=>{
+        res.render("admin_user",{parray:found})
+    })
+})
 
     // Document
 
@@ -4813,6 +5013,254 @@ app.get("/admin/road",(req,res)=>{
     res.redirect("/admin/road/list")
    })
  })
+
+
+  //  Makan
+ 
+  var makan_valid=0;
+
+  app.get("/admin/makan",(req,res)=>{
+    res.render("admin_makan",{makan_valid:makan_valid})
+    makan_valid=0;
+  })
+ 
+  app.get("/admin/makan/list",(req,res)=>{
+      Makan.find().then((found)=>{
+          res.render("admin_makan_list",{parray:found})
+      })
+  })
+ 
+  app.get("/admin/:city/:sampati/:sagrachna/makan/delete",(req,res)=>{
+    Makan.deleteOne({city:req.params.city,sampati:req.params.sampati,sagrachna:req.params.sagrachna}).then((found)=>{
+        res.redirect("/admin/makan/list")
+    })
+  })
+ 
+  app.post("/admin/makan",async(req,res)=>{
+      const city=req.body.city
+      const sampati=req.body.sampati
+      const sagrachna=req.body.sagrachna
+      const upbad=req.body.upbad
+      const second=req.body.second
+      const tal=req.body.tal
+      const avskarn=req.body.avskarn
+      Makan.findOne({city:city,sampati:sampati,sagrachna:sagrachna}).then(async(found)=>{
+        if(found){
+            makan_valid=1;
+        }else{
+            const makan=new Makan({
+                city:city,
+                sampati:sampati,
+                sagrachna:sagrachna,
+                upbad:upbad,
+                second:second,
+                tal:tal,
+                avskarn:avskarn
+            })
+            await makan.save();
+        }
+        res.redirect("/admin/makan")
+    }).catch((e)=>{
+        console.log(e)
+    })
+ 
+  })
+ 
+  app.get("/admin/:city/:sampati/:sagrachna/makan/update",(req,res)=>{
+    Makan.findOne({city:req.params.city,sampati:req.params.sampati,sagrachna:req.params.sagrachna}).then((found)=>{
+        res.render("admin_makan_update",{found:found})
+    })
+ })
+ 
+ app.post("/admin/makan/update",async(req,res)=>{
+    const city=req.body.city
+    const sampati=req.body.sampati
+    const sagrachna=req.body.sagrachna
+    const upbad=req.body.upbad
+    const second=req.body.second
+    const tal=req.body.tal
+    const avskarn=req.body.avskarn
+   const found=await Makan.findOne({city:city,sampati:sampati,sagrachna:sagrachna})
+   found.upbad=upbad
+   found.second=second
+   found.tal=tal
+   found.avskarn=avskarn
+   await found.save().then(()=>{
+    res.redirect("/admin/makan/list")
+   })
+ })
+
+ //  Tal
+ 
+ var tal_valid=0;
+
+ app.get("/admin/tal",(req,res)=>{
+   res.render("admin_makan_tal",{tal_valid:tal_valid})
+   tal_valid=0;
+ })
+
+ app.get("/admin/tal/list",(req,res)=>{
+     Tal.find().then((found)=>{
+         res.render("admin_makan_tal_list",{parray:found})
+     })
+ })
+
+ app.get("/admin/:name/tal/delete",(req,res)=>{
+    Tal.deleteOne({name:req.params.name}).then((found)=>{
+       res.redirect("/admin/tal/list")
+   })
+ })
+
+ app.post("/admin/tal",async(req,res)=>{
+     const name=req.body.name
+     const Percentage=req.body.Percentage
+     Tal.findOne({name:name}).then(async(found)=>{
+       if(found){
+        tal_valid=1;
+       }else{
+           const tal=new Tal({
+               name:name,
+               Percentage:Percentage
+           })
+           await tal.save();
+       }
+       res.redirect("/admin/tal")
+   }).catch((e)=>{
+       console.log(e)
+   })
+
+ })
+
+ app.get("/admin/:name/tal/update",(req,res)=>{
+    Tal.findOne({name:req.params.name}).then((found)=>{
+       res.render("admin_makan_tal_update",{found:found})
+   })
+})
+
+app.post("/admin/tal/update",async(req,res)=>{
+  const name=req.body.name
+  const Percentage=req.body.Percentage
+  const found=await Tal.findOne({name:name})
+  found.Percentage=Percentage
+  await found.save().then(()=>{
+   res.redirect("/admin/tal/list")
+  })
+})
+
+//  Extra
+ 
+var extra_valid=0;
+
+app.get("/admin/extra",(req,res)=>{
+  res.render("admin_makan_extra",{extra_valid:extra_valid})
+  extra_valid=0;
+})
+
+app.get("/admin/extra/list",(req,res)=>{
+    Extra.find().then((found)=>{
+        res.render("admin_makan_extra_list",{parray:found})
+    })
+})
+
+app.get("/admin/:name/extra/delete",(req,res)=>{
+   Extra.deleteOne({name:req.params.name}).then((found)=>{
+      res.redirect("/admin/extra/list")
+  })
+})
+
+app.post("/admin/extra",async(req,res)=>{
+    const name=req.body.name
+    const Percentage=req.body.Percentage
+    Extra.findOne({name:name}).then(async(found)=>{
+      if(found){
+       extra_valid=1;
+      }else{
+          const extra=new Extra({
+              name:name,
+              Percentage:Percentage
+          })
+          await extra.save();
+      }
+      res.redirect("/admin/extra")
+  }).catch((e)=>{
+      console.log(e)
+  })
+
+})
+
+app.get("/admin/:name/extra/update",(req,res)=>{
+   Extra.findOne({name:req.params.name}).then((found)=>{
+      res.render("admin_makan_extra_update",{found:found})
+  })
+})
+
+app.post("/admin/extra/update",async(req,res)=>{
+ const name=req.body.name
+ const Percentage=req.body.Percentage
+ const found=await Extra.findOne({name:name})
+ found.Percentage=Percentage
+ await found.save().then(()=>{
+  res.redirect("/admin/extra/list")
+ })
+})
+
+
+//  Incomplete
+ 
+var incomplete_valid=0;
+
+app.get("/admin/incomplete",(req,res)=>{
+  res.render("admin_makan_incomplete",{incomplete_valid:incomplete_valid})
+  incomplete_valid=0;
+})
+
+app.get("/admin/incomplete/list",(req,res)=>{
+    Incomplete.find().then((found)=>{
+        res.render("admin_makan_incomplete_list",{parray:found})
+    })
+})
+
+app.get("/admin/:name/incomplete/delete",(req,res)=>{
+   Incomplete.deleteOne({name:req.params.name}).then((found)=>{
+      res.redirect("/admin/incomplete/list")
+  })
+})
+
+app.post("/admin/incomplete",async(req,res)=>{
+    const name=req.body.name
+    const Percentage=req.body.Percentage
+    Incomplete.findOne({name:name}).then(async(found)=>{
+      if(found){
+       incomplete_valid=1;
+      }else{
+          const incomplete=new Incomplete({
+              name:name,
+              Percentage:Percentage
+          })
+          await incomplete.save();
+      }
+      res.redirect("/admin/incomplete")
+  }).catch((e)=>{
+      console.log(e)
+  })
+
+})
+
+app.get("/admin/:name/incomplete/update",(req,res)=>{
+   Incomplete.findOne({name:req.params.name}).then((found)=>{
+      res.render("admin_makan_incomplete_update",{found:found})
+  })
+})
+
+app.post("/admin/incomplete/update",async(req,res)=>{
+ const name=req.body.name
+ const Percentage=req.body.Percentage
+ const found=await Incomplete.findOne({name:name})
+ found.Percentage=Percentage
+ await found.save().then(()=>{
+  res.redirect("/admin/incomplete/list")
+ })
+})
 
 // condition upload
 app.get('/admin/condition/list', async (req, res) => {
