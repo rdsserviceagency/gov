@@ -4,7 +4,7 @@ const cookieParser=require("cookie-parser");
 const jwt=require("jsonwebtoken");
 
 async function dastavejRegister(req, res) {
-    const { name, phone, email, password, profession, upi, mapLink, address,Jila,Office } = req.body;
+    const { name, phone, email, profession, upi, mapLink, address,Jila,Office,panjayan,lincense } = req.body;
     const Password= await bcrypt.hash(req.body.password,10);
 
     const existingUser = await DastavejUser.findOne({ email: email }).exec();
@@ -24,7 +24,9 @@ async function dastavejRegister(req, res) {
                 Office:Office,
                 mapLink:mapLink,
                 address:address,
-                password:Password
+                password:Password,
+                lincense:lincense,
+                panjayan:panjayan
             }
             );
         await newUser.save().then(()=>{

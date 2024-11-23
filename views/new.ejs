@@ -27,7 +27,9 @@
                 <p id="b">यहाँ पर मेनू पर सुचना डिस्प्ले करना है जो ब्लिंग होता रहेगा</p>
             </div>
             <div class="right col-sm-3">
-                <p class="log"><span class="img"><img src="/img/logout.png" alt=""></span>लॉग आउट</p>
+                <a href="/logout" style="text-decoration: none;">
+                    <p class="log"><span class="img"><img src="/img/logout.png" alt=""></span>लॉग आउट</p>
+                </a>
                 <p class="ph">
                     आवेदन संख्या :
                     <%=appli%>
@@ -104,7 +106,7 @@
                         </li>
                     </a>
                     <br>
-                    <a href="/Mumbai/pakashkar" style="text-decoration: none;">
+                    <a href="/pakashkar?number:<%=appli%>" style="text-decoration: none;">
                         <li>पक्षकार का विवरण
                         </li>
                     </a>
@@ -156,17 +158,13 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div  class="col-sm-6">
                                 <div id="parsk" class="mb-5">
                                     <label for="formGroupExampleInput" class="form-label">पक्षकारो के मध्य
                                         सम्बन्ध</label>
-                                    <select class="form-select inputName" name="parskh" id="formGroupExampleInput"
+                                    <select id="पक्षकारो" class="form-select inputName" name="parskh" id="formGroupExampleInput"
                                         aria-label="Default select example">
-                                        <% for(let i=0;i<parskh.length;i++){ %>
-                                            <option value="<%=parskh[i].name%>">
-                                                <%=parskh[i].name%>
-                                            </option>
-                                            <%} %>
+                                          
                                     </select>
 
                                 </div>
@@ -202,12 +200,12 @@
                                 <div class="col-sm-6">
                                     <div class="mb-5">
                                         <label for="s1" class="form-label">के आदेश क्रमांक </label>
-                                        <input type="text"  name="sampatiNo" required class="form-control inputName" id="s1"
+                                        <input type="text"  name="sampatiNo"  class="form-control inputName" id="s1"
                                             placeholder="ENTER SUMMARY">
                                     </div>
                                     <div class="mb-5">
                                         <label for="s2" class="form-label">कार्यालय </label>
-                                        <input type="text" name="sampatioffice"  required class="form-control inputName" id="s2"
+                                        <input type="text" name="sampatioffice"   class="form-control inputName" id="s2"
                                             placeholder="ENTER SUMMARY">
 
                                     </div>
@@ -237,7 +235,7 @@
                             <div class="mb-5">
                                 <label for="formGroupExampleInput"  class="form-label">Aadiwasi ki bhumi ke sambandh
                                     me</label>
-                                <select class="form-select inputName" name="aadwasi" required id="formGroupExampleInput"
+                                <select class="form-select inputName" name="aadwasi"  id="formGroupExampleInput"
                                     onchange="fun3(this.value)" aria-label="Default select example">
                                     <option value="" hidden selected>choose</option>
                                     <option value="Yes">Yes</option>
@@ -250,12 +248,12 @@
                                 <div class="col-sm-6">
                                     <div class="mb-5">
                                         <label for="a1"  class="form-label">के आदेश क्रमांक </label>
-                                        <input type="text" name="aadwasino" required class="form-control inputName" id="a1"
+                                        <input type="text" name="aadwasino"  class="form-control inputName" id="a1"
                                             placeholder="ENTER SUMMARY">
                                     </div>
                                     <div class="mb-5">
                                         <label for="a2"  class="form-label">कार्यालय </label>
-                                        <input type="text" name="aadwasioffice" required class="form-control inputName" id="a2"
+                                        <input type="text" name="aadwasioffice"  class="form-control inputName" id="a2"
                                             placeholder="ENTER SUMMARY">
 
                                     </div>
@@ -277,114 +275,313 @@
                             </div>
                         </div>
 
-
-                        <!-- PRATIFAL -->
-                        <div id="PRATIFAL">
-                            <div class="container" id="partialHolder">
-                                <div style="display: flex;justify-content: space-between;">
-                                    <p id="pratifalCounter">PRATIFAL 1</p>
-                                    <!-- <button onclick="fun5()" style="background-color: #313044;border-radius: 23px;padding: 10px 20px;color: white;">ADD</button> -->
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="mb-5">
-                                            <label for="formGroupExampleInput" class="form-label">PRATIFAL KA PRAKAR
-                                            </label>
-                                            <select class="form-select inputName" name="pratifal" onchange="fun4(this.value)" required
-                                                id="formGroupExampleInput" aria-label="Default select example">
-                                                <option value="" hidden selected>Choose</option>
-                                                <option value="Cash">Cash</option>
-                                                <option value="Cheque">Cheque</option>
-                                                <option value="RTGS">RTGS</option>
-                                                <option value="NFTS">NFTS</option>
-                                                <option value="UPI">UPI</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-5">
-                                            <label for="formGroupExampleInput" class="form-label">JAARI DINANK </label>
-                                            <input type="date" required name="pratifaldate" class="form-control inputName"
-                                                id="formGroupExampleInput">
-
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div id="checkr" class="mb-5">
-                                            <label for="checkr1" class="form-label">CHECK/RTGS NO/NFTS No/UPI Id </label>
-                                            <input type="text" required id="checkr1" name="check" class="form-control inputName">
-                                        </div>
-                                        <div class="mb-5">
-                                            <label for="formGroupExampleInput" class="form-label">RASHI</label>
-                                            <input type="number" name="pratifalamount" required id="formGroupExampleInput"
-                                                class="form-control inputName">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div id="bank" class="mb-5">
-                                            <label for="bank1" class="form-label">BANK KA NAAM </label>
-                                            <input type="text" required  name="pratifalbank" id="bank1" class="form-control inputName">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a class="btn btn-success btn-sm" onclick="addPratifal()">Add Pratifal</a>
-                        </div>
-
-                        <!-- Loan -->
-                        <div id="Loan">
-                            <div>
-                                <p>Loan Information </p>
-                            </div>
-                                <div class="mb-5">
-                                    <label for="Loan1" class="form-label">Loan Amount</label>
-                                        <input type="number" name="loan" required id="Loan1"
-                                        class="form-control inputName">
-                                </div>
-                        </div>
-
-                        <!-- Ledge -->
-                        <div id="Ledge">
-                                <div>
-                                    <p>Ledge Information </p>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="mb-5">
-                                            <label for="Ledge1" class="form-label">Rent Amount</label>
-                                                <input type="number" name="ledgeamount" required id="Ledge1"
-                                                class="form-control inputName">
-                                        </div>
-                                        <div class="mb-5">
-                                            <label for="Ledge2" class="form-label">Interest</label>
-                                            <input type="number" name="ledgeinterest" step="0.01" required id="Ledge2"
-                                            class="form-control inputName">
-
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="mb-5">
-                                            <label for="Ledge3" class="form-label">Interest Year</label>
-                                            <input type="number" name="ledgeyear" required id="Ledge3"
-                                            class="form-control inputName">
-
-                                        </div>
-                                    </div>
-                                </div>
-                               
-                        </div>
-
                         <!-- SAMPATI VIVRAN KI AVASHAKTA  -->
-                        <div class="mb-5">
+                        <div id="sammauk" style="display: none;" class="mb-5">
                             <label for="formGroupExampleInput" class="form-label">SAMPATI VIVRAN KI AVASHAKTA </label>
-                            <select class="form-select inputName" name="VIVRAN" required id="formGroupExampleInput"
+                            <select class="form-select inputName" name="VIVRAN"  id="formGroupExampleInput"
                                 aria-label="Default select example">
-                                <option value="One">One</option>
-                                <option value="Two">Two</option>
-                                <option value="Three">Three</option>
+                                <option value="Yes" selected>Yes</option>
+                                <option value="No">No</option>
                             </select>
                         </div>
 
+                        <!-- Hat -->
+                        <div id="सहखातेदार" style="display: none;" class="mb-5">
+                            <label for="सहखातेदार"  class="form-label">कुल सहखातेदार  </label>
+                                <input type="number" name="सहखातेदार"  id="सहखातेदार"
+                                class="form-control inputName">
+                        </div>
+                        <div id="सहखातेदार1" style="display: none;" class="mb-5">
+                            <label for="सहखातेदार1"  class="form-label">हक़ त्याग किये जाने वाले सहखातेदार की संख्या </label>
+                                <input type="number" name="सहखातेदार1"  id="सहखातेदार1"
+                                class="form-control inputName">
+                        </div>
+
+                        <div id="विक्रय" style="display: none;" class="mb-5">
+                            <label for="विक्रय"  class="form-label">विक्रय इकरार की राशी  </label>
+                                <input type="number" name="विक्रय"  id="विक्रय"
+                                class="form-control inputName">
+                        </div>
+
+                        <!-- Pata vilak -->
+                        <div id="वृद्धि2" style="display: none;" class="mb-5">
+                            <label for="वृद्धि21"  class="form-label">रेंट अमाउंट </label>
+                                <input type="number" name="ledgeamount"  id="वृद्धि21"
+                                class="form-control inputName">
+                        </div>
+                    
+
+                        <div id="वृद्धि1" style="display: none;" class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">रेंट में वृद्धि</label>
+                            <select class="form-select inputName" name="VIVRAN1" onchange="fun5(this.value)" id="formGroupExampleInput"
+                                aria-label="Default select example">
+                                <option value="select" selected>select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+
+                        <div id="वृद्धि" style="display: none;" class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">वृद्धि अवधि  </label>
+                            <select class="form-select inputName" name="VIVRAN1"  id="formGroupExampleInput"
+                                aria-label="Default select example">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                            </select>
+                        </div>
+
+                        <div id="वृद्धि3" style="display: none;"  class="mb-5">
+                            <label for="वृद्धि32" class="form-label">वृद्धि प्रतिषत</label>
+                            <input type="number" name="ledgeinterest" step="0.01"  id="वृद्धि32"
+                            class="form-control inputName">
+
+                        </div>
+                        <div id="वृद्धि4" style="display: none;"  class="mb-5">
+                            <label for="वृद्धि42" class="form-label">प्रीमियम राशी</label>
+                            <input type="number" name="ledgeinterest" step="0.01"  id="वृद्धि42"
+                            class="form-control inputName">
+
+                        </div>
+                        <div id="वृद्धि5" style="display: none;"  class="mb-5">
+                            <label for="वृद्धि52" class="form-label">जल कर राशी</label>
+                            <input type="number" name="ledgeinterest" step="0.01"  id="वृद्धि52"
+                            class="form-control inputName">
+
+                        </div>
+                        <div id="वृद्धि6" style="display: none;"  class="mb-5">
+                            <label for="वृद्धि62" class="form-label">बिजली कर राशी</label>
+                            <input type="number" name="ledgeinterest" step="0.01"  id="वृद्धि62"
+                            class="form-control inputName">
+
+                        </div>
+
+                        <div id="वृद्धि7" style="display: none;"  class="mb-5">
+                            <label for="वृद्धि72" class="form-label">कुल पट्टा की अवधि </label>
+                            <input type="text" name="ledgeinterest"   id="वृद्धि72"
+                            class="form-control inputName">
+
+                        </div>
+
+                        <div id="वृद्धि8" style="display: none;"  class="mb-5">
+                            <label for="वृद्धि82" class="form-label">इकाई वर्ष</label>
+                            <input type="text" name="ledgeinterest"   id="वृद्धि82"
+                            class="form-control inputName">
+
+                        </div>
+
+                        <div id="वृद्धि9" style="display: none;"  class="mb-5">
+                            <label for="वृद्धि92" class="form-label">इकाई माह </label>
+                            <input type="text" name="ledgeinterest"   id="वृद्धि92"
+                            class="form-control inputName">
+
+                        </div>
+
+                        <div id="वृद्धि10" style="display: none;" class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">वृद्धि अवधि  </label>
+                            <select class="form-select inputName" name="वृद्धि10"  id="formGroupExampleInput"
+                                aria-label="Default select example">
+                                <option value="1 वर्ष से कम">1 वर्ष से कम</option>
+                                <option value="1 से 5 वर्ष">1 से 5 वर्ष</option>
+                                <option value="5 से 10 वर्ष">5 से 10 वर्ष</option>
+                                <option value="10 से 20 वर्ष">10 से 20 वर्ष</option>
+                                <option value="20 से 30 वर्ष">20 से 30 वर्ष</option>
+                                <option value="30 से 100 वर्ष">30 से 100 वर्ष</option>
+                            </select>
+                        </div>
+
+                        
+                        <!-- मुख्त्यार नामा  vilak -->
+                        <div id="मुख्त्यारvilak" style="display: none;"> 
+                            <div  class="mb-5">
+                                <label for="formGroupExampleInput" class="form-label">उप पंजीयक कार्यालय का नाम  </label>
+                                <input type="text" name="मुख्त्यार" id="formGroupExampleInput"
+                                class="form-control inputName">
+                            </div>
+                            <div   class="mb-5">
+                                <label for="formGroupExampleInput" class="form-label">दस्तावेज क्रमांक </label>
+                                <input type="text" name="मुख्त्यार1" id="formGroupExampleInput"
+                                class="form-control inputName">
+                            </div>
+                     
+                            <div   class="mb-5">
+                                <label for="formGroupExampleInput" class="form-label">पुस्तक क्रमांक</label>
+                                <input type="text" name="मुख्त्यार2" id="formGroupExampleInput"
+                                class="form-control inputName">
+                            </div>
+                     
+                            <div   class="mb-5">
+                                <label for="formGroupExampleInput" class="form-label">ग्रन्थ क्रमांक</label>
+                                <input type="text" name="मुख्त्यार3" id="formGroupExampleInput"
+                                class="form-control inputName">
+                            </div>
+                     
+                            <div  class="mb-5">
+                                <label for="formGroupExampleInput" class="form-label">पृष्ठ क्रमांक</label>
+                                <input type="text" name="मुख्त्यार4" id="formGroupExampleInput"
+                                class="form-control inputName">
+                            </div>
+                     
+                            <div  class="mb-5">
+                                <label for="formGroupExampleInput" class="form-label">इ पंजीयन आई डी </label>
+                                <input type="text" name="मुख्त्यार5" id="formGroupExampleInput"
+                                class="form-control inputName">
+                            </div>
+                     
+                        </div>
+
+                        <!-- सुधारनामा vilak -->
+                        <div id="वसुधारनामाvilak" style="display: none;">
+                            <div id="वसुधारनामा" class="mb-5">
+                                <label for="formGroupExampleInput" class="form-label">मूल विलेख के पंजीयन का विवरण जिसमे सुधार किया जाना है</label>
+                                <select class="form-select inputName" name="वसुधारनामा" id="formGroupExampleInput"
+                                    aria-label="Default select example">
+                                    <% for(let i=0;i<unit1.length;i++){ %>
+                                        <option value="<%=unit1[i].name%>">
+                                            <%=unit1[i].name%>
+                                        </option>
+                                        <%} %>
+                                </select>
+                            </div>
+
+                            <div id="वसुधारनामा1"  class="mb-5">
+                                <label for="formGroupExampleInput" class="form-label">उप पंजीयक कार्यालय का नाम  </label>
+                                <input type="text" name="वसुधारनामा1" id="formGroupExampleInput"
+                                class="form-control inputName">
+                            </div>
+                     
+                            <div id="वसुधारनामा2"  class="mb-5">
+                                <label for="formGroupExampleInput" class="form-label">पुस्तक क्रमांक</label>
+                                <input type="text" name="वसुधारनामा2" id="formGroupExampleInput"
+                                class="form-control inputName">
+                            </div>
+                     
+                            <div id="वसुधारनामा3"  class="mb-5">
+                                <label for="formGroupExampleInput" class="form-label">ग्रन्थ क्रमांक</label>
+                                <input type="text" name="वसुधारनामा3" id="formGroupExampleInput"
+                                class="form-control inputName">
+                            </div>
+                     
+                            <div id="वसुधारनामा4"   class="mb-5">
+                                <label for="formGroupExampleInput" class="form-label">दस्तावेज क्रमांक</label>
+                                <input type="text" name="वसुधारनामा4" id="formGroupExampleInput"
+                                class="form-control inputName">
+                            </div>
+                     
+                        </div>
+
+                             <!-- PRATIFAL -->
+                             <div id="PRATIFAL">
+                                <div class="container" id="partialHolder">
+                                    <div style="display: flex;justify-content: space-between;">
+                                        <p id="pratifalCounter">PRATIFAL 1</p>
+                                        <!-- <button onclick="fun5()" style="background-color: #313044;border-radius: 23px;padding: 10px 20px;color: white;">ADD</button> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="mb-5">
+                                                <label for="formGroupExampleInput" class="form-label">PRATIFAL KA PRAKAR
+                                                </label>
+                                                <select class="form-select inputName" name="pratifal" onchange="fun4(this.value)" 
+                                                    id="formGroupExampleInput"  aria-label="Default select example">
+                                                    <option value="" hidden selected>Choose</option>
+                                                    <option value="Cash">Cash</option>
+                                                    <option value="Cheque">Cheque</option>
+                                                    <option value="RTGS">RTGS</option>
+                                                    <option value="NFTS">NFTS</option>
+                                                    <option value="UPI">UPI</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-5">
+                                                <label for="formGroupExampleInput" class="form-label">JAARI DINANK </label>
+                                                <input type="date"  name="pratifaldate" class="form-control inputName"
+                                                    id="formGroupExampleInput">
+    
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div id="checkr" class="mb-5">
+                                                <label for="checkr1" class="form-label">CHECK/RTGS NO/NFTS No/UPI Id </label>
+                                                <input type="text"  id="checkr1" name="check" class="form-control inputName">
+                                            </div>
+                                            <div class="mb-5">
+                                                <label for="formGroupExampleInput" class="form-label">RASHI</label>
+                                                <input type="number" name="pratifalamount"  id="formGroupExampleInput"
+                                                    class="form-control inputName">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div id="bank" class="mb-5">
+                                                <label for="bank1" class="form-label">BANK KA NAAM </label>
+                                                <input type="text"   name="pratifalbank" id="bank1" class="form-control inputName">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="btn btn-success btn-sm" onclick="addPratifal()">Add Pratifal</a>
+                            </div>
+    
+                            <!-- Loan -->
+                            <div id="Loan">
+                                <div>
+                                    <p>Loan Information </p>
+                                </div>
+                                    <div class="mb-5">
+                                        <label for="Loan1" class="form-label">Loan Amount</label>
+                                            <input type="number" name="loan"  id="Loan1"
+                                            class="form-control inputName">
+                                    </div>
+                            </div>
+    
+                            <!-- Ledge -->
+                            <div id="Ledge">
+                                    <div>
+                                        <p>Ledge Information </p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="mb-5">
+                                                <label for="Ledge1" class="form-label">Rent Amount</label>
+                                                    <input type="number" name="ledgeamount"  id="Ledge1"
+                                                    class="form-control inputName">
+                                            </div>
+                                            <div class="mb-5">
+                                                <label for="Ledge2" class="form-label">Interest</label>
+                                                <input type="number" name="ledgeinterest" step="0.01"  id="Ledge2"
+                                                class="form-control inputName">
+    
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="mb-5">
+                                                <label for="Ledge3" class="form-label">Interest Year</label>
+                                                <input type="number" name="ledgeyear"  id="Ledge3"
+                                                class="form-control inputName">
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                            </div>
                         <div class="submit">
                             <button type="submit" class="m-5 submitbtn">Save and next</button>
                         </div>
@@ -395,6 +592,20 @@
     </section>
     <script>
         var d;
+        function fun5(val){
+            console.log(val)
+            let वृद्धि3 = document.getElementById("वृद्धि3");
+            let वृद्धि = document.getElementById("वृद्धि");
+            if(val=="Yes"){
+                console.log(val)
+                वृद्धि3.style.display="block"
+                वृद्धि.style.display="block"
+            }
+            else{
+                वृद्धि3.style.display="none"
+                वृद्धि.style.display="none"
+            }
+        }
         function fun(arr, val) {
             d = val;
             let dynamicPratifal = document.querySelectorAll(".pratifal-section");
@@ -406,7 +617,8 @@
             let sampati = document.getElementById("sampati");
             let sub = document.getElementById("sub");
             let subdes = document.getElementById("subdes");
-            let parsk = document.getElementById("parsk");
+            let वसुधारनामाvilak = document.getElementById("वसुधारनामाvilak");
+            let मुख्त्यारvilak = document.getElementById("मुख्त्यारvilak");
             let a1 = document.getElementById("a1");
             let a2 = document.getElementById("a2");
             let s1 = document.getElementById("s1");
@@ -414,6 +626,20 @@
             let Loan1 = document.getElementById("Loan1");
             let Ledge1 = document.getElementById("Ledge1");
             let Ledge2 = document.getElementById("Ledge2");
+            let वृद्धि2 = document.getElementById("वृद्धि2");
+            let वृद्धि1 = document.getElementById("वृद्धि1");
+            let वृद्धि3 = document.getElementById("वृद्धि3");
+            let वृद्धि = document.getElementById("वृद्धि");
+            let वृद्धि4 = document.getElementById("वृद्धि4");
+            let वृद्धि5 = document.getElementById("वृद्धि5");
+            let वृद्धि10 = document.getElementById("वृद्धि10");
+            let वृद्धि7 = document.getElementById("वृद्धि7");
+            let वृद्धि8 = document.getElementById("वृद्धि8");
+            let वृद्धि9 = document.getElementById("वृद्धि9");
+            let विक्रय = document.getElementById("विक्रय");
+            let सहखातेदार = document.getElementById("सहखातेदार");
+            let सहखातेदार1 = document.getElementById("सहखातेदार1");
+            let वृद्धि6 = document.getElementById("वृद्धि6");
             let Ledge3 = document.getElementById("Ledge3");
             let checkr1 = document.getElementById("checkr1");
             let bank1 = document.getElementById("bank1");
@@ -431,6 +657,71 @@
                 });
             }
 
+            console.log(val)
+            if(val=="पट्टा" || val=="पट्टा (पु.क्र. IV)"){
+                console.log("val")
+                console.log(वृद्धि2)
+                वृद्धि2.style.display="block"
+                वृद्धि1.style.display="block"
+                वृद्धि4.style.display="block"
+                वृद्धि5.style.display="block"
+                वृद्धि6.style.display="block"
+                वृद्धि7.style.display="block"
+                वृद्धि8.style.display="block"
+                वृद्धि9.style.display="block"
+                वृद्धि10.style.display="block"
+                वृद्धि3.style.display="block"
+                वृद्धि.style.display="block"
+            }
+            else{
+                वृद्धि2.style.display="none"
+                वृद्धि1.style.display="none"
+                वृद्धि3.style.display="none"
+                वृद्धि4.style.display="none"
+                वृद्धि5.style.display="none"
+                वृद्धि6.style.display="none"
+                वृद्धि.style.display="none"
+                वृद्धि7.style.display="none"
+                वृद्धि8.style.display="none"
+                वृद्धि9.style.display="none"
+                वृद्धि10.style.display="none"
+            }
+
+            if(val=="निर्मुक्ति (हकत्याग)"){
+       
+                सहखातेदार.style.display="block"
+                सहखातेदार1.style.display="block"
+        
+            }
+            else{
+                सहखातेदार.style.display="none"
+                सहखातेदार1.style.display="none"
+   
+            }
+
+            if(val=="विक्रय इकरार (कब्जा सहित)" || val=="विक्रय इकरार (कब्जा रहित)"){
+         
+                विक्रय.style.display="block"
+       
+            }
+            else{
+                विक्रय.style.display="none"
+     
+            }
+
+            if(val=="सुधारनामा विलेख"){
+                वसुधारनामाvilak.style.display="block"
+            }
+            else{
+                वसुधारनामाvilak.style.display="none"
+            }
+
+            if(val=="वसीयत निरस्तीकरण" || val=="मुख्तारनामा का निरस्तीकरण"){
+                मुख्त्यारvilak.style.display="block"
+            }
+            else{
+                मुख्त्यारvilak.style.display="none"
+            }
 
             for (let i = 0; i < arr.length; i++) {
                 if (arr[i].name == val) {
@@ -440,12 +731,7 @@
                     }
                     sub.innerHTML = text;
                     subdes.value = " "
-                    if (arr[i].par == "Yes") {
-                        parsk.style.display = "block";
-                    }
-                    else {
-                        parsk.style.display = "none";
-                    }
+               
                     if (arr[i].adi == "Yes") {
                         a1.value = ""
                         a2.value = ""
@@ -505,11 +791,32 @@
             let doc = document.getElementById("doc");
             let sub = document.getElementById("sub");
             let subdes = document.getElementById("subdes");
+            let पक्षकारो = document.getElementById("पक्षकारो");
+            let sammauk = document.getElementById("sammauk");
+            let parsk = document.getElementById("parsk");
+            let text=""
             for (let i = 0; i < arr.length; i++) {
                 if (arr[i].name == d) {
                     for (let k = 0; k < arr[i].sub.length; k++) {
                         if (arr[i].sub[k].name == val) {
                             subdes.value = arr[i].sub[k].description
+                            if (arr[i].sub[k].SamptiRequi == "No") {
+                                sammauk.style.display = "block";
+                            }
+                            else {
+                                sammauk.style.display = "none";
+                            }
+                            if (arr[i].sub[k].Pakshsam != "No") {
+                                parsk.style.display = "block";
+                            }
+                            else {
+                                parsk.style.display = "none";
+                            }
+
+                            for (let k1 = 0; k1 < arr[i].sub[k].Reason.length; k1++) {
+                                text = text + `<option  value="${arr[i].sub[k].Reason[k1].name}">${arr[i].sub[k].Reason[k1].name}</option> `
+                            }
+                            पक्षकारो.innerHTML=text
                         }
                     }
                 }

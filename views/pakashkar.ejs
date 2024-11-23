@@ -32,7 +32,7 @@
             </div>
             <div class="right col-sm-3">
                 <p class="log"><span class="img"><img src="/img/logout.png" alt=""></span>लॉग आउट</p>
-                <p class="ph"><span class="img"></span>आवेदन संख्या : 202300730020928</p>
+                <p class="ph"><span class="img"></span>आवेदन संख्या : <%=app%></p>
             </div>
         </div>
     </section>
@@ -130,15 +130,11 @@
                 <!-- Add this code below the strip-navbar -->
                 <div class="container mt-5">
                     <div class="row">
-                        <div class="col-md-4 text-start">
-                            <p>विक्रेता की संख्या: 1</p>
-                        </div>
-                        <div class="col-md-4 text-center">
-                            <p>गवाह की संख्या: 1</p>
-                        </div>
-                        <div class="col-md-4 text-end">
-                            <p>क्रेता की संख्या: 1</p>
-                        </div>
+                        <% for(let i=0;i<3;i++){ %>
+                            <div class="col-md-4 text-start">
+                                <p><%=parray4[i].name%> की संख्या: <%=parray4[i].value%></p>
+                            </div>
+                        <% } %>
                     </div>
 
                     <table class="table table-bordered table-striped">
@@ -148,94 +144,60 @@
                                 <th>पक्षकार प्रकार</th>
                                 <th>नाम</th>
                                 <th>पिता / माता / पति / अन्य का नाम</th>
-                                <th>स्थायी पता</th>
-                                <th>प्रस्तुतकर्ता</th>
+                                <th>वर्ग</th>
+                                <th>लिंग</th>
                                 <th>विकल्प</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- Example row, add more rows as needed -->
-                            <tr data-id="1">
-                                <td>1</td>
-                                <td>प्रकार 1</td>
-                                <td>नाम 1</td>
-                                <td>पिता / माता / पति / अन्य का नाम 1</td>
-                                <td>स्थायी पता 1</td>
-                                <td>प्रस्तुतकर्ता 1</td>
-                                <td>
-                                    <button class="btn btn-info btn-sm edit-button">
-                                        <i class="fas fa-edit"></i> संपादित करें
-                                    </button>
-                                    <button class="btn btn-danger btn-sm ml-2 delete-button">
-                                        <i class="fa-solid fa-trash"></i> हटाएं
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>प्रकार 1</td>
-                                <td>नाम 1</td>
-                                <td>पिता / माता / पति / अन्य का नाम 1</td>
-                                <td>स्थायी पता 1</td>
-                                <td>प्रस्तुतकर्ता 1</td>
-                                <td>
-                                    <button class="btn btn-info btn-sm">
-                                        <i class="fa-solid fa-pen-to-square"></i> संपादित करें
-                                    </button>
-                                    <button class="btn btn-danger btn-sm ml-2">
-                                        <i class="fas fa-trash"></i> हटाएं
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>प्रकार 1</td>
-                                <td>नाम 1</td>
-                                <td>पिता / माता / पति / अन्य का नाम 1</td>
-                                <td>स्थायी पता 1</td>
-                                <td>प्रस्तुतकर्ता 1</td>
-                                <td>
-                                    <button class="btn btn-info btn-sm">
-                                        <i class="fas fa-edit"></i> संपादित करें
-                                    </button>
-                                    <button class="btn btn-danger btn-sm ml-2">
-                                        <i class="fas fa-trash"></i> हटाएं
-                                    </button>
-                                </td>
-                            </tr>
+                            <% for(let i=0;i<parray2.length;i++){ %>
+                                <tr data-id="1">
+                                    <td><%=i+1%></td>
+                                    <td><%=parray2[i].type1%></td>
+                                    <td><%=parray2[i].name%></td>
+                                    <td><%=parray2[i].relition%></td>
+                                    <td><%=parray2[i].category%></td>
+                                    <td><%=parray2[i].gender%></td>
+                                    <td>
+                                        <button class="btn btn-info btn-sm edit-button">
+                                            <i class="fas fa-edit"></i> संपादित करें
+                                        </button>
+                                        <a href="/pakashkar/delete?name=<%=parray2[i].name%>&type=<%=parray2[i].type1%>&number=<%=app%>">
+                                        <button class="btn btn-danger btn-sm ml-2 delete-button">
+                                            <i class="fa-solid fa-trash"></i> हटाएं
+                                        </button>
+                                    </a>
+                                    </td>
+                                </tr>
+                            <% } %>
+
+                          
+                         
                             <!-- Add more rows here -->
                         </tbody>
                     </table>
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <button class="btn btn-custom-add" type="button" data-pakshakar="विक्रेता">
-                                    <i class="fa-solid fa-plus"></i> विक्रेता जोड़े
-                                </button>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <button class="btn btn-custom-add" type="button" data-pakshakar="क्रेता">
-                                    <i class="fa-solid fa-plus"></i> क्रेता जोड़े
-                                </button>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <button class="btn btn-custom-add" type="button" data-pakshakar="गवाह">
-                                    <i class="fa-solid fa-plus"></i> गवाह जोड़े
-                                </button>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <button class="btn btn-custom-add" type="button" data-pakshakar="गवाह">
-                                    <i class="fa-solid fa-plus"></i> गवाह जोड़े
-                                </button>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <button class="btn btn-custom-add" type="button" data-pakshakar="A">
-                                    <i class="fa-solid fa-plus"></i> मुख्त्यार आम  जोड़े
-                                </button>
-                            </div>
+                            <%for(let i=0;i<parray3.length;i++) { %>
+                                <div class="col-md-4 mb-3">
+                                    <button class="btn btn-custom-add" type="button" data-pakshakar="<%=parray3[i].name%>">
+                                        <i class="fa-solid fa-plus"></i> <%=parray3[i].name%>
+                                    </button>
+                                </div>
+                            <%}%>
+                   
+                       
                         </div>
+                        <% if(access=="Yes"){ %>
+                            <div class="submit">
+                                <a href="/prauta?number=<%=app%>">
+                                    <button class="m-5 submitbtn">Save and Next</button>
+                                </a>
+                            </div>
+                        <%}%>
                     </div>
-                    <form action="" class="hidden" method="post" id="myForm">
+                    <form action="/pakashkar?number=<%=app%>" class="hidden" method="post" id="myForm">
                         <div class="form" id="formDiv">
                             <div style="display: flex;justify-content: space-between;">
 
@@ -251,7 +213,7 @@
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">पक्षकार का
                                                 प्रकार</label>
-                                            <input type="text" class="form-control inputName" placeholder="" readonly>
+                                            <input type="text" class="form-control inputName" name="type1" placeholder="" readonly>
                                             <!-- <select class="form-select inputName" onchange="fun(this.value)"  aria-label="Default select example">
                                             <option selected hidden>Choose</option>
                                             <% for(let i=0;i<parray1.length;i++){ %>
@@ -266,7 +228,7 @@
                                         </div>
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">पहचान पत्र</label>
-                                            <select class="form-select inputName" aria-label="Default select example">
+                                            <select class="form-select inputName"name="verify" aria-label="Default select example">
                                                 <option hidden selected>Choose</option>
                                                 <% for(let i=0;i<parray.length;i++){ %>
                                                     <option value="<%=parray[i].name%>">
@@ -277,7 +239,7 @@
                                         </div>
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">क्रमांक </label>
-                                            <input type="number" class="form-control inputName"
+                                            <input type="number" class="form-control inputName" name="number1"
                                                 placeholder="ENTER SUMMARY">
                                         </div>
                                         <!-- <div class="mb-5">
@@ -286,7 +248,7 @@
                                     </div> -->
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">Designation</label>
-                                            <select class="form-select inputName" aria-label="Default select example">
+                                            <select class="form-select inputName" name="Designation" aria-label="Default select example">
                                                 <option value="Mr.">Mr.</option>
                                                 <option value="Mrs.">Mrs.</option>
                                                 <option value="Ms.">Ms.</option>
@@ -294,13 +256,13 @@
                                         </div>
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">मोबाइल न- </label>
-                                            <input type="number" class="form-control inputName"
+                                            <input type="number" class="form-control inputName" name="number"
                                                 placeholder="ENTER SUMMARY">
                                         </div>
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">संरक्षक चयन करे (हिंदी
                                                 में)</label>
-                                            <select class="form-select inputName" aria-label="Default select example">
+                                            <select class="form-select inputName" name="relition" aria-label="Default select example">
                                                 <option value="Father">Father</option>
                                                 <option value="Mother">Mother</option>
                                                 <option value="Husband">Husband</option>
@@ -331,12 +293,24 @@
                                             <input type="date" class="form-control inputName"
                                                 placeholder="ENTER SUMMARY">
                                         </div>
+                                        <div class="mb-5">
+                                            <label for="formGroupExampleInput" class="form-label">Father Name</label>
+                                            <input type="text" class="form-control inputName" name="father"
+                                                placeholder="ENTER SUMMARY">
+                                        </div>
+                                        <div class="mb-5">
+                                            <label for="formGroupExampleInput" class="form-label">क्या हस्ताक्षर अपेक्षित है</label>
+                                            <select class="form-select inputName" name="हस्ताक्षर" aria-label="Default select example">
+                                                <option value="हां">हां</option>
+                                                <option value="ना">ना</option>
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">लिंग </label>
-                                            <select class="form-select inputName" aria-label="Default select example">
+                                            <select class="form-select inputName" name="gender" aria-label="Default select example">
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
                                                 <option value="Other">Other</option>
@@ -344,7 +318,7 @@
                                         </div>
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">वर्ग </label>
-                                            <select class="form-select inputName" aria-label="Default select example">
+                                            <select class="form-select inputName" name="category" aria-label="Default select example">
                                                 <option value="General">General</option>
                                                 <option value="SC">SC</option>
                                                 <option value="ST">ST</option>
@@ -354,27 +328,49 @@
                                         </div>
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">जाति </label>
-                                            <input type="text" class="form-control inputName"
+                                            <input type="text" class="form-control inputName" name="religion"
                                                 placeholder="ENTER SUMMARY">
                                         </div>
                                         <div class=" mb-5">
                                             <label for="formGroupExampleInput" class="form-label">जन्म तिथि </label>
-                                            <input type="text" class="form-control inputName"
+                                            <input type="text" class="form-control inputName" name="DOB"
                                                 placeholder="ENTER SUMMARY" onfocus="this.type='date'"
                                                 onblur="this.type='text'">
                                         </div>
-                                        <div class="mb-5">
-                                            <label for="formGroupExampleInput" class="form-label">नाम (हिंदी
-                                                में)</label>
-                                            <input type="text" class="form-control inputName" name="name"
-                                                placeholder="ENTER SUMMARY">
+                                        <% if(doc_valid23 == 0){ %>
+                                            <div class="mb-5">
+                                                <label for="formGroupExampleInput" class="form-label">नाम (हिंदी
+                                                    में)</label>
+                                                <input type="text" class="form-control inputName" name="name"
+                                                    placeholder="ENTER SUMMARY">
 
-                                        </div>
+                                            </div>
+                                        <% } %>    
+
+                                        <% if(doc_valid23 == 1){ %>
+                                            <div class="mb-5">
+                                                <label for="formGroupExampleInput" class="form-label">नाम (हिंदी में)</label>
+                                                <input type="text" class="form-control input is-invalid" name="name" id="exampleInputPassword2" aria-describedby="validationServer04Feedback" required>
+                                                <div id="validationServer04Feedback" class="invalid-feedback">
+                                                    पक्षकार नाम is already exist
+                                                </div>
+                                            </div>
+                                        <% } %>    
+
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">उम्र</label>
-                                            <input type="number" class="form-control inputName"
+                                            <input type="number" class="form-control inputName" name="age"
                                                 placeholder="ENTER SUMMARY">
                                         </div>
+                                        <div class="mb-5">
+                                            <label for="formGroupExampleInput" class="form-label">क्या अंगूठा निशानी अपेक्षित है</label>
+                                            <select class="form-select inputName" name="अंगूठा" aria-label="Default select example">
+                                                <option value="हां">हां</option>
+                                                <option value="ना">ना</option>
+                                            </select>
+                                        </div>
+                              
+                                 
 
                                         <div id="दस्तावेज" class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">दस्तावेज क्रमांक
@@ -424,19 +420,19 @@
                                                 id="panCardNo" value="No">
                                             <label class="form-check-label" for="panCardNo">नहीं (No)</label>
                                         </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="panCardRadio"
+                                                id="panCardNo" value="Not">
+                                            <label class="form-check-label" for="panCardNo">Not Neccessary</label>
+                                        </div>
                                     </div>
 
                                     <!-- PAN Card Details Section (Hidden by default) -->
                                     <div id="panCardDetails" style="display: none;">
                                         <div class="mb-3">
                                             <label for="panNumber" class="form-label text-white">PAN Number *</label>
-                                            <input type="text" class="form-control inputName" id="panNumber"
+                                            <input type="text" class="form-control inputName" id="panNumber" name="panNumber"
                                                 placeholder="Enter PAN Number">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="panCardFile" class="form-label text-white">Upload PAN Card PDF
-                                                *</label>
-                                            <input type="file" class="form-control" id="panCardFile">
                                         </div>
                                     </div>
 
@@ -469,23 +465,23 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="First Name *" name="Form60_firstName" required>
+                                                            placeholder="First Name *" name="Form60_firstName" value=" " required>
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="Middle Name" name="Form60_middleName">
+                                                            placeholder="Middle Name" name="Form60_middleName" value=" ">
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="Surname" name="Form60_surname">
+                                                            placeholder="Surname" name="Form60_surname" value=" ">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="dobDeclarant" class="form-label">2. Date of
                                                     Birth/Incorporation of declarant *</label>
-                                                <input type="date" class="form-control inputName" id="dobDeclarant"
-                                                    name="Form60_dobDeclarant" required>
+                                                <input type="date" class="form-control inputName" id="dobDeclarant" value=" "
+                                                    name="Form60_dobDeclarant" >
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -494,98 +490,98 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="First Name *" name="Form60_dobFirstName"
+                                                            placeholder="First Name *" name="Form60_dobFirstName"  value=" "
                                                             required>
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="Middle Name" name="Form60_dobMiddleName">
+                                                            placeholder="Middle Name" value=" " name="Form60_dobMiddleName">
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="Surname" name="Form60_dobSurname">
+                                                            placeholder="Surname" value=" " name="Form60_dobSurname">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="flatRoomNo" class="form-label">4. Flat/Room No</label>
-                                                <input type="text" class="form-control inputName" id="flatRoomNo"
+                                                <input type="text" class="form-control inputName" value=" " id="flatRoomNo"
                                                     name="Form60_flatRoomNo">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <label for="floorNo" class="form-label">5. Floor No</label>
-                                                <input type="text" class="form-control inputName" id="floorNo"
+                                                <input type="text" class="form-control inputName" value=" " id="floorNo"
                                                     name="Form60_floorNo">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="nameOfPremises" class="form-label">6. Name of
                                                     Premises</label>
-                                                <input type="text" class="form-control inputName" id="nameOfPremises"
+                                                <input type="text" class="form-control inputName" value=" " id="nameOfPremises"
                                                     name="Form60_nameOfPremises">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <label for="blockNameNo" class="form-label">7. Block Name/No</label>
-                                                <input type="text" class="form-control inputName" id="blockNameNo"
+                                                <input type="text" class="form-control inputName" value=" " id="blockNameNo"
                                                     name="Form60_blockNameNo">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="roadStreetLane" class="form-label">8.
                                                     Road/Street/Lane</label>
-                                                <input type="text" class="form-control inputName" id="roadStreetLane"
+                                                <input type="text" class="form-control inputName" value=" " id="roadStreetLane"
                                                     name="Form60_roadStreetLane">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <label for="areaLocality" class="form-label">9. Area/Locality</label>
-                                                <input type="text" class="form-control inputName" id="areaLocality"
+                                                <input type="text" class="form-control inputName" value=" " id="areaLocality"
                                                     name="Form60_areaLocality">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="townCity" class="form-label">10. Town/City *</label>
-                                                <input type="text" class="form-control inputName" id="townCity"
+                                                <input type="text" class="form-control inputName" value=" " id="townCity"
                                                     name="Form60_townCity" required>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <label for="district" class="form-label">11. District *</label>
-                                                <input type="text" class="form-control inputName" id="district"
+                                                <input type="text" class="form-control inputName" value=" " id="district"
                                                     name="Form60_district" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="state" class="form-label">12. State *</label>
-                                                <input type="text" class="form-control inputName" id="state"
+                                                <input type="text" class="form-control inputName" value=" " id="state"
                                                     name="Form60_state" required>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <label for="pinCode" class="form-label">13. Pin Code *</label>
-                                                <input type="text" class="form-control inputName" id="pinCode"
+                                                <input type="text" class="form-control inputName" value=" " id="pinCode"
                                                     name="Form60_pinCode" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="telephoneNumber" class="form-label">14. Telephone Number
                                                     (with STD code)</label>
-                                                <input type="text" class="form-control inputName" id="telephoneNumber"
+                                                <input type="text" class="form-control inputName" value=" " id="telephoneNumber"
                                                     name="Form60_telephoneNumber">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <label for="mobileNumber" class="form-label">15. Mobile Number *</label>
-                                                <input type="text" class="form-control inputName" id="mobileNumber"
+                                                <input type="text" class="form-control inputName" value=" " id="mobileNumber"
                                                     name="Form60_mobileNumber" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="amountTransaction" class="form-label">16. Amount of
                                                     Transaction (Rs) *</label>
-                                                <input type="text" class="form-control inputName" id="amountTransaction"
+                                                <input type="text" class="form-control inputName" value=" " id="amountTransaction"
                                                     name="Form60_amountTransaction" required>
                                             </div>
                                         </div>
@@ -593,14 +589,14 @@
                                             <div class="col-md-6">
                                                 <label for="dateTransaction" class="form-label">17. Date of Transaction
                                                     *</label>
-                                                <input type="date" class="form-control inputName" id="dateTransaction"
-                                                    name="Form60_dateTransaction" required>
+                                                <input type="date" class="form-control inputName" value=" " id="dateTransaction"
+                                                    name="Form60_dateTransaction" >
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="personsInvolved" class="form-label">18. In case of
                                                     transaction in joint names, number of persons involved in the
                                                     transaction</label>
-                                                <input type="text" class="form-control inputName" id="personsInvolved"
+                                                <input type="text" class="form-control inputName" value=" " id="personsInvolved"
                                                     name="Form60_personsInvolved">
                                             </div>
                                         </div>
@@ -608,13 +604,13 @@
                                             <div class="col-md-6">
                                                 <label for="modeOfTransaction" class="form-label">19. Mode of
                                                     Transaction *</label>
-                                                <input type="text" class="form-control inputName" id="modeOfTransaction"
+                                                <input type="text" class="form-control inputName" value=" " id="modeOfTransaction"
                                                     name="Form60_modeOfTransaction" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="aadhaarNumber" class="form-label">20. Aadhaar Number issued
                                                     by UIDAI (if available)</label>
-                                                <input type="text" class="form-control inputName" id="aadhaarNumber"
+                                                <input type="text" class="form-control inputName" value=" " id="aadhaarNumber"
                                                     name="Form60_aadhaarNumber">
                                             </div>
                                         </div>
@@ -625,12 +621,12 @@
                                                     acknowledgement number</label>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <input type="date" class="form-control inputName"
+                                                        <input type="date" class="form-control inputName" value=" "
                                                             placeholder="Application date"
                                                             name="Form60_panApplicationDate">
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control inputName"
+                                                        <input type="text" class="form-control inputName" value=" "
                                                             placeholder="Acknowledgement number"
                                                             name="Form60_panAcknowledgementNumber">
                                                     </div>
@@ -648,14 +644,14 @@
                                                     <div class="col">
                                                         <label for="agriculturalIncome" class="form-label">a)
                                                             Agricultural income (Rs) *</label>
-                                                        <input type="text" class="form-control inputName"
+                                                        <input type="text" class="form-control inputName" value=" "
                                                             id="agriculturalIncome" name="Form60_agriculturalIncome"
                                                             required>
                                                     </div>
                                                     <div class="col">
                                                         <label for="otherIncome" class="form-label">b) Other than
                                                             agricultural income (Rs) *</label>
-                                                        <input type="text" class="form-control inputName"
+                                                        <input type="text" class="form-control inputName" value=" "
                                                             id="otherIncome" name="Form60_otherIncome" required>
                                                     </div>
                                                 </div>
@@ -668,18 +664,18 @@
                                                     document being produced in support of identity in Column 1</label>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <input type="text" class="form-control inputName"
+                                                        <input type="text" class="form-control inputName" value=" "
                                                             placeholder="Document type *"
                                                             name="Form60_identityDocumentType" required>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control inputName"
+                                                        <input type="text" class="form-control inputName" value=" "
                                                             placeholder="Document identification number *"
                                                             name="Form60_identityDocumentNumber" required>
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="Name and address of authority issuing the document *"
+                                                            placeholder="Name and address of authority issuing the document *" value=" "
                                                             name="Form60_identityDocumentAuthority" required>
                                                     </div>
                                                 </div>
@@ -694,17 +690,17 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="Document type *"
+                                                            placeholder="Document type *" value=" "
                                                             name="Form60_addressDocumentType" required>
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="Document identification number *"
+                                                            placeholder="Document identification number *" value=" "
                                                             name="Form60_addressDocumentNumber" required>
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="Name and address of authority issuing the document *"
+                                                            placeholder="Name and address of authority issuing the document *" value=" "
                                                             name="Form60_addressDocumentAuthority" required>
                                                     </div>
                                                 </div>
@@ -724,7 +720,7 @@
 
                         </div>
                     </form>
-                    <form action="" class="hidden" method="post" id="editForm">
+                    <form action="/pakashkar" class="hidden" method="post" id="editForm">
                         <div class="form" id="formDiv">
                             <div style="display: flex;justify-content: space-between;">
 
@@ -740,7 +736,7 @@
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">पक्षकार का
                                                 प्रकार</label>
-                                            <input type="text" class="form-control inputName" placeholder="" readonly>
+                                            <input type="text" class="form-control inputName" placeholder="" name="type1" readonly>
                                             <!-- <select class="form-select inputName" onchange="fun(this.value)"  aria-label="Default select example">
                                             <option selected hidden>Choose</option>
                                             <% for(let i=0;i<parray1.length;i++){ %>
@@ -755,7 +751,7 @@
                                         </div>
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">पहचान पत्र</label>
-                                            <select class="form-select inputName" aria-label="Default select example">
+                                            <select class="form-select inputName" name="verify" aria-label="Default select example">
                                                 <option hidden selected>Choose</option>
                                                 <% for(let i=0;i<parray.length;i++){ %>
                                                     <option value="<%=parray[i].name%>">
@@ -766,7 +762,7 @@
                                         </div>
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">क्रमांक </label>
-                                            <input type="number" class="form-control inputName"
+                                            <input type="number"  name="number1" class="form-control inputName"
                                                 placeholder="ENTER SUMMARY">
                                         </div>
                                         <!-- <div class="mb-5">
@@ -775,7 +771,7 @@
                                     </div> -->
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">Designation</label>
-                                            <select class="form-select inputName" aria-label="Default select example">
+                                            <select class="form-select inputName"  name="Designation" aria-label="Default select example">
                                                 <option value="Mr.">Mr.</option>
                                                 <option value="Mrs.">Mrs.</option>
                                                 <option value="Ms.">Ms.</option>
@@ -783,13 +779,13 @@
                                         </div>
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">मोबाइल न- </label>
-                                            <input type="number" class="form-control inputName"
+                                            <input type="number"  name="number" class="form-control inputName"
                                                 placeholder="ENTER SUMMARY">
                                         </div>
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">संरक्षक चयन करे (हिंदी
                                                 में)</label>
-                                            <select class="form-select inputName" aria-label="Default select example">
+                                            <select class="form-select inputName"  name="relition" aria-label="Default select example">
                                                 <option value="Father">Father</option>
                                                 <option value="Mother">Mother</option>
                                                 <option value="Husband">Husband</option>
@@ -799,25 +795,25 @@
                                         <div id="मुख्त्यार" class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">मुख्त्यार आम का विवरण
                                                 भरे </label>
-                                            <input type="text" class="form-control inputName"
+                                            <input type="text" class="form-control inputName"  
                                                 placeholder="ENTER SUMMARY">
                                         </div>
                                         <div id="पंजीयन" class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">पंजीयन कार्यालय का नाम
                                             </label>
-                                            <input type="text" class="form-control inputName"
+                                            <input type="text" class="form-control inputName"  
                                                 placeholder="ENTER SUMMARY">
                                         </div>
                                         <div id="संरक्षक" class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">संरक्षक होने संबंथी
                                                 विवरण</label>
-                                            <input type="text" class="form-control inputName"
+                                            <input type="text" class="form-control inputName"  
                                                 placeholder="ENTER SUMMARY">
                                         </div>
 
                                         <div id="दिनांक" class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">दिनांक </label>
-                                            <input type="date" class="form-control inputName"
+                                            <input type="date" class="form-control inputName"  
                                                 placeholder="ENTER SUMMARY">
                                         </div>
                                     </div>
@@ -825,7 +821,7 @@
                                     <div class="col-sm-6">
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">लिंग </label>
-                                            <select class="form-select inputName" aria-label="Default select example">
+                                            <select class="form-select inputName"  name="gender" aria-label="Default select example">
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
                                                 <option value="Other">Other</option>
@@ -833,7 +829,7 @@
                                         </div>
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">वर्ग </label>
-                                            <select class="form-select inputName" aria-label="Default select example">
+                                            <select class="form-select inputName"  name="category" aria-label="Default select example">
                                                 <option value="General">General</option>
                                                 <option value="SC">SC</option>
                                                 <option value="ST">ST</option>
@@ -843,12 +839,12 @@
                                         </div>
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">जाति </label>
-                                            <input type="text" class="form-control inputName"
+                                            <input type="text" class="form-control inputName"  name="religion"
                                                 placeholder="ENTER SUMMARY">
                                         </div>
                                         <div class=" mb-5">
                                             <label for="formGroupExampleInput" class="form-label">जन्म तिथि </label>
-                                            <input type="text" class="form-control inputName"
+                                            <input type="text" class="form-control inputName"  name="DOB"
                                                 placeholder="ENTER SUMMARY" onfocus="this.type='date'"
                                                 onblur="this.type='text'">
                                         </div>
@@ -861,7 +857,7 @@
                                         </div>
                                         <div class="mb-5">
                                             <label for="formGroupExampleInput" class="form-label">उम्र</label>
-                                            <input type="number" class="form-control inputName"
+                                            <input type="number" class="form-control inputName"  name="age"
                                                 placeholder="ENTER SUMMARY">
                                         </div>
 
@@ -913,6 +909,11 @@
                                                 id="panCardNo" value="No">
                                             <label class="form-check-label" for="panCardNo">नहीं (No)</label>
                                         </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="panCardRadio"
+                                                id="panCardNo" value="Not">
+                                            <label class="form-check-label" for="panCardNo">Not Neccessary</label>
+                                        </div>
                                     </div>
 
                                     <!-- PAN Card Details Section (Hidden by default) -->
@@ -958,14 +959,14 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="First Name *" name="Form60_firstName" required>
+                                                            placeholder="First Name *" name="Form60_firstName" value=" " required>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control inputName"
+                                                        <input type="text" class="form-control inputName" value=" "
                                                             placeholder="Middle Name" name="Form60_middleName">
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control inputName"
+                                                        <input type="text" class="form-control inputName" value=" "
                                                             placeholder="Surname" name="Form60_surname">
                                                     </div>
                                                 </div>
@@ -973,8 +974,8 @@
                                             <div class="col-md-6">
                                                 <label for="dobDeclarant" class="form-label">2. Date of
                                                     Birth/Incorporation of declarant *</label>
-                                                <input type="date" class="form-control inputName" id="dobDeclarant"
-                                                    name="Form60_dobDeclarant" required>
+                                                <input type="date" class="form-control inputName" id="dobDeclarant" value=" "
+                                                    name="Form60_dobDeclarant" >
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -983,98 +984,98 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="First Name *" name="Form60_dobFirstName"
+                                                            placeholder="First Name *" name="Form60_dobFirstName" value=" "
                                                             required>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control inputName"
+                                                        <input type="text" class="form-control inputName" value=" "
                                                             placeholder="Middle Name" name="Form60_dobMiddleName">
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control inputName"
+                                                        <input type="text" class="form-control inputName" value=" "
                                                             placeholder="Surname" name="Form60_dobSurname">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="flatRoomNo" class="form-label">4. Flat/Room No</label>
-                                                <input type="text" class="form-control inputName" id="flatRoomNo"
+                                                <input type="text" class="form-control inputName" value=" " id="flatRoomNo"
                                                     name="Form60_flatRoomNo">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <label for="floorNo" class="form-label">5. Floor No</label>
-                                                <input type="text" class="form-control inputName" id="floorNo"
+                                                <input type="text" class="form-control inputName" value=" " id="floorNo"
                                                     name="Form60_floorNo">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="nameOfPremises" class="form-label">6. Name of
                                                     Premises</label>
-                                                <input type="text" class="form-control inputName" id="nameOfPremises"
+                                                <input type="text" class="form-control inputName" value=" " id="nameOfPremises"
                                                     name="Form60_nameOfPremises">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <label for="blockNameNo" class="form-label">7. Block Name/No</label>
-                                                <input type="text" class="form-control inputName" id="blockNameNo"
+                                                <input type="text" class="form-control inputName" value=" " id="blockNameNo"
                                                     name="Form60_blockNameNo">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="roadStreetLane" class="form-label">8.
                                                     Road/Street/Lane</label>
-                                                <input type="text" class="form-control inputName" id="roadStreetLane"
+                                                <input type="text" class="form-control inputName" value=" " id="roadStreetLane"
                                                     name="Form60_roadStreetLane">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <label for="areaLocality" class="form-label">9. Area/Locality</label>
-                                                <input type="text" class="form-control inputName" id="areaLocality"
+                                                <input type="text" class="form-control inputName" value=" " id="areaLocality"
                                                     name="Form60_areaLocality">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="townCity" class="form-label">10. Town/City *</label>
-                                                <input type="text" class="form-control inputName" id="townCity"
+                                                <input type="text" class="form-control inputName" value=" " id="townCity"
                                                     name="Form60_townCity" required>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <label for="district" class="form-label">11. District *</label>
-                                                <input type="text" class="form-control inputName" id="district"
+                                                <input type="text" class="form-control inputName" value=" " id="district"
                                                     name="Form60_district" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="state" class="form-label">12. State *</label>
-                                                <input type="text" class="form-control inputName" id="state"
+                                                <input type="text" class="form-control inputName" value=" " id="state"
                                                     name="Form60_state" required>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <label for="pinCode" class="form-label">13. Pin Code *</label>
-                                                <input type="text" class="form-control inputName" id="pinCode"
+                                                <input type="text" class="form-control inputName" value=" " id="pinCode"
                                                     name="Form60_pinCode" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="telephoneNumber" class="form-label">14. Telephone Number
                                                     (with STD code)</label>
-                                                <input type="text" class="form-control inputName" id="telephoneNumber"
+                                                <input type="text" class="form-control inputName" value=" " id="telephoneNumber"
                                                     name="Form60_telephoneNumber">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <label for="mobileNumber" class="form-label">15. Mobile Number *</label>
-                                                <input type="text" class="form-control inputName" id="mobileNumber"
+                                                <input type="text" class="form-control inputName" value=" " id="mobileNumber"
                                                     name="Form60_mobileNumber" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="amountTransaction" class="form-label">16. Amount of
                                                     Transaction (Rs) *</label>
-                                                <input type="text" class="form-control inputName" id="amountTransaction"
+                                                <input type="text" class="form-control inputName" value=" " id="amountTransaction"
                                                     name="Form60_amountTransaction" required>
                                             </div>
                                         </div>
@@ -1082,14 +1083,14 @@
                                             <div class="col-md-6">
                                                 <label for="dateTransaction" class="form-label">17. Date of Transaction
                                                     *</label>
-                                                <input type="date" class="form-control inputName" id="dateTransaction"
-                                                    name="Form60_dateTransaction" required>
+                                                <input type="date" class="form-control inputName" value=" " id="dateTransaction"
+                                                    name="Form60_dateTransaction" >
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="personsInvolved" class="form-label">18. In case of
                                                     transaction in joint names, number of persons involved in the
                                                     transaction</label>
-                                                <input type="text" class="form-control inputName" id="personsInvolved"
+                                                <input type="text" class="form-control inputName" value=" " id="personsInvolved"
                                                     name="Form60_personsInvolved">
                                             </div>
                                         </div>
@@ -1097,13 +1098,13 @@
                                             <div class="col-md-6">
                                                 <label for="modeOfTransaction" class="form-label">19. Mode of
                                                     Transaction *</label>
-                                                <input type="text" class="form-control inputName" id="modeOfTransaction"
+                                                <input type="text" class="form-control inputName" value=" " id="modeOfTransaction"
                                                     name="Form60_modeOfTransaction" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="aadhaarNumber" class="form-label">20. Aadhaar Number issued
                                                     by UIDAI (if available)</label>
-                                                <input type="text" class="form-control inputName" id="aadhaarNumber"
+                                                <input type="text" class="form-control inputName" value=" " id="aadhaarNumber"
                                                     name="Form60_aadhaarNumber">
                                             </div>
                                         </div>
@@ -1115,12 +1116,12 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <input type="date" class="form-control inputName"
-                                                            placeholder="Application date"
+                                                            placeholder="Application date" value=" "
                                                             name="Form60_panApplicationDate">
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="Acknowledgement number"
+                                                            placeholder="Acknowledgement number" value=" "
                                                             name="Form60_panAcknowledgementNumber">
                                                     </div>
                                                 </div>
@@ -1138,13 +1139,13 @@
                                                         <label for="agriculturalIncome" class="form-label">a)
                                                             Agricultural income (Rs) *</label>
                                                         <input type="text" class="form-control inputName"
-                                                            id="agriculturalIncome" name="Form60_agriculturalIncome"
+                                                            id="agriculturalIncome" name="Form60_agriculturalIncome" value=" "
                                                             required>
                                                     </div>
                                                     <div class="col">
                                                         <label for="otherIncome" class="form-label">b) Other than
                                                             agricultural income (Rs) *</label>
-                                                        <input type="text" class="form-control inputName"
+                                                        <input type="text" class="form-control inputName" value=" "
                                                             id="otherIncome" name="Form60_otherIncome" required>
                                                     </div>
                                                 </div>
@@ -1158,16 +1159,16 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="Document type *"
+                                                            placeholder="Document type *" value=" "
                                                             name="Form60_identityDocumentType" required>
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="Document identification number *"
+                                                            placeholder="Document identification number *" value=" "
                                                             name="Form60_identityDocumentNumber" required>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control inputName"
+                                                        <input type="text" class="form-control inputName" value=" "
                                                             placeholder="Name and address of authority issuing the document *"
                                                             name="Form60_identityDocumentAuthority" required>
                                                     </div>
@@ -1183,17 +1184,17 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="Document type *"
+                                                            placeholder="Document type *" value=" "
                                                             name="Form60_addressDocumentType" required>
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="Document identification number *"
+                                                            placeholder="Document identification number *" value=" "
                                                             name="Form60_addressDocumentNumber" required>
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" class="form-control inputName"
-                                                            placeholder="Name and address of authority issuing the document *"
+                                                            placeholder="Name and address of authority issuing the document *" value=" "
                                                             name="Form60_addressDocumentAuthority" required>
                                                     </div>
                                                 </div>
@@ -1208,7 +1209,7 @@
 
 
                             <div class="submit">
-                                <button type="submit" class="m-5 submitbtn">Updateपक्षकार का विवरण</button>
+                                <button type="submit" class="m-5 submitbtn">Save and next</button>
                             </div>
 
                         </div>

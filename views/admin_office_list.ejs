@@ -40,10 +40,11 @@
                                         <% for(var j=0; j < parray[i].office.length; j++){ %>
                                         <tr>
                                             <td><%=k%></td>
+                                            <td><%= parray[i].name %></td>
                                             <td>
                                                     <%= parray[i].office[j].name %>
                                             </td>
-                                            <td><%= parray[i].name %></td>
+                                       
                                             <td>
                                                 <a href="/admin/<%= parray[i].office[j].name %>/<%= parray[i].name %>/DastvajOffice/delete" class="btn btn-danger btn-sm" data-toggle="tooltip" style="color: white;background-color:red;" data-placement="left" title="Update"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                             </td>

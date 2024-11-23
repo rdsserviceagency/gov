@@ -30,6 +30,14 @@ const DastavejUser = new mongoose.Schema({
         type: String,
         default: "",
     },
+    panjayan: {
+        type: String,
+        default: "",
+    },
+    lincense: {
+        type: String,
+        default: "",
+    },
     Jila: {
         type: String,
         default: "",

@@ -42,8 +42,7 @@ const wardSchema = new mongoose.Schema({
 const hectorSchema = new mongoose.Schema({
     name: String,
     Price: {
-        type: Number,
-        default: -1
+        type: String,
     }
 });
 

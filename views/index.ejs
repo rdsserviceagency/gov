@@ -36,128 +36,116 @@
     }
 </style>
 
+<style>
+    .container1 {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .left1{
+        background-color: #2F2E41;
+        color: white;
+        width: 20%; 
+        padding: 20px;
+        border: 1px solid #2F2E41;
+    }
+    .right1{
+        background-color: #2F2E41;
+        width: 20%; 
+        color: white;
+        padding: 20px;
+        border: 1px solid #2F2E41;
+    }
+    .center1{
+        background-color: #fff;
+        width: 50%; 
+        color: #2F2E41;
+        padding: 20px;
+    }
+    @keyframes blink {
+    50% {
+        color: transparent;
+    }
+    }
+
+    .blinking {
+        animation: blink 0.8s infinite;
+}
+</style>
+
 <body>
-    <section class="upper">
-        <p class="heading">CG-EREGISTRY</p>
-        <div class="bt">
-            <div class="left">
+    <%- include("partials/body"); -%>
+    <section>
+        <div class="container1">
+            <div class="left1">
+                <h1 style="font-size: 18px;text-align: center;font-weight: 700;">
+                    ऑनलाइन सेवाये
+                </h1>
+                <h1 style="font-size: 18px;text-align: center;font-weight: 700;">
+                    (ONLINE SERVICES)
+                </h1>
+                <br>
+                <ul style="list-style: disc;">
+                    <li><a  style="text-decoration: none;color: #fff;" href="/login">दस्तावेज बनाये (DEED DRAFTING)</a></li>
+                    <br>
+                    <li><a style="text-decoration: none;color: #fff;" href="/condition">पंजीयन दस्तावेज पता लगाये (KNOW YOUR DEED)</a></li>
+                    <br>
+                    <li><a  style="text-decoration: none;color: #fff;" href="/login">बाजार मूल्य  गणना (GUIDELINE RATE CALCULATION)</a></li>
+                    <br>
+                    <li><a style="text-decoration: none;color: #fff;"  href="/login">स्टाम्प और पंजीयन शुल्क गणना (CALCULATION OF STAMP & FEE)</a>
+                    </li>
+                    <br>
+                </ul>
             </div>
-            <div class="middle">
-                <p id="inborder">सी की वेबसाईट के माध्यम से उप पंजीयन कार्यालय में पंचीकृत होने वाले सभी प्रकार के
-                    दस्तावेज<br>
-                    किफायती दर पर ऑनलाइन प्रिंट/पा प्राप्त करे</p>
+            <div class="center1">
+                <h1 style="font-size: 18px;text-align: center;font-weight: 700;">
+                    हमारी सेवाए (OUR SERVICES)
+                </h1>
+                <br>
+                <ul id="list"  style="list-style: none;">
+                    <li style="display: none;"><a style="text-decoration: none;color: #2F2E41;font-weight: 600;" href="/">1-	छत्तीसगढ़ राज्य अंतर्गत पंजीयन कार्यालय में पंजीकृत होने वाले दस्तावेज की ड्राफ्टिंग</a></li>
+                    <br>
+                    <li style="display: none;"><a  style="text-decoration: none;color: #2F2E41;font-weight: 600;" href="/">2-	जमीन के क्रय विक्रय हेतु निःशुल्क विज्ञापन</a></li>
+                    <br>
+                    <li style="display: none;"><a style="text-decoration: none;color: #2F2E41;font-weight: 600;"  href="/">3-	संपत्ति के बाजार मूल्य (सरकारी कीमत) की गणना</a>
+                    </li>
+                    <br>
+                    <li style="display: none;"><a  style="text-decoration: none;color: #2F2E41;font-weight: 600;" href="/">4-	पंजीकृत होने वाले दस्तावेज के बारे में जाने</a></li>
+                    <br>
+                    <li style="display: none;"><a  style="text-decoration: none;color: #2F2E41;font-weight: 600;" href="/">5-	पंजीयन खर्च (स्टाम्प और पंजीयन शुल्क) की गणना े</a></li>
+                    <br>
+                    <li style="display: none;"><a  style="text-decoration: none;color: #2F2E41;font-weight: 600;" href="/">6-	गाइड लाइन  (सरकारी कीमत) पता करना े</a></li>
+                    <br>
+                    <li style="display: none;"><a  style="text-decoration: none;color: #2F2E41;font-weight: 600;" href="/">7-	दस्तावेज के पंजीयन सम्बन्धी जानकारी उपलब्ध करना</a></li>
+                    <br>
+                    <li style="display: none;"><a  style="text-decoration: none;color: #2F2E41;font-weight: 600;" href="/">8-	पंजीयन कार्यालय में उपयोग होने वाले प्रारूप के नमूने प्राप्त करे</a></li>
+                </ul>
             </div>
-            <div class="right">
-                <a href="/login" style="text-decoration: none;">
-                    <p class="ph"><span class="img"><img src="/img/logout.png"
-                                alt="admin"></span>लॉग इन </p>
-                </a>
-                <p class="ph"><span class="img"><img src="/img/whatsapp 3.png" alt=""></span>9039791530 </p>
-                <p class="ph"><span class="img"><img src="/img/phone-call 2.png" alt=""></span>9039791530</p>
+            <div class="right1">
+                <h1 style="font-size: 18px;text-align: center;font-weight: 700;">
+                    नागरिक सेवाये
+                </h1>
+                <h1 style="font-size: 18px;text-align: center;font-weight: 700;">
+                    (PUBLIC SERVICES)
+                </h1>
+                <br>
+                <ul style="list-style: disc;">
+                    <li><a style="text-decoration: none;color: #fff;" href="/">बाजार मूल्य (भूमि/संरचना/मकान/वृक्ष) (KNOW CIRCLE RATE)</a></li>
+                    <br>
+                    <li><a  style="text-decoration: none;color: #fff;" href="/">दस्तावेजवार स्टाम्प और पंजीयन शुल्क दर (DEEDWISE STAMP & FEE RATE)</a></li>
+                    <br>
+                    <li><a style="text-decoration: none;color: #fff;"  href="/login">भूमि क्रय-विक्रय विज्ञापन (FREE ADS LAND SALE-PURCHASE)</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>
-    <div>
-        <p id="b" style="animation: moveText 10s linear infinite;">यहाँ पर मेनू पर सुचना डिस्प्ले करना है जो ब्लिंग होता
-            रहेगा</p>
-    </div>
-    <section class="navbar">
-        <!-- <p>मुख्य </p> -->
-        <button type="button" class="btn bg-white" style="width: 150px; position: relative; top: 10px;">
-            <a style="text-decoration: none; color: black" href="/">मुख्य</a>
-        </button>
-        <!-- <p> हमारे</p> -->
-        <button type="button" class="btn bg-white" style="width: 150px; position: relative; top: 10px;">
-            <a style="text-decoration: none; color: black" href="./about.ejs">हमारे</a>
-        </button>
-        <!-- <p>ऑनलाइन</p> -->
-        <div class="dropdown">
-            <a class="btn bg-white dropdown-toggle" style="width: 150px;" href="#" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                ऑनलाइन
-            </a>
 
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/condition">पजं ीयन डकये जानेवाले दस्तावेज पता करें</a></li>
-                <li><a class="dropdown-item" href="/login">जमीन की सरकारी कीमत बाजार म ल्ू य क ी ग र् न ा</a></li>
-                <li><a class="dropdown-item" href="/login">रडजस्री खचा (स्टाम्प, फीस , सेवा श ल्ु क ) क ी ग र् न ा</a></li>
-                <li><a class="dropdown-item" href="/login">दस्तावेज तैयार करे</a></li>
-                <li><a class="dropdown-item" href="/login">प वू ा क े द स् त ा व े ज स च ा क र े</a></li>
-            </ul>
-        </div>
-        <!-- <p> नागरिक</p> -->
-        <div class="dropdown">
-            <a class="btn bg-white dropdown-toggle" style="width: 150px;" href="#" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                नागरिक
-            </a>
-
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">ज म ी न / म क ा न / व क्षृ ों आ ड द क े ड न ध ा ा र र त द र क ी ज
-                        ा न क ा र ी</a></li>
-                <li><a class="dropdown-item" href="#">स्टाम्प, पडजयन और सेवा शल्ु क की शासन द्वारा डनधााररत दर की
-                        जानकारी</a></li>
-                <li><a class="dropdown-item" href="/vigyaapn/upload">जमीन की खरीदी/डबक्री डवज्ञापन</a></li>
-                <li><a class="dropdown-item" href="/nagrikSevaye">दस्तावेज लेखक/स्टाम्प वेंिर/अडधवक्ता/जमीन िीलसा सपं का</a></li>
-            </ul>
-        </div>
-        <!-- <p> महत्वपूर्ण</p> -->
-        <button type="button" class="btn bg-white" style="width: 150px; position: relative; top: 10px;">
-            <a style="text-decoration: none; color: black" href="/important">महत्वपूर्ण</a>
-        </button>
-        <!-- वक्रय क्रय हतेुप्रॉपटी खोज -->
-        <button type="button" class="btn bg-white" style="width: 150px; position: relative; top: 10px;">
-            <a style="text-decoration: none; color: black" href="/vigyaapn">वक्रय क्रय हतेु प्रॉपटी खोज</a>
-        </button>
-        <!-- <p>संपर्क</p> -->
-        <button type="button" class="btn bg-white" style="width: 150px; position: relative; top: 10px;">
-            <a style="text-decoration: none; color: black" href="">संपर्क</a>
-        </button>
-        <!-- <p>पालिसी</p> -->
-        <button type="button" class="btn bg-white" style="width: 150px; position: relative; top: 10px;">
-            <a style="text-decoration: none; color: black" href="">पालिसी</a>
-        </button>
-    </section>
 
     <section>
-        <h3 class="text-center my-5">
-            इस वेब पोर्टल में जमीन सम्बन्धी महत्वपूर्ण आवश्यकताओ को <br> ध्यान में रख कर तैयार किया गया है। अब आप घर
-            बैठे सम्पूर्ण छत्तीसगढ़ <br> में स्थित संपत्ति के सरकारी टेट (गाइड लाइन), रजिस्ट्री में खर्च <br> (स्टाम्प,
-            फीस, सेवा शुल्क) की जानकारी, खुद से घर बैठे रजिस्ट्री के <br> महत्वपूर्ण दस्तावेज तैयार कर सकते हैं।
-        </h3>
 
-        <div class="button d-flex justify-content-center">
-            <div class="dropdown m-5">
-                <a class="btn dropdown-toggle" style="width: 20rem; background-color: #2F2E41; color: white;" href="#"
-                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    ऑनलाइन सेवाए
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/condition">पजं ीयन डकये जानेवाले दस्तावेज पता करें</a></li>
-                    <li><a class="dropdown-item" href="/login">जमीन की सरकारी कीमत बाजार म ल्ू य क ी ग र् न ा</a></li>
-                    <li><a class="dropdown-item" href="/login">रडजस्री खचा (स्टाम्प, फीस , सेवा श ल्ु क ) क ी ग र् न ा</a>
-                    </li>
-                    <li><a class="dropdown-item" href="/login">दस्तावेज तैयार करे</a></li>
-                    <li><a class="dropdown-item" href="/login">प वू ा क े द स् त ा व े ज स च ा क र े</a></li>
-                </ul>
-            </div>
-
-            <div class="dropdown m-5">
-                <a class="btn dropdown-toggle"
-                    style="width: 20rem; background-color: #2F2E41; color: white;"
-                    href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    नागरिक सेवाए
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">जम ीन / मक ान / वक्षृ ों आडद क े डनध ा ाररत दर क ार ी</a></li>
-                    <li><a class="dropdown-item" href="#">स्टाम्प, पडजयन और सेवा शल्ु क की शासन द्वारा डनधााररत दर की
-                            जानकारी</a></li>
-                    <li><a class="dropdown-item" href="/vigyaapn/upload">जमीन की खरीदी/डबक्री डवज्ञापन</a></li>
-                    <li><a class="dropdown-item" href="/nagrikSevaye">दस्तावेज लेखक/स्टाम्प वेंिर/अडधवक्ता/जमीन िीलसा सपं का</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
 
         <div class="lobutton">
 
@@ -174,9 +162,46 @@
         <br><br>
     </section>
 
+    <%- include("partials/footer"); -%>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
+        
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const listItems = document.querySelectorAll("#list li");
+    console.log(listItems)
+
+    // Function to show list items one by one
+    function showItemsOneByOne(index) {
+        if (index < listItems.length) {
+            listItems[index].style.display = "block";
+            setTimeout(function() {
+                showItemsOneByOne(index + 1);
+            }, 800); // Adjust timing as needed
+        } else {
+            console.log("kjd")
+            startBlinking();
+        }
+    }
+
+    // Function to start blinking effect
+    function startBlinking() {
+        setInterval(function() {
+            
+            listItems.forEach(function(item) {
+                item.classList.toggle("blinking");
+            });
+        }, 800); // Adjust blinking speed as needed
+    }
+
+    // Start showing list items one by one
+    showItemsOneByOne(0);
+});
+
+    </script>
+
 </body>
 
 </html>

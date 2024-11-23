@@ -110,6 +110,21 @@
                                         <label for="exampleInputEmail1" style="color: #2F2E41;">पक्षकार  <sup style="color: red;">*</sup></label>
                                         <input type="text" value="<%=Paksh%>" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Paksh">
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1" style="color: #2F2E41;">पक्षकारो के मध्य सम्बन्ध<sup style="color: red;">*</sup></label>
+                                      
+                                        <select name="Pakshsam" id="exampleInputPassword1" required class="form-control" aria-placeholder="Select Status">
+                                            <% if(Pakshsam=="Yes"){ %>
+                                                <option value="Yes" selected>Yes</option>
+                                                <option value="No">No</option>
+                                            <%}%>
+                                            <% if(Pakshsam!="Yes"){ %>
+                                                <option value="Yes" >Yes</option>
+                                                <option value="No" selected>No</option>
+                                            <%}%>
+                                        </select>
+                                    </div>
                                 
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" style="color: #2F2E41;"> Sampati Required  <sup style="color: red;">*</sup></label>

@@ -80,6 +80,8 @@ document.getElementById("register-form").addEventListener("submit", (e) => {
     const upi = document.getElementById("upi").value;
     const Jila = document.getElementById("Jila").value;
     const Office = document.getElementById("Office").value;
+    const lincense = document.getElementById("lincense").value;
+    const panjayan = document.getElementById("panjayan").value;
     const mapLink = document.getElementById("mapLink").value;
     const address = document.getElementById("address").value;
     if(password!=confirmpassword){
@@ -94,7 +96,7 @@ document.getElementById("register-form").addEventListener("submit", (e) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ name, phone, email, password, profession, upi, mapLink, address,Jila, Office}),
+            body: JSON.stringify({ name, phone, email, password, profession, upi, mapLink, address,Jila, Office,panjayan,lincense}),
         })
             .then((response) => {
                 if(response.status == 200){

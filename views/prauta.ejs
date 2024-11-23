@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>page 3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style3.css">
+    <link rel="stylesheet" href="/css/style5.css">
+</head>
+
+<body>
+    <section class="upper">
+        <div class="bt row">
+            <div class="left col-sm-3">
+                <img src="/img/logo.jpeg" alt="">
+            </div>
+            <div class="middle col-sm-6">
+                <p class="heading">CG-EREGISTRY</p>
+                <p id="inborder">सी की वेबसाईट के माध्यम से उप पंजीयन कार्यालय में पंचीकृत होने वाले सभी प्रकार के
+                    दस्तावेज
+                    किफायती दर पर ऑनलाइन प्रिंट/पा प्राप्त करे</p>
+                <p id="b">यहाँ पर मेनू पर सुचना डिस्प्ले करना है जो ब्लिंग होता रहेगा</p>
+            </div>
+            <div class="right col-sm-3">
+                <a href="/logout" style="text-decoration: none;">
+                    <p class="log"><span class="img"><img src="/img/logout.png" alt=""></span>लॉग आउट</p>
+                </a>
+                <p class="ph"><span class="img"><img src="/img/whatsapp 3.png" alt=""></span>9039791530 </p>
+                <p class="ph"><span class="img"><img src="/img/phone-call (1) 2.png" alt=""></span>9039791530</p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid mid">
+                <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse nav-bar" id="navbarNav">
+                    <ul class="nav justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link " href="#">मुख्य</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"> हमारे</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">ऑनलाइन</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">नागरिक</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">महत्वपूर्ण</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">लॉग इन पंजीयन करे</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">संपर्क</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">पालिसी</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <section class="bottom">
+        <div class="row">
+            <div class="col-sm-3 define">
+                <ul>
+                    <a style="text-decoration: none;" href="/new">
+                        <li>दस्तावेज का विवरण
+                        </li>
+                    </a>
+                    <br>
+                    <li> संपत्ति का विवरण भरे
+                    </li>
+                    <br>
+                    <li>संपत्ति का बाजार मूल्य जाँच करे
+                    </li>
+                    <br>
+                    <li>संपत्ति का चौहद्दी एवं अन्य विवरण भरे
+                    </li>
+                    <br>
+                    <li> स्टाम्प शुल्क और पंजियन शुल्क गणना
+                    </li>
+                    <br>
+                    <li>पक्षकार का विवरण
+                    </li>
+                    <br>
+                    <li> दस्तावेज के आतंरिक स्वरुप चुने या स्वयं तैयार करे
+                    </li>
+                    <br>
+                    <li>गवाह का विवरण
+                    </li>
+                    <br>
+                    <li>दस्तावेज उत्पन्न कर प्रिंट प्रीव्यू देखे एडिट करे/सबमिट करे/डाउनलोड करे/मेल-whatsapp करे
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-9">
+                <form action="/prauta?number=<%=appli%>" method="post">
+                    <div class="form">
+                        <div>
+                            <p>स्टेप - प्रारूपकर्ता का विवरण</p>
+                        </div>
+                        <div class="mb-5">
+                            <label for="प्रारुपकर्ता" class="form-label">प्रारुपकर्ता का नाम</label>
+                            <select class="form-select inputName" name="प्रारुपकर्ता" onchange="fun(this.value)" id="प्रारुपकर्ता" aria-label="Default select example">
+                                    <option value="पक्षकार स्वयं" selected>पक्षकार स्वयं</option>
+                                    <option value="दस्तावेज लेखक">दस्तावेज लेखक</option>
+                                    <option value="अधिवक्ता">अधिवक्ता</option>
+                            </select>
+                        </div>
+
+                     
+
+                        <div id="पक्षकार" class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">पक्षकार का नाम</label>
+                            <input type="text" name="name" value="<%=name%>"  class="form-control inputName" id="formGroupExampleInput" >
+                        </div>
+
+                        <div id="जिला" style="display: none;" class="mb-5">
+                            <label for="jila" class="form-label">जिला</label>
+                            <select class="form-select inputName" name="jila" onchange="fun1(this.value)" id="jila" aria-label="Default select example">
+                                <option value="---Select---" selected hidden>---Select---</option>
+                                <% for(let i=0;i<parray1.length;i++) { %>
+                                    <option value="<%=parray1[i].name%>"><%=parray1[i].name%></option>
+                                <%}%>
+                            </select>
+                        </div>
+
+                        <div id="जिला1" style="display: none;" class="mb-5">
+                            <label for="कार्यालय" class="form-label">कार्यालय</label>
+                            <select class="form-select inputName" name="कार्यालय" onchange="fun2(this.value)" id="कार्यालय" aria-label="Default select example">
+                            </select>
+                        </div>
+
+                        <div id="जिला2" style="display: none;" class="mb-5">
+                            <label for="नाम" class="form-label">नाम</label>
+                            <select class="form-select inputName" name="नाम" onchange="fun3(this.value)" id="नाम" aria-label="Default select example">
+                            </select>
+                        </div>
+
+                        <div id="जिला3" style="display: none;" class="mb-5">
+                            <label for="लाइसेंस" class="form-label">लाइसेंस क्रमांक</label>
+                            <input type="text" name="लाइसेंस" readonly  class="form-control inputName" id="लाइसेंस" >
+                        </div>
+
+                        <div id="जिला4" style="display: none;" class="mb-5">
+                            <label for="पंजी" class="form-label">पंजी क्रमांक</label>
+                            <input type="text" name="पंजी"   class="form-control inputName" id="पंजी" >
+                        </div>
+
+                        <div id="अधिवक्ता" style="display: none;" class="mb-5">
+                            <label for="पंजीयन" class="form-label">पंजीयन क्रमांक</label>
+                            <input type="text" name="पंजीयन" readonly  class="form-control inputName" id="पंजीयन" >
+                        </div>
+
+                    
+
+                        <div  class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">दिनांक</label>
+                            <input type="date" name="date"   class="form-control inputName" id="formGroupExampleInput" >
+                        </div>
+                
+                        <div class="submit">
+                            <button class="m-5 submitbtn">SUBMIT</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+
+    <script>
+        function fun(val){
+        let पक्षकार=document.getElementById("पक्षकार");
+        let अधिवक्ता=document.getElementById("अधिवक्ता");
+        let जिला4=document.getElementById("जिला4");
+        let जिला3=document.getElementById("जिला3");
+        let जिला2=document.getElementById("जिला2");
+        let जिला1=document.getElementById("जिला1");
+        let जिला=document.getElementById("जिला");
+        let पंजीयन=document.getElementById("पंजीयन");
+        let लाइसेंस=document.getElementById("लाइसेंस");
+
+            if(val=="पक्षकार स्वयं"){
+                पक्षकार.style.display="block"
+                अधिवक्ता.style.display="none"
+                जिला4.style.display="none"
+                जिला3.style.display="none"
+                जिला2.style.display="none"
+                जिला1.style.display="none"
+                जिला.style.display="none"
+            }
+            else if(val=="अधिवक्ता"){
+                पक्षकार.style.display="none"
+                अधिवक्ता.style.display="block"
+                जिला4.style.display="none"
+                जिला3.style.display="none"
+                जिला2.style.display="block"
+                जिला1.style.display="block"
+                जिला.style.display="block"  
+                लाइसेंस.value = ""
+          }
+          else{
+                पक्षकार.style.display="none"
+                अधिवक्ता.style.display="none"
+                जिला4.style.display="block"
+                जिला3.style.display="block"
+                जिला2.style.display="block"
+                जिला1.style.display="block"
+                जिला.style.display="block"  
+                पंजीयन.value = ""
+
+          }
+      }
+
+      function fun1(val){
+        let कार्यालय=document.getElementById("कार्यालय");
+        let optionsHtml=`<option value="---Select---" selected hidden>---Select---</option>`
+        fetch(`/api/office?jila=${val}`)
+                .then(response => response.json())
+                .then(data => {
+                    for (const item of data) {
+                    optionsHtml += `<option value="${item.name}">${item.name}</option>`;
+                }
+                कार्यालय.innerHTML = optionsHtml
+            })
+                .catch(error => {
+                    console.error('Error fetching Gao data:', error);
+        });
+      
+      }
+
+      function fun2(val){
+        let jila=document.getElementById("jila").value;
+        let प्रारुपकर्ता=document.getElementById("प्रारुपकर्ता").value;
+        let नाम=document.getElementById("नाम");
+        let optionsHtml=`<option value="---Select---" selected hidden>---Select---</option>`
+        fetch(`/api/vendor?jila=${jila}&office=${val}&type=${प्रारुपकर्ता}`)
+                .then(response => response.json())
+                .then(data => {
+                    for (const item of data) {
+                    optionsHtml += `<option value="${item.name}">${item.name}</option>`;
+                }
+                नाम.innerHTML = optionsHtml
+            })
+                .catch(error => {
+                    console.error('Error fetching Gao data:', error);
+        });
+      
+      }
+
+      function fun3(val){
+        let jila=document.getElementById("jila").value;
+        let प्रारुपकर्ता=document.getElementById("प्रारुपकर्ता").value;
+        let पंजीयन=document.getElementById("पंजीयन");
+        let लाइसेंस=document.getElementById("लाइसेंस");
+        let कार्यालय=document.getElementById("कार्यालय").value;
+        let optionsHtml=`<option value="---Select---" selected hidden>---Select---</option>`
+        fetch(`/api/lience?jila=${jila}&office=${कार्यालय}&type=${प्रारुपकर्ता}&name=${val}`)
+                .then(response => response.json())
+                .then(data => {
+                if(प्रारुपकर्ता=="अधिवक्ता"){
+                    पंजीयन.value = data
+                }
+                else{
+                    लाइसेंस.value = data
+                }
+            })
+                .catch(error => {
+                    console.error('Error fetching Gao data:', error);
+        });
+      
+      }
+
+    </script>
+</body>
+
+</html>

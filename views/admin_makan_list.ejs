@@ -58,8 +58,8 @@
                                             <td><%= parray[i].tal %></td>
                                             <td><%= parray[i].avskarn %></td>
                                             <td>
-                                                <a href="/admin/<%= parray[i].city %>/<%= parray[i].sampati %>/<%= parray[i].sagrachna %>/makan/update" class="btn btn-info btn-sm" data-toggle="tooltip" style="color: white;background-color: #501bd7eb;" data-placement="left" title="Update"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                                <a href="/admin/<%= parray[i].city %>/<%= parray[i].sampati %>/<%= parray[i].sagrachna %>/makan/delete" class="btn btn-danger btn-sm" data-toggle="tooltip" style="color: white;background-color:red;" data-placement="left" title="Update"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                <a href="/admin/makan/update/?city=<%= parray[i].city %>&sampati=<%= parray[i].sampati %>&sagrachna=<%= parray[i].sagrachna %>" class="btn btn-info btn-sm" data-toggle="tooltip" style="color: white;background-color: #501bd7eb;" data-placement="left" title="Update"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                <a href="/admin/makan/delete/?city=<%= parray[i].city %>&sampati=<%= parray[i].sampati %>&sagrachna=<%= parray[i].sagrachna%>"  class="btn btn-danger btn-sm" data-toggle="tooltip" style="color: white;background-color:red;" data-placement="left" title="Update"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                             </td>
                                          
                                         </tr>

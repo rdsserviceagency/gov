@@ -130,6 +130,13 @@ $(document).ready(function () {
             $('#panNumber, #panCardFile').prop('required', false);
             $('#name, #gender, #occupation').prop('required', true);
         }
+        else{
+            $('#panCardDetails').hide();
+            $('#form60Details').hide();
+            // Make Form 60 fields mandatory
+            $('#panNumber, #panCardFile').prop('required', false);
+            $('#name, #gender, #occupation').prop('required', false);
+        }
     });
 
     // Trigger the change event to initialize based on default selection

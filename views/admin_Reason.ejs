@@ -9,7 +9,7 @@
                             <!-- Card Header - Dropdown -->
                             <div
                                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="background-color: #2F2E41;">
-                                <h6 class="m-0" style="color: #fff; font-weight: 700;">Template</h6>
+                                <h6 class="m-0" style="color: #fff; font-weight: 700;">पक्षकार</h6>
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
@@ -33,42 +33,20 @@
                                     </div>
                                     <% if(rea_valid == 1){ %>
                                         <div class="mb-3">
-                                            <label for="exampleInputPassword2" class="form-label">Reason <sup style="color: red;">*</sup></label>
+                                            <label for="exampleInputPassword2" class="form-label">पक्षकारो <sup style="color: red;">*</sup></label>
                                             <input type="text" class="form-control input is-invalid" name="name" id="exampleInputPassword2" aria-describedby="validationServer04Feedback" required>
                                             <div id="validationServer04Feedback" class="invalid-feedback">
-                                                Reason  is already exist
+                                                पक्षकारो  is already exist
                                             </div>
                                         </div>
                                     <% } %>    
                                     <% if(rea_valid == 0){ %>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" style="color: #2F2E41;">Reason   <sup style="color: red;">*</sup></label>
+                                        <label for="exampleInputEmail1" style="color: #2F2E41;">पक्षकारो   <sup style="color: red;">*</sup></label>
                                         <input type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name">
                                     </div>
                                     <% } %>    
 
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" style="color: #2F2E41;">Reason Discount  <sup style="color: red;">*</sup></label>
-                                        <input type="number" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="rdiscount">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" style="color: #2F2E41;">Discount Type <sup style="color: red;">*</sup></label>
-                                        <select name="Type" id="exampleInputEmail1" required class="form-control" aria-placeholder="Select Status">
-                                            <option value="Fixed">Fixed</option>
-                                            <option value="Percentage">Percentage</option>
-                                            <option value="Per Feet">Per Feet</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" style="color: #2F2E41;">Applicable <sup style="color: red;">*</sup></label>
-                                        <select name="Applicable" id="exampleInputEmail1" required class="form-control" aria-placeholder="Select Status">
-                                            <option value="Stamp">Stamp</option>
-                                            <option value="Panjyan">Panjyan</option>
-                                        </select>
-                                    </div>
-                                
                                     <!--Image upload-->
                                     <button type="submit" class="btn btn-primary" style="background:#2F2E41; color: #fff; font-weight: 700;">Submit</button>
                                 </form>

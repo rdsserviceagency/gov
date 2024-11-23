@@ -1,0 +1,163 @@
+<%- include("partials/en_header"); -%>
+
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div
+                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="background-color: #2F2E41;">
+                                <h6 class="m-0" style="color: #fff; font-weight: 700;">Makan</h6>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <form action="/en/admin/makan" method="post">
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1" style="color: #2F2E41;">क्षेत्र का प्रकार  <sup style="color: red;">*</sup></label>
+                                        <select name="city" id="exampleInputEmail1" required class="form-control" aria-placeholder="Select Status">
+                                            <option value="नगर निगम">नगर निगम </option>
+                                            <option value="नगर पालिका">नगर पालिका </option>
+                                            <option value="नगर पंचायत">नगर पंचायत</option>
+                                            <option value="विकसित क्षेत्र">विकसित क्षेत्र</option>
+                                            <option value="ग्रामीण क्षेत्र">ग्रामीण क्षेत्र  </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" style="color: #2F2E41;">निर्मित संपत्ति का उपयोग  <sup style="color: red;">*</sup></label>
+                                        <select name="sampati" id="exampleInputEmail1" required class="form-control" aria-placeholder="Select Status">
+                                            <option value="आवासीय">आवासीय</option>
+                                            <option value="दुकान">दुकान</option>
+                                            <option value="गोदाम">गोदाम</option>
+                                            <option value="कार्यालय">कार्यालय</option>
+                                            <option value="भूखंड में नीव/प्लिंथ लेबल निर्माण">भूखंड में नीव/प्लिंथ लेबल निर्माण</option>
+                                            <option value="बौन्द्री वाल">बौन्द्री वाल</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1" style="color: #2F2E41;">संरचना का प्रकार<sup style="color: red;">*</sup></label>
+                                      
+                                        <select name="sagrachna" id="exampleInputPassword1" required class="form-control" aria-placeholder="Select Status">
+                                            <option value="कालम सिस्टम पक्का आर. सी. सी. छत/मार्बल ग्रेनाइट उच्च श्रेणी सर्व सुविधा युक्त निर्मित">कालम सिस्टम पक्का आर. सी. सी. छत/मार्बल ग्रेनाइट उच्च श्रेणी सर्व सुविधा युक्त निर्मित</option>
+                                            <option value="कच्चा मिटटी दीवाल का कवेलू पोश">कच्चा मिटटी दीवाल का कवेलू पोश</option>
+                                            <option value="कालम सिस्टम पाइलिंग आर. सी. सी. छत  युक्त निर्मित">कालम सिस्टम पाइलिंग आर. सी. सी. छत  युक्त निर्मित</option>
+                                            <option value="बिना कालम आर. सी. सी. छत  युक्त निर्मित">बिना कालम आर. सी. सी. छत  युक्त निर्मित</option>
+                                            <option value="आर. बी. सी. छत चिप गार्डर का बना">आर. बी. सी. छत चिप गार्डर का बना</option>
+                                            <option value="टीन शेड/असबेस्टस शीट, अंग्रेजी टाइल्स">टीन शेड/असबेस्टस शीट, अंग्रेजी टाइल्स </option>
+                                            <option value="छत कच्छा कवेलू ईट की दीवाल">छत कच्छा कवेलू ईट की दीवाल  </option>
+                                        </select>
+                                    </div>
+
+                                    <% if(makan_valid == 1){ %>
+                                        <div class="mb-3">
+                                            <label for="exampleInputPassword2" class="form-label">उपबंद दर  <sup style="color: red;">*</sup></label>
+                                            <input type="number" class="form-control input is-invalid" name="upbad" id="exampleInputPassword2" aria-describedby="validationServer04Feedback" required>
+                                            <div id="validationServer04Feedback" class="invalid-feedback">
+                                                उपबंद दर  is already filled
+                                            </div>
+                                        </div>
+                                    <% } %>    
+                                    <% if(makan_valid == 0){ %>
+
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1" style="color: #2F2E41;">उपबंद दर<sup style="color: red;">*</sup></label>
+                                      <input type="number" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  name="upbad">
+                                    </div>
+                                    <% } %>  
+
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1" style="color: #2F2E41;">बहुमंजिला भवन (प्रकोष्ठ अधिनियम लागू है)<sup style="color: red;">*</sup></label>
+                                      
+                                        <select name="second" id="exampleInputPassword1" required class="form-control" aria-placeholder="Select Status">
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1" style="color: #2F2E41;">तल<sup style="color: red;">*</sup></label>
+                                      
+                                        <select name="tal" id="exampleInputPassword1" required class="form-control" aria-placeholder="Select Status">
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1" style="color: #2F2E41;">अवक्षयण<sup style="color: red;">*</sup></label>
+                                      
+                                        <select name="avskarn" id="exampleInputPassword1" required class="form-control" aria-placeholder="Select Status">
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                    <!--Image upload-->
+                                    <button type="submit" class="btn btn-primary" style="background:#2F2E41; color: #fff; font-weight: 700;">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+         
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/js/demo/chart-area-demo.js"></script>
+    <script src="/js/demo/chart-pie-demo.js"></script>
+
+</body>
+
+</html>

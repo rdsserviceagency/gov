@@ -6,7 +6,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Reason</h1>
+                    <h1 class="h3 mb-2 text-gray-800">पक्षकार</h1>
                    
 
                     <!-- DataTales Example -->
@@ -20,19 +20,14 @@
                                     <thead>
                                         <tr>
                                             <th>SL No.</th>
-                                            <th>Reason</th>
-                                            <th>Description</th>
-                                            <th>Applicable</th>
+                                            <th>पक्षकारो</th>
                                             <th>Action</th>
-
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>SL No.</th>
-                                            <th>Reason</th>
-                                            <th>Description</th>
-                                            <th>Applicable</th>
+                                            <th>पक्षकारो</th>
                                             <th>Action</th>
 
                                         </tr>
@@ -42,19 +37,6 @@
                                             <tr>
                                             <td><%=i+1%></td>
                                             <td><%= parray[i].name %></td>
-                                            <% if(parray[i].Type=="Fixed") {%>
-                                                <td><%= parray[i].discount %> Rs</td>
-
-                                            <%}%>
-                                            <% if(parray[i].Type=="Percentage") {%>
-                                                <td><%= parray[i].discount %> %</td>
-
-                                            <%}%>
-                                            <% if(parray[i].Type=="Per Feet") {%>
-                                                <td><%= parray[i].discount %> प्रति बटवारा हिस्सा</td>
-                                            <%}%>
-                                            <td><%= parray[i].Applicable %></td>
-
                                             <td>
                                               
                                                 <a href="/admin/<%= parray[i].name %>/<%=Sub%>/<%=Doc%>/reas/delete" class="btn btn-danger btn-sm" data-toggle="tooltip" style="color: white;background-color:red;" data-placement="left" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>

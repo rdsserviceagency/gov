@@ -47,8 +47,8 @@
                                             <td><%= parray[i].size %></td>                                      
                                             <td><%= parray[i].price %></td>                                      
                                             <td>
-                                                <a href="/admin/<%= parray[i].name %>/tree/update" class="btn btn-info btn-sm" data-toggle="tooltip" style="color: white;background-color: #501bd7eb;" data-placement="left" title="Update"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                                <a href="/admin/<%= parray[i].name %>/tree/delete" class="btn btn-danger btn-sm" data-toggle="tooltip" style="color: white;background-color:red;" data-placement="left" title="Update"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                <a href="/admin/tree/update?name=<%= parray[i].name %>&quality=<%= parray[i].quality %>&size=<%= parray[i].size %>" class="btn btn-info btn-sm" data-toggle="tooltip" style="color: white;background-color: #501bd7eb;" data-placement="left" title="Update"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                <a href="/admin/tree/delete?name=<%= parray[i].name %>&quality=<%= parray[i].quality %>&size=<%= parray[i].size %>" class="btn btn-danger btn-sm" data-toggle="tooltip" style="color: white;background-color:red;" data-placement="left" title="Update"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                             </td>
                                          
                                         </tr>

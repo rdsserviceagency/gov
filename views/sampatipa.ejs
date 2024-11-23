@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>page 3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style3.css">
+    <link rel="stylesheet" href="/css/style5.css">
+</head>
+
+<body>
+    <section class="upper">
+        <div class="bt row">
+            <div class="left col-sm-3">
+                <img src="/img/logo.jpeg" alt="">
+            </div>
+            <div class="middle col-sm-6">
+                <p class="heading">CG-EREGISTRY</p>
+                <p id="inborder">सी की वेबसाईट के माध्यम से उप पंजीयन कार्यालय में पंचीकृत होने वाले सभी प्रकार के
+                    दस्तावेज
+                    किफायती दर पर ऑनलाइन प्रिंट/पा प्राप्त करे</p>
+                <p id="b">यहाँ पर मेनू पर सुचना डिस्प्ले करना है जो ब्लिंग होता रहेगा</p>
+            </div>
+            <div class="right col-sm-3">
+                <a href="/logout" style="text-decoration: none;">
+                    <p class="log"><span class="img"><img src="/img/logout.png" alt=""></span>लॉग आउट</p>
+                </a>
+                <p class="ph">
+                    आवेदन संख्या :
+                    <%=appli%>
+                </p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid mid">
+                <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse nav-bar" id="navbarNav">
+                    <ul class="nav justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link " href="/">मुख्य</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"> हमारे</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">ऑनलाइन</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">नागरिक</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">महत्वपूर्ण</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">लॉग इन पंजीयन करे</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">संपर्क</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">पालिसी</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <section class="bottom">
+        <div class="row">
+            <div class="col-sm-3 define">
+                <ul>
+                    <a style="text-decoration: none;" href="/new">
+                        <li>दस्तावेज का विवरण
+                        </li>
+                    </a>
+                    <br>
+                    <li> संपत्ति का विवरण भरे
+                    </li>
+                    <br>
+                    <li>संपत्ति का बाजार मूल्य जाँच करे
+                    </li>
+                    <br>
+                    <li>संपत्ति की विशेष जानकारी का प्रारूप
+                    </li>
+                    <br>
+                    <li> स्टाम्प शुल्क और पंजियन शुल्क गणना
+                    </li>
+                    <br>
+                    <li>पक्षकार का विवरण
+                    </li>
+                    <br>
+                    <li> दस्तावेज के आतंरिक स्वरुप चुने या स्वयं तैयार करे
+                    </li>
+                    <br>
+                    <li>गवाह का विवरण
+                    </li>
+                    <br>
+                    <li>दस्तावेज उत्पन्न कर प्रिंट प्रीव्यू देखे एडिट करे/सबमिट करे/डाउनलोड करे/मेल-whatsapp करे
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-9">
+                <form action="/sampti1?number=<%=appli%>" method="post">
+                    <div class="form">
+                        <div>
+                            <p>संपत्ति की विशेष जानकारी का प्रारूप </p>
+                        </div>
+                        
+                        <div class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">भूमि मुख्य मार्ग से लगी है/नहीं है  </label>
+                            <select class="form-select inputName" name="maukya" onchange="fun(this.value)" id="formGroupExampleInput" aria-label="Default select example">
+                                <option value="हां" selected>हां</option>
+                                <option value="नहीं">नहीं </option>
+                            </select>
+                        </div>
+                        <div id="maukya1" style="display: none;" class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">मुख्य मार्ग से दुरी </label>
+                            <input type="number" name="maukyadistance"  class="form-control inputName" id="formGroupExampleInput" >
+                        </div>
+
+                        <div id="maukya2"  style="display: none;" class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">इकाई </label>
+                            <select class="form-select inputName" name="unit"  id="formGroupExampleInput" aria-label="Default select example">
+                                <option value="मीटर" selected>मीटर</option>
+                                <option value="किलोमीटर">किलोमीटर</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">भूमि पर निर्माण बना है</label>
+                            <select class="form-select inputName" name="makan" onchange="fun1(this.value)" id="formGroupExampleInput" aria-label="Default select example">
+                                <option value="हां">हां</option>
+                                <option value="नहीं"selected>नहीं </option>
+                            </select>
+                        </div>
+
+                        <div id="makantype"  style="display: none;" class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">भूमि पर निर्माण Type</label>
+                            <select class="form-select inputName" name="makantype"id="formGroupExampleInput" aria-label="Default select example">
+                                <option value="मकान" selected>मकान</option>
+                                <option value="दुकान">दुकान</option>
+                                <option value="कार्यालय">कार्यालय</option>
+                                <option value="गोदाम">गोदाम</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">भूमि पर सिंचाई का स्रोत से सिंचाई होता है </label>
+                            <select class="form-select inputName" name="kua" onchange="fun2(this.value)" id="formGroupExampleInput" aria-label="Default select example">
+                                <option value="हां">हां</option>
+                                <option value="नहीं"selected>नहीं </option>
+                            </select>
+                        </div>
+
+                        <div id="kuatype"  style="display: none;" class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">स्रोत</label>
+                            <select class="form-select inputName" name="kuatype"id="formGroupExampleInput" aria-label="Default select example">
+                                <option value="नलकूप" selected>नलकूप</option>
+                                <option value="कुंवा">कुंवा</option>
+                                <option value="नहर">नहर</option>
+                                <option value="अन्य">अन्य </option>
+                            </select>
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">भूमि पर किसी भी प्रजाति का वृक्ष</label>
+                            <select class="form-select inputName" name="tree" onchange="fun3(this.value)" id="formGroupExampleInput" aria-label="Default select example">
+                                <option value="हां">हां</option>
+                                <option value="नहीं"selected>नहीं </option>
+                            </select>
+                        </div>
+
+                        <div id="treetype"  style="display: none;" class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">वृक्ष का नाम</label>
+                            <select class="form-select inputName" name="treetype"id="formGroupExampleInput" aria-label="Default select example">
+                                <% for(let i=0;i<parray1.length;i++){%>
+                                    <option value="<%=parray1[i].name%>"><%=parray1[i].name%></option>
+                                <%}%>
+                            </select>
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">भूमि का किस्म</label>
+                            <select class="form-select inputName" name="kisam"id="formGroupExampleInput" aria-label="Default select example">
+                                <option value="अपरिवर्तित कृषि पडत" selected>अपरिवर्तित कृषि पडत</option>
+                                <option value="अपरिवर्तित कृषि असिंचित">अपरिवर्तित कृषि असिंचित</option>
+                                <option value="अपरिवर्तित कृषि सिंचित">अपरिवर्तित कृषि सिंचित</option>
+                                <option value="परिवर्तित">परिवर्तित</option>
+                                <option value="आबादी">आबादी</option>
+                                <option value="नजूल">नजूल</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">भूमि का प्रयोजन</label>
+                            <select class="form-select inputName" name="bhumi"id="formGroupExampleInput" aria-label="Default select example">
+                                <option value="कृषि" selected>कृषि</option>
+                                <option value="आवासीय">आवासीय</option>
+                                <option value="औद्योगिक">औद्योगिक</option>
+                                <option value="व्यावसायिक">व्यावसायिक</option>
+                            </select>
+                        </div>
+                        <% if(a4=="yes") {%>
+
+                        <div class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">टाउन एंड कंट्री लेआउट अनुमोदित</label>
+                            <select class="form-select inputName" name="town" onchange="fun4(this.value)" id="formGroupExampleInput" aria-label="Default select example">
+                                <option value="हां">हां</option>
+                                <option value="नहीं"selected>नहीं </option>
+                            </select>
+                        </div>
+
+                        <div id="टाउन1"  style="display: none;" class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">कार्यालय</label>
+                            <input type="text" name="town1"  class="form-control inputName" id="formGroupExampleInput" >
+                        </div>
+
+                        <div id="टाउन2"  style="display: none;" class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">पत्र क्रमांक</label>
+                            <input type="text" name="town2"  class="form-control inputName" id="formGroupExampleInput" >
+                        </div>
+                        
+                        <div id="टाउन3"  style="display: none;" class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">दिनांक</label>
+                            <input type="date" name="town3"  class="form-control inputName" id="formGroupExampleInput" >
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">रेरा से अनुमोदित</label>
+                            <select class="form-select inputName" name="rara" onchange="fun5(this.value)" id="formGroupExampleInput" aria-label="Default select example">
+                                <option value="हां">हां</option>
+                                <option value="नहीं"selected>नहीं </option>
+                            </select>
+                        </div>
+
+                        <div id="rara1"  style="display: none;" class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">रेरा रजिस्ट्रेशन नंबर</label>
+                            <input type="text" name="rara1"  class="form-control inputName" id="formGroupExampleInput" >
+                        </div>
+                        <%}%>
+
+                        <% if(a1=="yes") {%>
+                        <div class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">क्या सभी खसरो के कुल रकबे के एक तिहाई हिस्से से अधिक हिस्से में मकान निर्मित है </label>
+                            <select class="form-select inputName" name="तिहाई" id="formGroupExampleInput" aria-label="Default select example">
+                                <option value="हां">हां</option>
+                                <option value="नहीं"selected>नहीं </option>
+                            </select>
+                        </div>
+                        <%}%>
+                        <% if(a2=="yes") {%>
+
+                        <div class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">क्या पंजीयनशुदा भूमि में क्रेता (एक या एक से अधिक होने पर सभी) महिला है अर्थात जमीन को केवल महिला/महिलाओ के पक्ष में क्रय किया जा रहा है  </label>
+                            <select class="form-select inputName" name="पंजीयनशुदा" id="formGroupExampleInput" aria-label="Default select example">
+                                <option value="हां">हां</option>
+                                <option value="नहीं"selected>नहीं </option>
+                            </select>
+                        </div>
+                        <%}%>
+
+                        <% if(a3=="yes") {%>
+
+                        <div class="mb-5">
+                            <label for="formGroupExampleInput" class="form-label">क्या पंजीयनशुदा भूमि में दानग्रहीता (एक या एक से अधिक होने पर सभी) महिला है अर्थात जमीन को केवल महिला/महिलाओ के पक्ष में दान किया जा रहा है  </label>
+                            <select class="form-select inputName" name="दानग्रहीता" id="formGroupExampleInput" aria-label="Default select example">
+                                <option value="हां">हां</option>
+                                <option value="नहीं"selected>नहीं </option>
+                            </select>
+                        </div>
+                        <%}%>
+
+
+                        <div class="submit">
+                            <button class="m-5 submitbtn">SUBMIT</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script>
+      function fun3(val){
+        let treetype=document.getElementById("treetype");
+
+            if(val=="हां"){
+                treetype.style.display="block"
+            }
+            else{
+                treetype.style.display="none"
+            }
+      }
+      function fun1(val){
+        let makantype=document.getElementById("makantype");
+
+            if(val=="हां"){
+                makantype.style.display="block"
+            }
+            else{
+                makantype.style.display="none"
+            }
+      }
+      function fun5(val){
+        let rara1=document.getElementById("rara1");
+
+            if(val=="हां"){
+                rara1.style.display="block"
+            }
+            else{
+                rara1.style.display="none"
+            }
+      }
+      function fun(val){
+        let maukya1=document.getElementById("maukya1");
+        let maukya2=document.getElementById("maukya2");
+
+            if(val=="हां"){
+                maukya1.style.display="none"
+                maukya2.style.display="none"
+            }
+            else{
+                maukya1.style.display="block"
+                maukya2.style.display="block"
+            }
+      }
+      function fun4(val){
+        let टाउन1=document.getElementById("टाउन1");
+        let टाउन2=document.getElementById("टाउन2");
+        let टाउन3=document.getElementById("टाउन3");
+
+            if(val=="नहीं"){
+                टाउन1.style.display="none"
+                टाउन2.style.display="none"
+                टाउन3.style.display="none"
+            }
+            else{
+                टाउन1.style.display="block"
+                टाउन2.style.display="block"
+                टाउन3.style.display="block"
+            }
+      }
+      function fun2(val){
+        let kuatype=document.getElementById("kuatype");
+
+            if(val=="हां"){
+                kuatype.style.display="block"
+            }
+            else{
+                kuatype.style.display="none"
+            }
+      }
+    
+  
+     
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

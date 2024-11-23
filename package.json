@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Tushar1909/gov#readme",
   "dependencies": {
+    "axios": "^1.6.5",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
