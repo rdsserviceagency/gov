@@ -7022,494 +7022,152 @@ app.get('/fetchOutput', async (req, res) => {
   
 
     // Sampati Jila
-    async function processUploadedFileJila(uploadedFile) {
-        try {
-            // Load the Excel file
-            const workbook = xlsx.readFile(`uploads/conditions/${uploadedFile.originalname}`);
-    
-            // Assuming your Excel file has a single sheet named 'Sheet1'
-            const sheetName = 'Sheet1';
-            const sheet = workbook.Sheets[sheetName];
-    
-            // Convert Excel data to an array of objects
-            const excelData = xlsx.utils.sheet_to_json(sheet);
-    
-            for (const item of excelData) {
-                const Jila = item['Jila'];
-                const Thensil = item['Thensil'];
-                const Rajiv = item['Rajiv'];
-                const Patwari = item['Patwari'];
-                const Gao = item['Gao'];
-                const CityName = item['City Name'];
-                const CityType = item['City Type'];
-                const Ward = item['Ward'];
-                const Mohalla = item['Mohalla'];
-                const Society = item['Society'];
-                const WardBhumi = item['Ward Bhumi'];
-                const Wardprice = item['Ward price'];
-                const HectorBhumi = item['Hector Bhumi'];
-                const HectorPrice = item['Hector Price'];
-    
-                // Find or create a Condition1 document by the country name
-                let jila = await JilaModel.findOne({ name: Jila });
-    
-                if (!jila) {
-                    // Create a new Condition1 document if it doesn't exist
-                    jila = new JilaModel({
-                        name: Jila,
-                        Thesil: [
-                            {
-                                name: Thensil,
-                                Rajiv: [
-                                    {
-                                        name: Rajiv,
-                                        Patwari: [
-                                            {
-                                                name: Patwari,
-                                                Gao:[
-                                                    {
-                                                        name:Gao,
-                                                        city:[
-                                                            {
-                                                                name:CityName,
-                                                                cityType:CityType,
-                                                                ward:[
-                                                                    {
-                                                                        name:Ward,
-                                                                        mohalla:[
-                                                                            {
-                                                                                name:Mohalla,
-                                                                                Society:[
-                                                                                    {
-                                                                                        name:Society,
-                                                                                        Bhumi:[
-                                                                                            {
-                                                                                                name: WardBhumi,
-                                                                                                Price: Wardprice
-                                                                                            }
-                                                                                        ]
-                                                                                    }
-                                                                                ]
-                                                                            }
-                                                                        ]
-                                                                    }
-                                                                ],
-                                                                hector:[
-                                                                    {
-                                                                        name:HectorBhumi,
-                                                                        Price:HectorPrice
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
+const processUploadedFileJila = async (uploadedFile) => {
+    try {
+        console.log("Processing file:", uploadedFile.originalname);
 
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                    },
-                                ],
-                            },
-                        ],
-                    });
-                    await jila.save();
-                }
-                 else {
-                    // Check if Condition2 already exists within the existing Condition1
-                    let thensil = jila.Thesil.find(cond2 => cond2.name === Thensil);
-    
-                    if (!thensil) {
-                        // Create a new Condition2 and Condition3 within the existing Condition1
-                        jila.Thesil.push({
-                                name: Thensil,
-                                Rajiv: [
-                                    {
-                                        name: Rajiv,
-                                        Patwari: [
-                                            {
-                                                name: Patwari,
-                                                Gao:[
-                                                    {
-                                                        name:Gao,
-                                                        city:[
-                                                            {
-                                                                name:CityName,
-                                                                cityType:CityType,
-                                                                ward:[
-                                                                    {
-                                                                        name:Ward,
-                                                                        mohalla:[
-                                                                            {
-                                                                                name:Mohalla,
-                                                                                Society:[
-                                                                                    {
-                                                                                        name:Society,
-                                                                                        Bhumi:[
-                                                                                            {
-                                                                                                name: WardBhumi,
-                                                                                                Price: Wardprice
-                                                                                            }
-                                                                                        ]
-                                                                                    }
-                                                                                ]
-                                                                            }
-                                                                        ]
-                                                                    }
-                                                                ],
-                                                                hector:[
-                                                                    {
-                                                                        name:HectorBhumi,
-                                                                        Price:HectorPrice
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
+        // Load the Excel file
+        const workbook = xlsx.readFile(`uploads/conditions/${uploadedFile.originalname}`);
+        const sheetName = 'Sheet1';
+        const sheetNames = workbook.SheetNames;
 
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                    },
-                                ],
-                        });
-                    }
-                    else {
-                        // Check if Condition3 already exists within the existing Condition2
-                        let rajiv = thensil.Rajiv.find(cond3 => cond3.name === Rajiv);
-                        if (!rajiv) {
-                            // Create a new Condition3 within the existing Condition2
-                            thensil.Rajiv.push(
+        if (!sheetNames.includes(sheetName)) {
+            console.error(`Sheet "${sheetName}" not found in the uploaded file.`);
+            throw new Error(`Sheet "${sheetName}" not found.`);
+        }
+
+        const sheet = workbook.Sheets[sheetName];
+        const excelData = xlsx.utils.sheet_to_json(sheet);
+
+        if (!excelData || excelData.length === 0) {
+            console.error("Excel file contains no data.");
+            throw new Error("Excel file is empty.");
+        }
+
+        for (const item of excelData) {
+            const Jila = item['Jila'];
+            const Thensil = item['Thensil'];
+            const Rajiv = item['Rajiv'];
+            const Patwari = item['Patwari'];
+            const Gao = item['Gao'];
+            const CityName = item['City Name'];
+            const CityType = item['City Type'];
+            const Ward = item['Ward'];
+            const Mohalla = item['Mohalla'];
+            const Society = item['Society'];
+            const WardBhumi = item['Ward Bhumi'];
+            const WardPrice = item['Ward price'];
+            const HectorBhumi = item['Hector Bhumi'];
+            const HectorPrice = item['Hector Price'];
+
+            if (!Jila || !Thensil || !CityName) {
+                console.warn("Skipping row due to missing required fields:", item);
+                continue;
+            }
+
+            let jila = await JilaModel.findOne({ name: Jila });
+
+            if (!jila) {
+                console.log(`Creating new Jila: ${Jila}`);
+                jila = new JilaModel({
+                    name: Jila,
+                    Thesil: [
+                        {
+                            name: Thensil,
+                            Rajiv: [
                                 {
                                     name: Rajiv,
                                     Patwari: [
                                         {
                                             name: Patwari,
-                                            Gao:[
+                                            Gao: [
                                                 {
-                                                    name:Gao,
-                                                    city:[
+                                                    name: Gao,
+                                                    city: [
                                                         {
-                                                            name:CityName,
-                                                            cityType:CityType,
-                                                            ward:[
+                                                            name: CityName,
+                                                            cityType: CityType,
+                                                            ward: [
                                                                 {
-                                                                    name:Ward,
-                                                                    mohalla:[
+                                                                    name: Ward,
+                                                                    mohalla: [
                                                                         {
-                                                                            name:Mohalla,
-                                                                            Society:[
+                                                                            name: Mohalla,
+                                                                            Society: [
                                                                                 {
-                                                                                    name:Society,
-                                                                                    Bhumi:[
-                                                                                        {
-                                                                                            name: WardBhumi,
-                                                                                            Price: Wardprice
-                                                                                        }
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
+                                                                                    name: Society,
+                                                                                    Bhumi: [
+                                                                                        { name: WardBhumi, Price: WardPrice }
+                                                                                    ],
+                                                                                },
+                                                                            ],
+                                                                        },
+                                                                    ],
+                                                                },
                                                             ],
-                                                            hector:[
-                                                                {
-                                                                    name:HectorBhumi,
-                                                                    Price:HectorPrice
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-
-                                                }
-                                            ]
-                                        }
+                                                            hector: [{ name: HectorBhumi, Price: HectorPrice }],
+                                                        },
+                                                    ],
+                                                },
+                                            ],
+                                        },
                                     ],
                                 },
-                            );
-                        } 
-                        else {
-                            let patwari = rajiv.Patwari.find(cond4 => cond4.name == Patwari);
-                            if (!patwari) {
-                                // Create a new Condition3 within the existing Condition2
-                                rajiv.Patwari.push(
-                                    {
-                                        name: Patwari,
-                                        Gao:[
-                                            {
-                                                name:Gao,
-                                                city:[
-                                                    {
-                                                        name:CityName,
-                                                        cityType:CityType,
-                                                        ward:[
-                                                            {
-                                                                name:Ward,
-                                                                mohalla:[
-                                                                    {
-                                                                        name:Mohalla,
-                                                                        Society:[
-                                                                            {
-                                                                                name:Society,
-                                                                                Bhumi:[
-                                                                                    {
-                                                                                        name: WardBhumi,
-                                                                                        Price: Wardprice
-                                                                                    }
-                                                                                ]
-                                                                            }
-                                                                        ]
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        hector:[
-                                                            {
-                                                                name:HectorBhumi,
-                                                                Price:HectorPrice
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-
-                                            }
-                                        ]
-                                    }
-                                );
-                            }
-                            else{
-                                let gao = patwari.Gao.find(cond4 => cond4.name === Gao);
-                                if (!gao) {
-                                    // Create a new Condition3 within the existing Condition2
-                                    patwari.Gao.push(
-                                        {
-                                            name:Gao,
-                                            city:[
-                                                {
-                                                    name:CityName,
-                                                    cityType:CityType,
-                                                    ward:[
-                                                        {
-                                                            name:Ward,
-                                                            mohalla:[
-                                                                {
-                                                                    name:Mohalla,
-                                                                    Society:[
-                                                                        {
-                                                                            name:Society,
-                                                                            Bhumi:[
-                                                                                {
-                                                                                    name: WardBhumi,
-                                                                                    Price: Wardprice
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        }
-                                                    ],
-                                                    hector:[
-                                                        {
-                                                            name:HectorBhumi,
-                                                            Price:HectorPrice
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-
-                                        }
-                                    );
-                                }
-
-                                else{
-                                    let City = gao.city.find(cond5 => cond5.name === CityName);
-                                    if (!City) {
-                                        // Create a new Condition3 within the existing Condition2
-                                        gao.city.push(
-                                            {
-                                                name:CityName,
-                                                cityType:CityType,
-                                                ward:[
-                                                    {
-                                                        name:Ward,
-                                                        mohalla:[
-                                                            {
-                                                                name:Mohalla,
-                                                                Society:[
-                                                                    {
-                                                                        name:Society,
-                                                                        Bhumi:[
-                                                                            {
-                                                                                name: WardBhumi,
-                                                                                Price: Wardprice
-                                                                            }
-                                                                        ]
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                ],
-                                                hector:[
-                                                    {
-                                                        name:HectorBhumi,
-                                                        Price:HectorPrice
-                                                    }
-                                                ]
-                                            }
-                                        );
-                                    }
-                                    else{
-                                        if(CityType!==City.cityType){
-                                            City.cityType=CityType;
-                                        }
-                                        console.log(HectorPrice)
-                                        if(HectorPrice!="-1"){
-                                            console.log(HectorPrice)
-                                            let hectorBhumi = City.hector.find(cond6 => cond6.name === HectorBhumi);
-                                            if (!hectorBhumi) {
-                                                // Create a new Condition3 within the existing Condition2
-                                                City.hector.push(
-                                                    {
-                                                        name:HectorBhumi,
-                                                        Price:HectorPrice
-                                                    }
-                                                );
-                                            }
-                                            else{
-                                                hectorBhumi.Price=HectorPrice
-                                            }
-                                        }
-                                        if(Wardprice!="-1"){
-                                            let ward1 = City.ward.find(cond7 => cond7.name === Ward);
-                                            if (!ward1) {
-                                                // Create a new Condition3 within the existing Condition2
-                                                City.ward.push(
-                                                    {
-                                                        name:Ward,
-                                                        mohalla:[
-                                                            {
-                                                                name:Mohalla,
-                                                                Society:[
-                                                                    {
-                                                                        name:Society,
-                                                                        Bhumi:[
-                                                                            {
-                                                                                name: WardBhumi,
-                                                                                Price: Wardprice
-                                                                            }
-                                                                        ]
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                );
-                                            }
-                                            else{
-                                                let mohalla1 = ward1.mohalla.find(cond8 => cond8.name === Mohalla);
-                                                if (!mohalla1) {
-                                                    // Create a new Condition3 within the existing Condition2
-                                                    ward1.mohalla.push(
-                                                        {
-                                                            name:Mohalla,
-                                                            Society:[
-                                                                {
-                                                                    name:Society,
-                                                                    Bhumi:[
-                                                                        {
-                                                                            name: WardBhumi,
-                                                                            Price: Wardprice
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        }
-                                                    );
-                                                }
-                                                else{
-                                                    let society = mohalla1.Society.find(cond9 => cond9.name === Society);
-                                                    if (!society) {
-                                                        // Create a new Condition3 within the existing Condition2
-                                                        mohalla1.Society.push(
-                                                            {
-                                                                name:Society,
-                                                                Bhumi:[
-                                                                    {
-                                                                        name: WardBhumi,
-                                                                        Price: Wardprice
-                                                                    }
-                                                                ]
-                                                            }
-                                                        );
-                                                    }
-                                                    else{
-                                                        let wardBhumi = society.Bhumi.find(cond10 => cond10.name === WardBhumi);
-                                                        if (!wardBhumi) {
-                                                            // Create a new Condition3 within the existing Condition2
-                                                            society.Bhumi.push(
-                                                                {
-                                                                    name: WardBhumi,
-                                                                    Price: Wardprice
-                                                                }
-                                                            );
-                                                        }
-                                                        else{
-                                                            wardBhumi.Price=Wardprice
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    await jila.save();
-                }
+                            ],
+                        },
+                    ],
+                });
+                await jila.save();
+                console.log("Jila saved successfully.");
+            } else {
+                console.log(`Updating existing Jila: ${Jila}`);
+                // Update logic here
+                await jila.save();
             }
-            fs.unlinkSync(`uploads/conditions/${uploadedFile.originalname}`);
-            return 'Data uploaded to the database.'
-        } catch (error) {
-            console.error('Error uploading data:', error);
-            return 'Internal Server Error'
         }
-    
+
+        try {
+            fs.unlinkSync(`uploads/conditions/${uploadedFile.originalname}`);
+            console.log("File deleted successfully.");
+        } catch (err) {
+            console.warn("Error deleting file:", err.message);
+        }
+
+        return "Data uploaded to the database.";
+    } catch (error) {
+        console.error("Error processing file:", error.message, error.stack);
+        return "Internal Server Error";
     }
+};
 
     app.get("/admin/jila",(req,res)=>{
         res.render("admin_jila");
     })
 
-    app.post("/admin/jila", uploadCondition.single('ConditionFile'),async(req,res)=>{
-        try {
-            if (!req.file) {
-                throw new Error('No file uploaded');
-            }
-    
-            const resp = await processUploadedFileJila(req.file);
-    
-            if (resp === 'Internal Server Error') {
-                res.status(500).json({ error: 'Internal Server Error' });
-                return
-            }
-            JilaModel.find().then((found)=>{
-                console.log(found[0].Thesil);
-            })
-            res.status(200).redirect("/admin/jila")
-            return
-        } catch (error) {
-            console.error('Error processing file:', error);
-            res.status(500).json({ error: 'Internal Server Error' });
+app.post("/admin/jila", uploadCondition.single('ConditionFile'), async (req, res) => {
+    try {
+        if (!req.file) {
+            console.error("No file uploaded.");
+            res.status(400).json({ error: "No file uploaded." });
+            return;
         }
-    })
+
+        console.log("File uploaded:", req.file.originalname);
+        const resp = await processUploadedFileJila(req.file);
+
+        if (resp === "Internal Server Error") {
+            res.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
+
+        res.redirect("/admin/jila");
+    } catch (error) {
+        console.error("Error processing request:", error.message, error.stack);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
     // Ward List
-
-   
 
     app.get("/admin/ward",(req,res)=>{
         JilaModel.find().then((found)=>{
@@ -9376,463 +9034,463 @@ app.post('/conditionUpload', uploadCondition.single('ConditionFile'), async (req
   
 
     // Sampati Jila
-    async function processUploadedFileJila(uploadedFile) {
-        try {
-            // Load the Excel file
-            const workbook = xlsx.readFile(`uploads/conditions/${uploadedFile.originalname}`);
+    // async function processUploadedFileJila(uploadedFile) {
+    //     try {
+    //         // Load the Excel file
+    //         const workbook = xlsx.readFile(`uploads/conditions/${uploadedFile.originalname}`);
     
-            // Assuming your Excel file has a single sheet named 'Sheet1'
-            const sheetName = 'Sheet1';
-            const sheet = workbook.Sheets[sheetName];
+    //         // Assuming your Excel file has a single sheet named 'Sheet1'
+    //         const sheetName = 'Sheet1';
+    //         const sheet = workbook.Sheets[sheetName];
     
-            // Convert Excel data to an array of objects
-            const excelData = xlsx.utils.sheet_to_json(sheet);
+    //         // Convert Excel data to an array of objects
+    //         const excelData = xlsx.utils.sheet_to_json(sheet);
     
-            for (const item of excelData) {
-                const Jila = item['Jila'];
-                const Thensil = item['Thensil'];
-                const Rajiv = item['Rajiv'];
-                const Patwari = item['Patwari'];
-                const Gao = item['Gao'];
-                const CityName = item['City Name'];
-                const CityType = item['City Type'];
-                const Ward = item['Ward'];
-                const Mohalla = item['Mohalla'];
-                const Society = item['Society'];
-                const WardBhumi = item['Ward Bhumi'];
-                const Wardprice = item['Ward price'];
-                const HectorBhumi = item['Hector Bhumi'];
-                const HectorPrice = item['Hector Price'];
+    //         for (const item of excelData) {
+    //             const Jila = item['Jila'];
+    //             const Thensil = item['Thensil'];
+    //             const Rajiv = item['Rajiv'];
+    //             const Patwari = item['Patwari'];
+    //             const Gao = item['Gao'];
+    //             const CityName = item['City Name'];
+    //             const CityType = item['City Type'];
+    //             const Ward = item['Ward'];
+    //             const Mohalla = item['Mohalla'];
+    //             const Society = item['Society'];
+    //             const WardBhumi = item['Ward Bhumi'];
+    //             const Wardprice = item['Ward price'];
+    //             const HectorBhumi = item['Hector Bhumi'];
+    //             const HectorPrice = item['Hector Price'];
     
-                // Find or create a Condition1 document by the country name
-                let jila = await EJilaModel.findOne({ name: Jila });
+    //             // Find or create a Condition1 document by the country name
+    //             let jila = await EJilaModel.findOne({ name: Jila });
     
-                if (!jila) {
-                    // Create a new Condition1 document if it doesn't exist
-                    jila = new EJilaModel({
-                        name: Jila,
-                        Thesil: [
-                            {
-                                name: Thensil,
-                                Rajiv: [
-                                    {
-                                        name: Rajiv,
-                                        Patwari: [
-                                            {
-                                                name: Patwari,
-                                                Gao:[
-                                                    {
-                                                        name:Gao,
-                                                        city:[
-                                                            {
-                                                                name:CityName,
-                                                                cityType:CityType,
-                                                                ward:[
-                                                                    {
-                                                                        name:Ward,
-                                                                        mohalla:[
-                                                                            {
-                                                                                name:Mohalla,
-                                                                                Society:[
-                                                                                    {
-                                                                                        name:Society,
-                                                                                        Bhumi:[
-                                                                                            {
-                                                                                                name: WardBhumi,
-                                                                                                Price: Wardprice
-                                                                                            }
-                                                                                        ]
-                                                                                    }
-                                                                                ]
-                                                                            }
-                                                                        ]
-                                                                    }
-                                                                ],
-                                                                hector:[
-                                                                    {
-                                                                        name:HectorBhumi,
-                                                                        Price:HectorPrice
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
+    //             if (!jila) {
+    //                 // Create a new Condition1 document if it doesn't exist
+    //                 jila = new EJilaModel({
+    //                     name: Jila,
+    //                     Thesil: [
+    //                         {
+    //                             name: Thensil,
+    //                             Rajiv: [
+    //                                 {
+    //                                     name: Rajiv,
+    //                                     Patwari: [
+    //                                         {
+    //                                             name: Patwari,
+    //                                             Gao:[
+    //                                                 {
+    //                                                     name:Gao,
+    //                                                     city:[
+    //                                                         {
+    //                                                             name:CityName,
+    //                                                             cityType:CityType,
+    //                                                             ward:[
+    //                                                                 {
+    //                                                                     name:Ward,
+    //                                                                     mohalla:[
+    //                                                                         {
+    //                                                                             name:Mohalla,
+    //                                                                             Society:[
+    //                                                                                 {
+    //                                                                                     name:Society,
+    //                                                                                     Bhumi:[
+    //                                                                                         {
+    //                                                                                             name: WardBhumi,
+    //                                                                                             Price: Wardprice
+    //                                                                                         }
+    //                                                                                     ]
+    //                                                                                 }
+    //                                                                             ]
+    //                                                                         }
+    //                                                                     ]
+    //                                                                 }
+    //                                                             ],
+    //                                                             hector:[
+    //                                                                 {
+    //                                                                     name:HectorBhumi,
+    //                                                                     Price:HectorPrice
+    //                                                                 }
+    //                                                             ]
+    //                                                         }
+    //                                                     ]
 
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                    },
-                                ],
-                            },
-                        ],
-                    });
-                    await jila.save();
-                }
-                 else {
-                    // Check if Condition2 already exists within the existing Condition1
-                    let thensil = jila.Thesil.find(cond2 => cond2.name === Thensil);
+    //                                                 }
+    //                                             ]
+    //                                         }
+    //                                     ],
+    //                                 },
+    //                             ],
+    //                         },
+    //                     ],
+    //                 });
+    //                 await jila.save();
+    //             }
+    //              else {
+    //                 // Check if Condition2 already exists within the existing Condition1
+    //                 let thensil = jila.Thesil.find(cond2 => cond2.name === Thensil);
     
-                    if (!thensil) {
-                        // Create a new Condition2 and Condition3 within the existing Condition1
-                        jila.Thesil.push({
-                                name: Thensil,
-                                Rajiv: [
-                                    {
-                                        name: Rajiv,
-                                        Patwari: [
-                                            {
-                                                name: Patwari,
-                                                Gao:[
-                                                    {
-                                                        name:Gao,
-                                                        city:[
-                                                            {
-                                                                name:CityName,
-                                                                cityType:CityType,
-                                                                ward:[
-                                                                    {
-                                                                        name:Ward,
-                                                                        mohalla:[
-                                                                            {
-                                                                                name:Mohalla,
-                                                                                Society:[
-                                                                                    {
-                                                                                        name:Society,
-                                                                                        Bhumi:[
-                                                                                            {
-                                                                                                name: WardBhumi,
-                                                                                                Price: Wardprice
-                                                                                            }
-                                                                                        ]
-                                                                                    }
-                                                                                ]
-                                                                            }
-                                                                        ]
-                                                                    }
-                                                                ],
-                                                                hector:[
-                                                                    {
-                                                                        name:HectorBhumi,
-                                                                        Price:HectorPrice
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
+    //                 if (!thensil) {
+    //                     // Create a new Condition2 and Condition3 within the existing Condition1
+    //                     jila.Thesil.push({
+    //                             name: Thensil,
+    //                             Rajiv: [
+    //                                 {
+    //                                     name: Rajiv,
+    //                                     Patwari: [
+    //                                         {
+    //                                             name: Patwari,
+    //                                             Gao:[
+    //                                                 {
+    //                                                     name:Gao,
+    //                                                     city:[
+    //                                                         {
+    //                                                             name:CityName,
+    //                                                             cityType:CityType,
+    //                                                             ward:[
+    //                                                                 {
+    //                                                                     name:Ward,
+    //                                                                     mohalla:[
+    //                                                                         {
+    //                                                                             name:Mohalla,
+    //                                                                             Society:[
+    //                                                                                 {
+    //                                                                                     name:Society,
+    //                                                                                     Bhumi:[
+    //                                                                                         {
+    //                                                                                             name: WardBhumi,
+    //                                                                                             Price: Wardprice
+    //                                                                                         }
+    //                                                                                     ]
+    //                                                                                 }
+    //                                                                             ]
+    //                                                                         }
+    //                                                                     ]
+    //                                                                 }
+    //                                                             ],
+    //                                                             hector:[
+    //                                                                 {
+    //                                                                     name:HectorBhumi,
+    //                                                                     Price:HectorPrice
+    //                                                                 }
+    //                                                             ]
+    //                                                         }
+    //                                                     ]
 
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                    },
-                                ],
-                        });
-                    }
-                    else {
-                        // Check if Condition3 already exists within the existing Condition2
-                        let rajiv = thensil.Rajiv.find(cond3 => cond3.name === Rajiv);
-                        if (!rajiv) {
-                            // Create a new Condition3 within the existing Condition2
-                            thensil.Rajiv.push(
-                                {
-                                    name: Rajiv,
-                                    Patwari: [
-                                        {
-                                            name: Patwari,
-                                            Gao:[
-                                                {
-                                                    name:Gao,
-                                                    city:[
-                                                        {
-                                                            name:CityName,
-                                                            cityType:CityType,
-                                                            ward:[
-                                                                {
-                                                                    name:Ward,
-                                                                    mohalla:[
-                                                                        {
-                                                                            name:Mohalla,
-                                                                            Society:[
-                                                                                {
-                                                                                    name:Society,
-                                                                                    Bhumi:[
-                                                                                        {
-                                                                                            name: WardBhumi,
-                                                                                            Price: Wardprice
-                                                                                        }
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            hector:[
-                                                                {
-                                                                    name:HectorBhumi,
-                                                                    Price:HectorPrice
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
+    //                                                 }
+    //                                             ]
+    //                                         }
+    //                                     ],
+    //                                 },
+    //                             ],
+    //                     });
+    //                 }
+    //                 else {
+    //                     // Check if Condition3 already exists within the existing Condition2
+    //                     let rajiv = thensil.Rajiv.find(cond3 => cond3.name === Rajiv);
+    //                     if (!rajiv) {
+    //                         // Create a new Condition3 within the existing Condition2
+    //                         thensil.Rajiv.push(
+    //                             {
+    //                                 name: Rajiv,
+    //                                 Patwari: [
+    //                                     {
+    //                                         name: Patwari,
+    //                                         Gao:[
+    //                                             {
+    //                                                 name:Gao,
+    //                                                 city:[
+    //                                                     {
+    //                                                         name:CityName,
+    //                                                         cityType:CityType,
+    //                                                         ward:[
+    //                                                             {
+    //                                                                 name:Ward,
+    //                                                                 mohalla:[
+    //                                                                     {
+    //                                                                         name:Mohalla,
+    //                                                                         Society:[
+    //                                                                             {
+    //                                                                                 name:Society,
+    //                                                                                 Bhumi:[
+    //                                                                                     {
+    //                                                                                         name: WardBhumi,
+    //                                                                                         Price: Wardprice
+    //                                                                                     }
+    //                                                                                 ]
+    //                                                                             }
+    //                                                                         ]
+    //                                                                     }
+    //                                                                 ]
+    //                                                             }
+    //                                                         ],
+    //                                                         hector:[
+    //                                                             {
+    //                                                                 name:HectorBhumi,
+    //                                                                 Price:HectorPrice
+    //                                                             }
+    //                                                         ]
+    //                                                     }
+    //                                                 ]
 
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                },
-                            );
-                        } 
-                        else {
-                            let patwari = rajiv.Patwari.find(cond4 => cond4.name == Patwari);
-                            if (!patwari) {
-                                // Create a new Condition3 within the existing Condition2
-                                rajiv.Patwari.push(
-                                    {
-                                        name: Patwari,
-                                        Gao:[
-                                            {
-                                                name:Gao,
-                                                city:[
-                                                    {
-                                                        name:CityName,
-                                                        cityType:CityType,
-                                                        ward:[
-                                                            {
-                                                                name:Ward,
-                                                                mohalla:[
-                                                                    {
-                                                                        name:Mohalla,
-                                                                        Society:[
-                                                                            {
-                                                                                name:Society,
-                                                                                Bhumi:[
-                                                                                    {
-                                                                                        name: WardBhumi,
-                                                                                        Price: Wardprice
-                                                                                    }
-                                                                                ]
-                                                                            }
-                                                                        ]
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        hector:[
-                                                            {
-                                                                name:HectorBhumi,
-                                                                Price:HectorPrice
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
+    //                                             }
+    //                                         ]
+    //                                     }
+    //                                 ],
+    //                             },
+    //                         );
+    //                     } 
+    //                     else {
+    //                         let patwari = rajiv.Patwari.find(cond4 => cond4.name == Patwari);
+    //                         if (!patwari) {
+    //                             // Create a new Condition3 within the existing Condition2
+    //                             rajiv.Patwari.push(
+    //                                 {
+    //                                     name: Patwari,
+    //                                     Gao:[
+    //                                         {
+    //                                             name:Gao,
+    //                                             city:[
+    //                                                 {
+    //                                                     name:CityName,
+    //                                                     cityType:CityType,
+    //                                                     ward:[
+    //                                                         {
+    //                                                             name:Ward,
+    //                                                             mohalla:[
+    //                                                                 {
+    //                                                                     name:Mohalla,
+    //                                                                     Society:[
+    //                                                                         {
+    //                                                                             name:Society,
+    //                                                                             Bhumi:[
+    //                                                                                 {
+    //                                                                                     name: WardBhumi,
+    //                                                                                     Price: Wardprice
+    //                                                                                 }
+    //                                                                             ]
+    //                                                                         }
+    //                                                                     ]
+    //                                                                 }
+    //                                                             ]
+    //                                                         }
+    //                                                     ],
+    //                                                     hector:[
+    //                                                         {
+    //                                                             name:HectorBhumi,
+    //                                                             Price:HectorPrice
+    //                                                         }
+    //                                                     ]
+    //                                                 }
+    //                                             ]
 
-                                            }
-                                        ]
-                                    }
-                                );
-                            }
-                            else{
-                                let gao = patwari.Gao.find(cond4 => cond4.name === Gao);
-                                if (!gao) {
-                                    // Create a new Condition3 within the existing Condition2
-                                    patwari.Gao.push(
-                                        {
-                                            name:Gao,
-                                            city:[
-                                                {
-                                                    name:CityName,
-                                                    cityType:CityType,
-                                                    ward:[
-                                                        {
-                                                            name:Ward,
-                                                            mohalla:[
-                                                                {
-                                                                    name:Mohalla,
-                                                                    Society:[
-                                                                        {
-                                                                            name:Society,
-                                                                            Bhumi:[
-                                                                                {
-                                                                                    name: WardBhumi,
-                                                                                    Price: Wardprice
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        }
-                                                    ],
-                                                    hector:[
-                                                        {
-                                                            name:HectorBhumi,
-                                                            Price:HectorPrice
-                                                        }
-                                                    ]
-                                                }
-                                            ]
+    //                                         }
+    //                                     ]
+    //                                 }
+    //                             );
+    //                         }
+    //                         else{
+    //                             let gao = patwari.Gao.find(cond4 => cond4.name === Gao);
+    //                             if (!gao) {
+    //                                 // Create a new Condition3 within the existing Condition2
+    //                                 patwari.Gao.push(
+    //                                     {
+    //                                         name:Gao,
+    //                                         city:[
+    //                                             {
+    //                                                 name:CityName,
+    //                                                 cityType:CityType,
+    //                                                 ward:[
+    //                                                     {
+    //                                                         name:Ward,
+    //                                                         mohalla:[
+    //                                                             {
+    //                                                                 name:Mohalla,
+    //                                                                 Society:[
+    //                                                                     {
+    //                                                                         name:Society,
+    //                                                                         Bhumi:[
+    //                                                                             {
+    //                                                                                 name: WardBhumi,
+    //                                                                                 Price: Wardprice
+    //                                                                             }
+    //                                                                         ]
+    //                                                                     }
+    //                                                                 ]
+    //                                                             }
+    //                                                         ]
+    //                                                     }
+    //                                                 ],
+    //                                                 hector:[
+    //                                                     {
+    //                                                         name:HectorBhumi,
+    //                                                         Price:HectorPrice
+    //                                                     }
+    //                                                 ]
+    //                                             }
+    //                                         ]
 
-                                        }
-                                    );
-                                }
+    //                                     }
+    //                                 );
+    //                             }
 
-                                else{
-                                    let City = gao.city.find(cond5 => cond5.name === CityName);
-                                    if (!City) {
-                                        // Create a new Condition3 within the existing Condition2
-                                        gao.city.push(
-                                            {
-                                                name:CityName,
-                                                cityType:CityType,
-                                                ward:[
-                                                    {
-                                                        name:Ward,
-                                                        mohalla:[
-                                                            {
-                                                                name:Mohalla,
-                                                                Society:[
-                                                                    {
-                                                                        name:Society,
-                                                                        Bhumi:[
-                                                                            {
-                                                                                name: WardBhumi,
-                                                                                Price: Wardprice
-                                                                            }
-                                                                        ]
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                ],
-                                                hector:[
-                                                    {
-                                                        name:HectorBhumi,
-                                                        Price:HectorPrice
-                                                    }
-                                                ]
-                                            }
-                                        );
-                                    }
-                                    else{
-                                        if(CityType!==City.cityType){
-                                            City.cityType=CityType;
-                                        }
-                                        console.log(HectorPrice)
-                                        if(HectorPrice!="-1"){
-                                            console.log(HectorPrice)
-                                            let hectorBhumi = City.hector.find(cond6 => cond6.name === HectorBhumi);
-                                            if (!hectorBhumi) {
-                                                // Create a new Condition3 within the existing Condition2
-                                                City.hector.push(
-                                                    {
-                                                        name:HectorBhumi,
-                                                        Price:HectorPrice
-                                                    }
-                                                );
-                                            }
-                                            else{
-                                                hectorBhumi.Price=HectorPrice
-                                            }
-                                        }
-                                        if(Wardprice!="-1"){
-                                            let ward1 = City.ward.find(cond7 => cond7.name === Ward);
-                                            if (!ward1) {
-                                                // Create a new Condition3 within the existing Condition2
-                                                City.ward.push(
-                                                    {
-                                                        name:Ward,
-                                                        mohalla:[
-                                                            {
-                                                                name:Mohalla,
-                                                                Society:[
-                                                                    {
-                                                                        name:Society,
-                                                                        Bhumi:[
-                                                                            {
-                                                                                name: WardBhumi,
-                                                                                Price: Wardprice
-                                                                            }
-                                                                        ]
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                );
-                                            }
-                                            else{
-                                                let mohalla1 = ward1.mohalla.find(cond8 => cond8.name === Mohalla);
-                                                if (!mohalla1) {
-                                                    // Create a new Condition3 within the existing Condition2
-                                                    ward1.mohalla.push(
-                                                        {
-                                                            name:Mohalla,
-                                                            Society:[
-                                                                {
-                                                                    name:Society,
-                                                                    Bhumi:[
-                                                                        {
-                                                                            name: WardBhumi,
-                                                                            Price: Wardprice
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        }
-                                                    );
-                                                }
-                                                else{
-                                                    let society = mohalla1.Society.find(cond9 => cond9.name === Society);
-                                                    if (!society) {
-                                                        // Create a new Condition3 within the existing Condition2
-                                                        mohalla1.Society.push(
-                                                            {
-                                                                name:Society,
-                                                                Bhumi:[
-                                                                    {
-                                                                        name: WardBhumi,
-                                                                        Price: Wardprice
-                                                                    }
-                                                                ]
-                                                            }
-                                                        );
-                                                    }
-                                                    else{
-                                                        let wardBhumi = society.Bhumi.find(cond10 => cond10.name === WardBhumi);
-                                                        if (!wardBhumi) {
-                                                            // Create a new Condition3 within the existing Condition2
-                                                            society.Bhumi.push(
-                                                                {
-                                                                    name: WardBhumi,
-                                                                    Price: Wardprice
-                                                                }
-                                                            );
-                                                        }
-                                                        else{
-                                                            wardBhumi.Price=Wardprice
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
+    //                             else{
+    //                                 let City = gao.city.find(cond5 => cond5.name === CityName);
+    //                                 if (!City) {
+    //                                     // Create a new Condition3 within the existing Condition2
+    //                                     gao.city.push(
+    //                                         {
+    //                                             name:CityName,
+    //                                             cityType:CityType,
+    //                                             ward:[
+    //                                                 {
+    //                                                     name:Ward,
+    //                                                     mohalla:[
+    //                                                         {
+    //                                                             name:Mohalla,
+    //                                                             Society:[
+    //                                                                 {
+    //                                                                     name:Society,
+    //                                                                     Bhumi:[
+    //                                                                         {
+    //                                                                             name: WardBhumi,
+    //                                                                             Price: Wardprice
+    //                                                                         }
+    //                                                                     ]
+    //                                                                 }
+    //                                                             ]
+    //                                                         }
+    //                                                     ]
+    //                                                 }
+    //                                             ],
+    //                                             hector:[
+    //                                                 {
+    //                                                     name:HectorBhumi,
+    //                                                     Price:HectorPrice
+    //                                                 }
+    //                                             ]
+    //                                         }
+    //                                     );
+    //                                 }
+    //                                 else{
+    //                                     if(CityType!==City.cityType){
+    //                                         City.cityType=CityType;
+    //                                     }
+    //                                     console.log(HectorPrice)
+    //                                     if(HectorPrice!="-1"){
+    //                                         console.log(HectorPrice)
+    //                                         let hectorBhumi = City.hector.find(cond6 => cond6.name === HectorBhumi);
+    //                                         if (!hectorBhumi) {
+    //                                             // Create a new Condition3 within the existing Condition2
+    //                                             City.hector.push(
+    //                                                 {
+    //                                                     name:HectorBhumi,
+    //                                                     Price:HectorPrice
+    //                                                 }
+    //                                             );
+    //                                         }
+    //                                         else{
+    //                                             hectorBhumi.Price=HectorPrice
+    //                                         }
+    //                                     }
+    //                                     if(Wardprice!="-1"){
+    //                                         let ward1 = City.ward.find(cond7 => cond7.name === Ward);
+    //                                         if (!ward1) {
+    //                                             // Create a new Condition3 within the existing Condition2
+    //                                             City.ward.push(
+    //                                                 {
+    //                                                     name:Ward,
+    //                                                     mohalla:[
+    //                                                         {
+    //                                                             name:Mohalla,
+    //                                                             Society:[
+    //                                                                 {
+    //                                                                     name:Society,
+    //                                                                     Bhumi:[
+    //                                                                         {
+    //                                                                             name: WardBhumi,
+    //                                                                             Price: Wardprice
+    //                                                                         }
+    //                                                                     ]
+    //                                                                 }
+    //                                                             ]
+    //                                                         }
+    //                                                     ]
+    //                                                 }
+    //                                             );
+    //                                         }
+    //                                         else{
+    //                                             let mohalla1 = ward1.mohalla.find(cond8 => cond8.name === Mohalla);
+    //                                             if (!mohalla1) {
+    //                                                 // Create a new Condition3 within the existing Condition2
+    //                                                 ward1.mohalla.push(
+    //                                                     {
+    //                                                         name:Mohalla,
+    //                                                         Society:[
+    //                                                             {
+    //                                                                 name:Society,
+    //                                                                 Bhumi:[
+    //                                                                     {
+    //                                                                         name: WardBhumi,
+    //                                                                         Price: Wardprice
+    //                                                                     }
+    //                                                                 ]
+    //                                                             }
+    //                                                         ]
+    //                                                     }
+    //                                                 );
+    //                                             }
+    //                                             else{
+    //                                                 let society = mohalla1.Society.find(cond9 => cond9.name === Society);
+    //                                                 if (!society) {
+    //                                                     // Create a new Condition3 within the existing Condition2
+    //                                                     mohalla1.Society.push(
+    //                                                         {
+    //                                                             name:Society,
+    //                                                             Bhumi:[
+    //                                                                 {
+    //                                                                     name: WardBhumi,
+    //                                                                     Price: Wardprice
+    //                                                                 }
+    //                                                             ]
+    //                                                         }
+    //                                                     );
+    //                                                 }
+    //                                                 else{
+    //                                                     let wardBhumi = society.Bhumi.find(cond10 => cond10.name === WardBhumi);
+    //                                                     if (!wardBhumi) {
+    //                                                         // Create a new Condition3 within the existing Condition2
+    //                                                         society.Bhumi.push(
+    //                                                             {
+    //                                                                 name: WardBhumi,
+    //                                                                 Price: Wardprice
+    //                                                             }
+    //                                                         );
+    //                                                     }
+    //                                                     else{
+    //                                                         wardBhumi.Price=Wardprice
+    //                                                     }
+    //                                                 }
+    //                                             }
+    //                                         }
+    //                                     }
 
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    await jila.save();
-                }
-            }
-            fs.unlinkSync(`uploads/conditions/${uploadedFile.originalname}`);
-            return 'Data uploaded to the database.'
-        } catch (error) {
-            console.error('Error uploading data:', error);
-            return 'Internal Server Error'
-        }
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //                 await jila.save();
+    //             }
+    //         }
+    //         fs.unlinkSync(`uploads/conditions/${uploadedFile.originalname}`);
+    //         return 'Data uploaded to the database.'
+    //     } catch (error) {
+    //         console.error('Error uploading data:', error);
+    //         return 'Internal Server Error'
+    //     }
     
-    }
+    // }
 
     app.get("/en/admin/jila",(req,res)=>{
         res.render("en_admin_jila");
